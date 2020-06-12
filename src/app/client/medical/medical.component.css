@@ -1,0 +1,41 @@
+h2, h3, h4 {
+    width: 100%;
+    float: left;
+}
+form {
+    background: #fff;
+    margin: 100px auto;
+    border-radius: 5px;
+    width: 100%;
+}
+form .form-group {
+    float: left;
+    width: 33%;
+    transition: all .5s ease-in-out;
+    margin: 0;
+}
+form label {
+    line-height: 35px;
+    width: 100%;
+}
+
+@media screen and (max-width:1140px) {
+    form .form-group {
+        width: 50%;
+    }
+}
+@media screen and (max-width:675px) {
+    form .form-group {
+        width: 100%;
+    }
+}
+
+.form-check-input {
+    margin-top: 0.7rem;
+}
+.form-check-inline .form-check-input {
+    margin-top: 0rem;
+}
+.w-100 {
+    float: left;
+}

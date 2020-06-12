@@ -1,0 +1,323 @@
+<div class="container">
+    <div class="row">
+      <form class="p-3">
+        <h2>Formulario</h2>
+        <div class="form-group p-3">
+          <label for="name">Nombres
+          <input type="text" class="form-control" id="name">
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label for="lastname">Apellidos
+                <input type="text" class="form-control" id="lastname">
+            </label>
+        </div>
+        <div class="form-group p-3">
+          <label for="pass">Fecha de Nacimiento
+          <input type="date" class="form-control" id="pass">
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label for="dni">Cédula
+                <input type="number" maxlength="10" minlength="10" class="form-control" id="dni">
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label for="telConv">Teléfono Convencional
+                <input type="number" class="form-control" id="telConv">
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label for="telCelular">Teléfono Celular
+                <input type="number" class="form-control" id="telCelular">
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label for="telEmer">Número de Emergencia
+                <input type="number" class="form-control" id="telEmer">
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label for="state">Provincia
+                <input type="text" class="form-control" id="state">
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label for="canton">Cantón
+                <input type="text" class="form-control" id="canton">
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label for="city">Ciudad
+                <input type="text" class="form-control" id="city">
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label for="barrio">Barrio
+                <input type="text" class="form-control" id="barrio">
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label for="street">Calle Principal
+                <input type="text" class="form-control" id="street">
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label for="nomeclatura">Nomeclatura
+                <input type="text" class="form-control" id="nomeclatura">
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label for="email">Correo Electrónico
+                <input type="email" class="form-control" id="email">
+            </label>
+        </div>
+        <h2>Información Tributaria</h2>
+        <div class="form-group p-3">
+            <h4>Seleccione una: </h4>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="rise-ruc" id="CB1" value="option1">
+                <label class="form-check-label" for="CB1">RUC</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="rise-ruc" id="CB2" value="option2">
+                <label class="form-check-label" for="CB2">RISE</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="rise-ruc" id="CB3" value="option3" checked>
+                <label class="form-check-label" for="CB3">Ninguna</label>
+              </div>
+        </div>
+        <div class="form-group p-3">
+            <label for="nomeclatura">RISE / RUC
+                <input type="text" class="form-control" id="rise-ruc">
+            </label>
+        </div>
+        <h2>Información de Locales</h2>
+        <div class="form-group p-3 w-100">
+            <h4>En su negocio, usted es:</h4>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="negocioOwner" id="CBa" value="option1" checked>
+                <label class="form-check-label" for="CBa">Propietario</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="negocioOwner" id="CBe" value="option2">
+                <label class="form-check-label" for="CBe">Arrendatario</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="negocioOwner" id="CBi" value="option3">
+                <label class="form-check-label" for="CBi">Posecionario</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="negocioOwner" id="CB4" value="option4">
+                <label class="form-check-label" for="CB4">Comodatario</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="negocioOwner" id="CB5" value="option5">
+                <label class="form-check-label" for="CB5">Apoderado</label>
+              </div>
+        </div>
+        <div class="form-group p-3">
+            <label>Nombre Comercial del Negocio
+                <input type="text" class="form-control" id="nameNeg">
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label>Razón Social
+                <input type="text" class="form-control" id="social">
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label>Producto que Comercializa
+                <select class="form-control" id="exampleFormControlSelect1">
+                    <option>Producto 1</option>
+                    <option>Producto 2</option>
+                    <option>Producto 3</option>
+                    <option>Producto 4</option>
+                    <option>Producto 5</option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label>Número de Local
+                <input type="text" class="form-control" id="numLocal">
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label>Número de Predio
+                <input type="number" class="form-control" id="predio">
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label>Número de Sector
+                <select class="form-control" id="exampleFormControlSelect2">
+                    <option>Sector 1</option>
+                    <option>Sector 2</option>
+                    <option>Sector 3</option>
+                    <option>Sector 4</option>
+                    <option>Sector 5</option>
+                    <option>Sector 6</option>
+                    <option>Sector 7</option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <h4>Seleccione su planta </h4>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="planta" id="CBalta" value="option1" checked>
+                <label class="form-check-label" for="CBalta">Planta Baja</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="planta" id="CBbaja" value="option2">
+                <label class="form-check-label" for="CBbaja">Planta Alta</label>
+              </div>
+        </div>
+        <div class="form-group p-3">
+            <label>Número de Pasillo
+                <input type="number" class="form-control" id="pasillo">
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label>Procedencia del Producto
+                <select class="form-control" id="exampleFormControlSelect3">
+                    <option>Nacional</option>
+                    <option>Internacional</option>
+                    <option>Ambas</option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label>Cantidad de Locales
+                <select class="form-control" id="exampleFormControlSelect4">
+                    <option>1 local</option>
+                    <option>2 locales</option>
+                    <option>3 locales</option>
+                    <option>Más de 4 locales</option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <h4>¿Es Artesano Calificado? </h4>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="calificado" id="CBsi" value="option1" checked>
+                <label class="form-check-label" for="CBsi">Sí</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="calificado" id="CBno" value="option2">
+                <label class="form-check-label" for="CBno">No</label>
+              </div>
+        </div>
+        <div class="form-group p-3">
+            <h4>Seleccione una </h4>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipoDeArtesano" id="CBfab" value="option1" checked>
+                <label class="form-check-label" for="CBfab">Fabricante</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipoDeArtesano" id="CBcomer" value="option2">
+                <label class="form-check-label" for="CBcomer">Comercializador</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipoDeArtesano" id="CBambas" value="option2">
+                <label class="form-check-label" for="CBambas">Ambas</label>
+              </div>
+        </div>
+        <h2>Información Clínica</h2>
+        <div class="form-group p-3">
+            <label>Tipo de Sangre
+                <select class="form-control" id="exampleFormControlSelect5">
+                    <option>O+</option>
+                    <option>A+</option>
+                    <option>B+</option>
+                    <option>AB+</option>
+                    <option>A+</option>
+                    <option>O-</option>
+                    <option>A-</option>
+                    <option>B-</option>
+                    <option>AB-</option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label>Peso
+                <input type="number" placeholder="En kg" class="form-control" id="peso">
+            </label>
+        </div>
+        <div class="w-100"></div>
+        <div class="form-group p-3">
+            <h4>¿Eres alérgico a un medicamento? </h4>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="alergico" id="CBmedsi" value="option1">
+                <label class="form-check-label" for="CBmedsi">Sí</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="alergico" id="CBmedno" value="option2" checked>
+                <label class="form-check-label" for="CBmedno">No</label>
+              </div>
+        </div>
+        <div class="form-group p-3">
+            <label>Ingrese el medicamento
+                <input type="text" class="form-control" id="alergicoMed">
+            </label>
+        </div>
+        <div class="w-100"></div>
+        <div class="form-group p-3">
+            <h4>¿Consume algún medicamento? </h4>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="consumeRa" id="CBconsumesi" value="option1">
+                <label class="form-check-label" for="CBconsumesi">Sí</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="consumeRa" id="CBconsumeno" value="option2" checked>
+                <label class="form-check-label" for="CBconsumeno">No</label>
+              </div>
+        </div>
+        <div class="form-group p-3">
+            <label>Ingrese el medicamento
+                <input type="text" class="form-control" id="consumeMed">
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label>Enfermedades Pre-Existentes
+                <input type="text" class="form-control" id="enfermedades">
+            </label>
+        </div>
+        <div class="w-100"></div>
+        <div class="form-group p-3">
+            <label>¿A qué está afiliado usted?
+                <select class="form-control" id="exampleFormControlSelect6">
+                    <option>IESS</option>
+                    <option>ISFA</option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <h4>¿Posee carnet de Conadis? </h4>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="carnetConadis" id="CBcarnetSi" value="option1">
+                <label class="form-check-label" for="CBcarnetSi">Sí</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="carnetConadis" id="CBcarnetNo" value="option2" checked>
+                <label class="form-check-label" for="CBcarnetNo">No</label>
+              </div>
+        </div>
+        <div class="form-group p-3">
+            <label>¿Cuál carnet posee usted?
+                <input type="text" class="form-control" id="carnetInput">
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label>Jubilación
+                <select class="form-control" id="exampleFormControlSelect7">
+                    <option>No</option>
+                    <option>IESS</option>
+                    <option>ISFA</option>
+                </select>
+            </label>
+        </div>
+        <div class="w-100" style="float: left;"><button type="submit" class="btn btn-primary">Crear una cuenta</button></div>
+        <br><br>
+      </form>
+    </div>
+  </div>
