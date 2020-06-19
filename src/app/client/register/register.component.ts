@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -7,9 +9,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  registerForm: FormGroup;
+  isSubmitted = false;
 
-  ngOnInit(): void {
+  constructor(public formBuilder: FormBuilder) { }
+
+  ngOnInit() {
+    this.registerForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]]
+    });
   }
 
+  get errorControl() {
+    return this.registerForm.controls;
+  }
+
+  submitForm() {
+    this.isSubmitted = true;
+    if (!this.registerForm.valid) {
+      Swal.fire({
+        title: 'Oh no',
+        text: `Parece que algo ha salido mal. Comprueba el correo electrónico e intenta de nuevo.`,
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+      return false;
+    } else {
+      Swal.fire({
+        title: 'Genial',
+        html: `Se ha enviado una contraseña temporal a la siguiente dirección: <b>${this.registerForm.value.email}</b>`,
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+      });
+    }
+  }
 }

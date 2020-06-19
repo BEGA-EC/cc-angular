@@ -1,75 +1,122 @@
 <div class="container">
     <div class="row">
-      <form class="p-3">
+      <form class="p-3" [formGroup]="dataForm" (ngSubmit)="submitForm()" novalidate>
         <h2>Formulario</h2>
         <div class="form-group p-3">
-          <label for="name">Nombres
-          <input type="text" class="form-control" id="name">
+            <label for="name">Nombres
+                <input type="text" class="form-control" id="name" formControlName="name">
+                <small *ngIf="isSubmitted && errorControl.name.errors?.required">
+                    Los nombres son necesarios
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label for="lastname">Apellidos
-                <input type="text" class="form-control" id="lastname">
+                <input type="text" class="form-control" id="lastname" formControlName="last">
+                <small *ngIf="isSubmitted && errorControl.last.errors?.required">
+                    Los apellidos son necesarios
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
-          <label for="pass">Fecha de Nacimiento
-          <input type="date" class="form-control" id="pass">
+            <label for="pass">Fecha de Nacimiento
+                <input type="date" class="form-control" id="pass" formControlName="dob">
+                <small *ngIf="isSubmitted && errorControl.dob.errors?.required">
+                    La fecha de nacimiento es necesaria
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label for="dni">Cédula
-                <input type="number" maxlength="10" minlength="10" class="form-control" id="dni">
+                <input type="number" class="form-control" id="dni" formControlName="cedula" minlength="10" maxlength="10">
+                <small *ngIf="isSubmitted && errorControl.cedula.errors?.required">
+                    La cédula es necesaria
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label for="telConv">Teléfono Convencional
-                <input type="number" class="form-control" id="telConv">
+                <input type="number" class="form-control" id="telConv" formControlName="conv">
+                <small *ngIf="isSubmitted && errorControl.conv.errors?.required">
+                    El teléfono convencional es necesario.
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label for="telCelular">Teléfono Celular
-                <input type="number" class="form-control" id="telCelular">
+                <input type="number" class="form-control" id="telCelular" formControlName="cel">
+                <small *ngIf="isSubmitted && errorControl.cel.errors?.required">
+                    El teléfono celular es necesario.
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label for="telEmer">Número de Emergencia
-                <input type="number" class="form-control" id="telEmer">
+                <input type="number" class="form-control" id="telEmer" formControlName="emer">
+                <small *ngIf="isSubmitted && errorControl.emer.errors?.required">
+                    El número de emergencia es necesario.
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label for="state">Provincia
-                <input type="text" class="form-control" id="state">
+                <input type="text" class="form-control" id="state" formControlName="provincia">
+                <small *ngIf="isSubmitted && errorControl.provincia.errors?.required">
+                    La provincia es necesaria.
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label for="canton">Cantón
-                <input type="text" class="form-control" id="canton">
+                <input type="text" class="form-control" id="canton" formControlName="canton">
+                <small *ngIf="isSubmitted && errorControl.canton.errors?.required">
+                    El cantón es necesario.
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label for="city">Ciudad
-                <input type="text" class="form-control" id="city">
+                <input type="text" class="form-control" id="city" formControlName="ciudad">
+                <small *ngIf="isSubmitted && errorControl.ciudad.errors?.required">
+                    La ciudad es necesaria.
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label for="barrio">Barrio
-                <input type="text" class="form-control" id="barrio">
+                <input type="text" class="form-control" id="barrio" formControlName="barrio">
+                <small *ngIf="isSubmitted && errorControl.barrio.errors?.required">
+                    El barrio es necesario.
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label for="street">Calle Principal
-                <input type="text" class="form-control" id="street">
+                <input type="text" class="form-control" id="street" formControlName="callePri">
+                <small *ngIf="isSubmitted && errorControl.callePri.errors?.required">
+                    La calle principal es necesaria.
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
-            <label for="nomeclatura">Nomeclatura
-                <input type="text" class="form-control" id="nomeclatura">
+            <label for="nomeclatura">Nomenclatura
+                <input type="text" class="form-control" id="nomeclatura" formControlName="nomencla">
+                <small *ngIf="isSubmitted && errorControl.nomencla.errors?.required">
+                    La nomenclatura es necesaria.
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label for="email">Correo Electrónico
                 <input type="email" class="form-control" id="email">
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label for="streetSec">Calle Secundaria
+                <input type="text" class="form-control" id="streetSec" formControlName="calleSec">
+                <small *ngIf="isSubmitted && errorControl.calleSec.errors?.required">
+                    La calle secundaria es necesaria.
+                </small>
             </label>
         </div>
         <h2>Información Tributaria</h2>
@@ -119,12 +166,18 @@
         </div>
         <div class="form-group p-3">
             <label>Nombre Comercial del Negocio
-                <input type="text" class="form-control" id="nameNeg">
+                <input type="text" class="form-control" id="nameNeg" formControlName="nameNeg">
+                <small *ngIf="isSubmitted && errorControl.nameNeg.errors?.required">
+                    El nombre del negocio es necesario.
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label>Razón Social
-                <input type="text" class="form-control" id="social">
+                <input type="text" class="form-control" id="social" formControlName="razonSoc">
+                <small *ngIf="isSubmitted && errorControl.razonSoc.errors?.required">
+                    La razón social es necesaria.
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
@@ -140,12 +193,18 @@
         </div>
         <div class="form-group p-3">
             <label>Número de Local
-                <input type="text" class="form-control" id="numLocal">
+                <input type="text" class="form-control" id="numLocal" formControlName="numLocal">
+                <small *ngIf="isSubmitted && errorControl.numLocal.errors?.required">
+                    El número del local es necesario.
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label>Número de Predio
-                <input type="number" class="form-control" id="predio">
+                <input type="number" class="form-control" id="predio" formControlName="predio">
+                <small *ngIf="isSubmitted && errorControl.predio.errors?.required">
+                    El predio es necesario.
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
@@ -174,7 +233,10 @@
         </div>
         <div class="form-group p-3">
             <label>Número de Pasillo
-                <input type="number" class="form-control" id="pasillo">
+                <input type="number" class="form-control" id="pasillo" formControlName="pasillo">
+                <small *ngIf="isSubmitted && errorControl.pasillo.errors?.required">
+                    El número del pasillo es necesario.
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
@@ -240,7 +302,10 @@
         </div>
         <div class="form-group p-3">
             <label>Peso
-                <input type="number" placeholder="En kg" class="form-control" id="peso">
+                <input type="number" placeholder="En kg" class="form-control" id="peso" formControlName="peso">
+                <small *ngIf="isSubmitted && errorControl.peso.errors?.required">
+                    El peso es necesario.
+                </small>
             </label>
         </div>
         <div class="w-100"></div>
