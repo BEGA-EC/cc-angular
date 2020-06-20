@@ -12,6 +12,10 @@ export class MedicalComponent implements OnInit {
   dataForm: FormGroup;
   defaultDate = '1987/06/30';
   isSubmitted = false;
+  riseruc: String = '';
+  alergia: String = '';
+  medicamento: String = '';
+  conadis: String = '';
 
   constructor(public formBuilder: FormBuilder) { }
 
@@ -19,16 +23,17 @@ export class MedicalComponent implements OnInit {
     this.dataForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       last: ['', [Validators.required]],
-      cedula: ['', [Validators.required, Validators.minLength(1000000000), Validators.max(9999999999)]],
-      conv: ['', [Validators.required, Validators.minLength(1000000), Validators.max(999999999)]],
-      cel: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(1000000000), Validators.max(9999999999)]],
-      emer: ['', [Validators.required, Validators.minLength(1000000), Validators.max(9999999999)]],
+      cedula: ['', [Validators.required, Validators.min(1000000000), Validators.max(9999999999)]],
+      conv: ['', [Validators.required, Validators.min(1000000), Validators.max(999999999)]],
+      cel: ['', [Validators.required, Validators.min(1000000000), Validators.max(9999999999)]],
+      emer: ['', [Validators.required, Validators.min(1000000), Validators.max(9999999999)]],
       provincia: ['', [Validators.required]],
       canton: ['', [Validators.required]],
       ciudad: ['', [Validators.required]],
       barrio: ['', [Validators.required]],
       callePri: ['', [Validators.required]],
       nomencla: ['', [Validators.required]],
+      riseruc: ['', [Validators.required]],
       calleSec: ['', [Validators.required]],
       nameNeg: ['', [Validators.required]],
       razonSoc: ['', [Validators.required]],
@@ -36,6 +41,9 @@ export class MedicalComponent implements OnInit {
       predio: ['', [Validators.required]],
       pasillo: ['', [Validators.required]],
       peso: ['', [Validators.required]],
+      alergia: ['', [Validators.required]],
+      medicamento: ['', [Validators.required]],
+      conadis: ['', [Validators.required]],
       dob: [this.defaultDate]
     });
   }
@@ -59,7 +67,6 @@ export class MedicalComponent implements OnInit {
         icon: 'error',
         confirmButtonText: 'Aceptar'
       });
-      console.log(this.dataForm);
       return false;
     } else {
       Swal.fire({

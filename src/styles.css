@@ -3,6 +3,9 @@ body {
     background-image: url(./assets/images/bg.png);
     background-attachment: fixed;
 }
+.form-group {
+    margin-bottom: 1.5rem;
+}
 small {
     color: #dc3545;
     position: absolute;

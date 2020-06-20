@@ -3,117 +3,141 @@
       <form class="p-3" [formGroup]="dataForm" (ngSubmit)="submitForm()" novalidate>
         <h2>Formulario</h2>
         <div class="form-group p-3">
-            <label for="name">Nombres
-                <input type="text" class="form-control" id="name" formControlName="name">
+            <label>Nombres
+                <input type="text" class="form-control" name="name" formControlName="name">
                 <small *ngIf="isSubmitted && errorControl.name.errors?.required">
                     Los nombres son necesarios
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
-            <label for="lastname">Apellidos
-                <input type="text" class="form-control" id="lastname" formControlName="last">
+            <label>Apellidos
+                <input type="text" class="form-control" name="last" formControlName="last">
                 <small *ngIf="isSubmitted && errorControl.last.errors?.required">
                     Los apellidos son necesarios
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
-            <label for="pass">Fecha de Nacimiento
-                <input type="date" class="form-control" id="pass" formControlName="dob">
+            <label>Fecha de Nacimiento
+                <input type="date" class="form-control" name="dob" value="" placeholder="dd/mm/aaaa" formControlName="dob">
                 <small *ngIf="isSubmitted && errorControl.dob.errors?.required">
                     La fecha de nacimiento es necesaria
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
-            <label for="dni">Cédula
-                <input type="number" class="form-control" id="dni" formControlName="cedula" minlength="10" maxlength="10">
+            <label>Cédula
+                <input type="text" appOnlynumber class="form-control" name="cedula" formControlName="cedula" minlength="10" maxlength="10">
                 <small *ngIf="isSubmitted && errorControl.cedula.errors?.required">
                     La cédula es necesaria
+                </small>
+                <small *ngIf="isSubmitted && errorControl.cedula.errors?.min">
+                    Debe ingresar 10 números.
+                </small>
+                <small *ngIf="isSubmitted && errorControl.cedula.errors?.max">
+                    Debe ingresar 10 números.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
-            <label for="telConv">Teléfono Convencional
-                <input type="number" class="form-control" id="telConv" formControlName="conv">
+            <label>Teléfono Convencional
+                <input type="text" appOnlynumber class="form-control" id="conv" formControlName="conv">
                 <small *ngIf="isSubmitted && errorControl.conv.errors?.required">
                     El teléfono convencional es necesario.
+                </small>
+                <small *ngIf="isSubmitted && errorControl.conv.errors?.min">
+                    Debe ingresar 7 números mínimo.
+                </small>
+                <small *ngIf="isSubmitted && errorControl.conv.errors?.max">
+                    Debe ingresar 9 números máximo.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label for="telCelular">Teléfono Celular
-                <input type="number" class="form-control" id="telCelular" formControlName="cel">
+                <input type="text" appOnlynumber class="form-control" id="telCelular" formControlName="cel">
                 <small *ngIf="isSubmitted && errorControl.cel.errors?.required">
                     El teléfono celular es necesario.
                 </small>
-            </label>
-        </div>
-        <div class="form-group p-3">
-            <label for="telEmer">Número de Emergencia
-                <input type="number" class="form-control" id="telEmer" formControlName="emer">
-                <small *ngIf="isSubmitted && errorControl.emer.errors?.required">
-                    El número de emergencia es necesario.
+                <small *ngIf="isSubmitted && errorControl.cel.errors?.min">
+                    Debe ingresar 10 números.
+                </small>
+                <small *ngIf="isSubmitted && errorControl.cel.errors?.max">
+                    Debe ingresar 10 números.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
-            <label for="state">Provincia
-                <input type="text" class="form-control" id="state" formControlName="provincia">
+            <label>Número de Emergencia
+                <input type="text" appOnlynumber class="form-control" name="emer" formControlName="emer">
+                <small *ngIf="isSubmitted && errorControl.emer.errors?.required">
+                    El número de emergencia es necesario.
+                </small>
+                <small *ngIf="isSubmitted && errorControl.emer.errors?.min">
+                    Debe ingresar 7 números mínimo.
+                </small>
+                <small *ngIf="isSubmitted && errorControl.emer.errors?.max">
+                    Debe ingresar 10 números máximo.
+                </small>
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label>Provincia
+                <input type="text" class="form-control" name="provincia" formControlName="provincia">
                 <small *ngIf="isSubmitted && errorControl.provincia.errors?.required">
                     La provincia es necesaria.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
-            <label for="canton">Cantón
-                <input type="text" class="form-control" id="canton" formControlName="canton">
+            <label>Cantón
+                <input type="text" class="form-control" name="canton" formControlName="canton">
                 <small *ngIf="isSubmitted && errorControl.canton.errors?.required">
                     El cantón es necesario.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
-            <label for="city">Ciudad
-                <input type="text" class="form-control" id="city" formControlName="ciudad">
+            <label>Ciudad
+                <input type="text" class="form-control" name="ciudad" formControlName="ciudad">
                 <small *ngIf="isSubmitted && errorControl.ciudad.errors?.required">
                     La ciudad es necesaria.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
-            <label for="barrio">Barrio
-                <input type="text" class="form-control" id="barrio" formControlName="barrio">
+            <label>Barrio
+                <input type="text" class="form-control" name="barrio" formControlName="barrio">
                 <small *ngIf="isSubmitted && errorControl.barrio.errors?.required">
                     El barrio es necesario.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
-            <label for="street">Calle Principal
-                <input type="text" class="form-control" id="street" formControlName="callePri">
+            <label>Calle Principal
+                <input type="text" class="form-control" name="callePri" formControlName="callePri">
                 <small *ngIf="isSubmitted && errorControl.callePri.errors?.required">
                     La calle principal es necesaria.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
-            <label for="nomeclatura">Nomenclatura
-                <input type="text" class="form-control" id="nomeclatura" formControlName="nomencla">
+            <label>Nomenclatura
+                <input type="text" class="form-control" name="nomeclatura" formControlName="nomencla">
                 <small *ngIf="isSubmitted && errorControl.nomencla.errors?.required">
                     La nomenclatura es necesaria.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
-            <label for="email">Correo Electrónico
-                <input type="email" class="form-control" id="email">
+            <label>Correo Electrónico
+                <input type="email" class="form-control" readonly placeholder="mail@domain.tld">
             </label>
         </div>
         <div class="form-group p-3">
-            <label for="streetSec">Calle Secundaria
-                <input type="text" class="form-control" id="streetSec" formControlName="calleSec">
+            <label>Calle Secundaria
+                <input type="text" class="form-control" name="calleSec" formControlName="calleSec">
                 <small *ngIf="isSubmitted && errorControl.calleSec.errors?.required">
                     La calle secundaria es necesaria.
                 </small>
@@ -122,22 +146,25 @@
         <h2>Información Tributaria</h2>
         <div class="form-group p-3">
             <h4>Seleccione una: </h4>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="rise-ruc" id="CB1" value="option1">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="riseruc" [(ngModel)]="riseruc" id="CB1" formControlName="riseruc" value="ruc">
                 <label class="form-check-label" for="CB1">RUC</label>
               </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="rise-ruc" id="CB2" value="option2">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="riseruc" [(ngModel)]="riseruc" id="CB2" formControlName="riseruc" value="rise">
                 <label class="form-check-label" for="CB2">RISE</label>
               </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="rise-ruc" id="CB3" value="option3" checked>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="riseruc" [(ngModel)]="riseruc" id="CB3" formControlName="riseruc" value="none" checked="true">
                 <label class="form-check-label" for="CB3">Ninguna</label>
               </div>
+              <small *ngIf="isSubmitted && errorControl.riseruc.errors?.required">
+                La información tributaria es necesaria.
+              </small>
         </div>
-        <div class="form-group p-3">
-            <label for="nomeclatura">RISE / RUC
-                <input type="text" class="form-control" id="rise-ruc">
+        <div class="form-group p-3" *ngIf="riseruc == 'ruc' || riseruc == 'rise'">
+            <label>RISE / RUC
+                <input type="text" class="form-control">
             </label>
         </div>
         <h2>Información de Locales</h2>
@@ -166,7 +193,7 @@
         </div>
         <div class="form-group p-3">
             <label>Nombre Comercial del Negocio
-                <input type="text" class="form-control" id="nameNeg" formControlName="nameNeg">
+                <input type="text" class="form-control" name="nameNeg" formControlName="nameNeg">
                 <small *ngIf="isSubmitted && errorControl.nameNeg.errors?.required">
                     El nombre del negocio es necesario.
                 </small>
@@ -174,7 +201,7 @@
         </div>
         <div class="form-group p-3">
             <label>Razón Social
-                <input type="text" class="form-control" id="social" formControlName="razonSoc">
+                <input type="text" class="form-control" name="razonSoc" formControlName="razonSoc">
                 <small *ngIf="isSubmitted && errorControl.razonSoc.errors?.required">
                     La razón social es necesaria.
                 </small>
@@ -193,7 +220,7 @@
         </div>
         <div class="form-group p-3">
             <label>Número de Local
-                <input type="text" class="form-control" id="numLocal" formControlName="numLocal">
+                <input type="text" class="form-control" name="numLocal" formControlName="numLocal">
                 <small *ngIf="isSubmitted && errorControl.numLocal.errors?.required">
                     El número del local es necesario.
                 </small>
@@ -201,7 +228,7 @@
         </div>
         <div class="form-group p-3">
             <label>Número de Predio
-                <input type="number" class="form-control" id="predio" formControlName="predio">
+                <input type="text" appOnlynumber class="form-control" name="predio" formControlName="predio">
                 <small *ngIf="isSubmitted && errorControl.predio.errors?.required">
                     El predio es necesario.
                 </small>
@@ -222,18 +249,18 @@
         </div>
         <div class="form-group p-3">
             <h4>Seleccione su planta </h4>
-            <div class="form-check">
+            <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="planta" id="CBalta" value="option1" checked>
                 <label class="form-check-label" for="CBalta">Planta Baja</label>
               </div>
-              <div class="form-check">
+              <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="planta" id="CBbaja" value="option2">
                 <label class="form-check-label" for="CBbaja">Planta Alta</label>
               </div>
         </div>
         <div class="form-group p-3">
             <label>Número de Pasillo
-                <input type="number" class="form-control" id="pasillo" formControlName="pasillo">
+                <input type="text" appOnlynumber class="form-control" name="pasillo" formControlName="pasillo">
                 <small *ngIf="isSubmitted && errorControl.pasillo.errors?.required">
                     El número del pasillo es necesario.
                 </small>
@@ -260,11 +287,11 @@
         </div>
         <div class="form-group p-3">
             <h4>¿Es Artesano Calificado? </h4>
-            <div class="form-check">
+            <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="calificado" id="CBsi" value="option1" checked>
                 <label class="form-check-label" for="CBsi">Sí</label>
               </div>
-              <div class="form-check">
+              <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="calificado" id="CBno" value="option2">
                 <label class="form-check-label" for="CBno">No</label>
               </div>
@@ -311,16 +338,19 @@
         <div class="w-100"></div>
         <div class="form-group p-3">
             <h4>¿Eres alérgico a un medicamento? </h4>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="alergico" id="CBmedsi" value="option1">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="alergia" [(ngModel)]="alergia" formControlName="alergia" id="CBmedsi" value="true">
                 <label class="form-check-label" for="CBmedsi">Sí</label>
               </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="alergico" id="CBmedno" value="option2" checked>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="alergia" [(ngModel)]="alergia" formControlName="alergia" id="CBmedno" value="false">
                 <label class="form-check-label" for="CBmedno">No</label>
               </div>
+              <small *ngIf="isSubmitted && errorControl.alergia.errors?.required">
+                Complete este campo, por favor.
+              </small>
         </div>
-        <div class="form-group p-3">
+        <div class="form-group p-3" *ngIf="alergia == 'true'">
             <label>Ingrese el medicamento
                 <input type="text" class="form-control" id="alergicoMed">
             </label>
@@ -328,16 +358,19 @@
         <div class="w-100"></div>
         <div class="form-group p-3">
             <h4>¿Consume algún medicamento? </h4>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="consumeRa" id="CBconsumesi" value="option1">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="medicamento" [(ngModel)]="medicamento" formControlName="medicamento" id="CBconsumesi" value="true">
                 <label class="form-check-label" for="CBconsumesi">Sí</label>
               </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="consumeRa" id="CBconsumeno" value="option2" checked>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="medicamento" [(ngModel)]="medicamento" formControlName="medicamento" id="CBconsumeno" value="false">
                 <label class="form-check-label" for="CBconsumeno">No</label>
               </div>
+              <small *ngIf="isSubmitted && errorControl.medicamento.errors?.required">
+                Complete este campo, por favor.
+              </small>
         </div>
-        <div class="form-group p-3">
+        <div class="form-group p-3" *ngIf="medicamento == 'true'">
             <label>Ingrese el medicamento
                 <input type="text" class="form-control" id="consumeMed">
             </label>
@@ -358,16 +391,19 @@
         </div>
         <div class="form-group p-3">
             <h4>¿Posee carnet de Conadis? </h4>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="carnetConadis" id="CBcarnetSi" value="option1">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="conadis" [(ngModel)]="conadis" formControlName="conadis" id="CBcarnetSi" value="true">
                 <label class="form-check-label" for="CBcarnetSi">Sí</label>
               </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="carnetConadis" id="CBcarnetNo" value="option2" checked>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="conadis" [(ngModel)]="conadis" formControlName="conadis" id="CBcarnetNo" value="false">
                 <label class="form-check-label" for="CBcarnetNo">No</label>
               </div>
+              <small *ngIf="isSubmitted && errorControl.conadis.errors?.required">
+                Complete este campo, por favor.
+              </small>
         </div>
-        <div class="form-group p-3">
+        <div class="form-group p-3" *ngIf="conadis == 'true'">
             <label>¿Cuál carnet posee usted?
                 <input type="text" class="form-control" id="carnetInput">
             </label>
