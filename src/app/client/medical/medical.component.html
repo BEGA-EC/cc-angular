@@ -131,16 +131,16 @@
             </label>
         </div>
         <div class="form-group p-3">
-            <label>Correo Electrónico
-                <input type="email" class="form-control" readonly placeholder="mail@domain.tld">
-            </label>
-        </div>
-        <div class="form-group p-3">
             <label>Calle Secundaria
                 <input type="text" class="form-control" name="calleSec" formControlName="calleSec">
                 <small *ngIf="isSubmitted && errorControl.calleSec.errors?.required">
                     La calle secundaria es necesaria.
                 </small>
+            </label>
+        </div>
+        <div class="form-group p-3">
+            <label>Correo Electrónico
+                <input type="email" class="form-control" readonly placeholder="mail@domain.tld">
             </label>
         </div>
         <h2>Información Tributaria</h2>
@@ -171,25 +171,28 @@
         <div class="form-group p-3 w-100">
             <h4>En su negocio, usted es:</h4>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="negocioOwner" id="CBa" value="option1" checked>
+                <input class="form-check-input" type="radio" name="negocioOw" formControlName="negocioOw" id="CBa" value="option1" checked>
                 <label class="form-check-label" for="CBa">Propietario</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="negocioOwner" id="CBe" value="option2">
+                <input class="form-check-input" type="radio" name="negocioOw" formControlName="negocioOw" id="CBe" value="option2">
                 <label class="form-check-label" for="CBe">Arrendatario</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="negocioOwner" id="CBi" value="option3">
+                <input class="form-check-input" type="radio" name="negocioOw" formControlName="negocioOw" id="CBi" value="option3">
                 <label class="form-check-label" for="CBi">Posecionario</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="negocioOwner" id="CB4" value="option4">
+                <input class="form-check-input" type="radio" name="negocioOw" formControlName="negocioOw" id="CB4" value="option4">
                 <label class="form-check-label" for="CB4">Comodatario</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="negocioOwner" id="CB5" value="option5">
+                <input class="form-check-input" type="radio" name="negocioOw" formControlName="negocioOw" id="CB5" value="option5">
                 <label class="form-check-label" for="CB5">Apoderado</label>
               </div>
+              <small *ngIf="isSubmitted && errorControl.negocioOw.errors?.required">
+                Por favor, rellene este campo.
+              </small>
         </div>
         <div class="form-group p-3">
             <label>Nombre Comercial del Negocio
@@ -209,13 +212,16 @@
         </div>
         <div class="form-group p-3">
             <label>Producto que Comercializa
-                <select class="form-control" id="exampleFormControlSelect1">
-                    <option>Producto 1</option>
-                    <option>Producto 2</option>
-                    <option>Producto 3</option>
-                    <option>Producto 4</option>
-                    <option>Producto 5</option>
+                <select class="form-control" name="producto" formControlName="producto">
+                    <option value="producto1">Producto 1</option>
+                    <option value="producto2">Producto 2</option>
+                    <option value="producto3">Producto 3</option>
+                    <option value="producto4">Producto 4</option>
+                    <option value="producto5">Producto 5</option>
                 </select>
+                <small *ngIf="isSubmitted && errorControl.producto.errors?.required">
+                    Seleccione uno.
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
@@ -236,27 +242,33 @@
         </div>
         <div class="form-group p-3">
             <label>Número de Sector
-                <select class="form-control" id="exampleFormControlSelect2">
-                    <option>Sector 1</option>
-                    <option>Sector 2</option>
-                    <option>Sector 3</option>
-                    <option>Sector 4</option>
-                    <option>Sector 5</option>
-                    <option>Sector 6</option>
-                    <option>Sector 7</option>
+                <select class="form-control" name="sector" formControlName="sector">
+                    <option value="sector1">Sector 1</option>
+                    <option value="sector2">Sector 2</option>
+                    <option value="sector3">Sector 3</option>
+                    <option value="sector4">Sector 4</option>
+                    <option value="sector5">Sector 5</option>
+                    <option value="sector6">Sector 6</option>
+                    <option value="sector7">Sector 7</option>
                 </select>
+                <small *ngIf="isSubmitted && errorControl.sector.errors?.required">
+                    Seleccione uno.
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
             <h4>Seleccione su planta </h4>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="planta" id="CBalta" value="option1" checked>
+                <input class="form-check-input" type="radio"  name="planta" formControlName="planta" id="CBalta" value="option1" checked>
                 <label class="form-check-label" for="CBalta">Planta Baja</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="planta" id="CBbaja" value="option2">
+                <input class="form-check-input" type="radio"  name="planta" formControlName="planta" id="CBbaja" value="option2">
                 <label class="form-check-label" for="CBbaja">Planta Alta</label>
               </div>
+              <small *ngIf="isSubmitted && errorControl.planta.errors?.required">
+                Seleccione uno.
+            </small>
         </div>
         <div class="form-group p-3">
             <label>Número de Pasillo
@@ -268,63 +280,78 @@
         </div>
         <div class="form-group p-3">
             <label>Procedencia del Producto
-                <select class="form-control" id="exampleFormControlSelect3">
-                    <option>Nacional</option>
-                    <option>Internacional</option>
-                    <option>Ambas</option>
+                <select class="form-control" name="procedencia" formControlName="procedencia">
+                    <option value="Nacional">Nacional</option>
+                    <option value="Internacional">Internacional</option>
+                    <option value="Ambas">Ambas</option>
                 </select>
+                <small *ngIf="isSubmitted && errorControl.procedencia.errors?.required">
+                    Seleccione una.
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label>Cantidad de Locales
-                <select class="form-control" id="exampleFormControlSelect4">
-                    <option>1 local</option>
-                    <option>2 locales</option>
-                    <option>3 locales</option>
-                    <option>Más de 4 locales</option>
+                <select class="form-control" name="locales" formControlName="locales">
+                    <option value="1 local">1 local</option>
+                    <option value="2 locales">2 locales</option>
+                    <option value="3 locales">3 locales</option>
+                    <option value="Más locales">Más de 4 locales</option>
                 </select>
+                <small *ngIf="isSubmitted && errorControl.locales.errors?.required">
+                    Seleccione una.
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
             <h4>¿Es Artesano Calificado? </h4>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="calificado" id="CBsi" value="option1" checked>
+                <input class="form-check-input" type="radio" name="artesano" formControlName="artesano" id="CBsi" value="option1" checked>
                 <label class="form-check-label" for="CBsi">Sí</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="calificado" id="CBno" value="option2">
+                <input class="form-check-input" type="radio" name="artesano" formControlName="artesano" id="CBno" value="option2">
                 <label class="form-check-label" for="CBno">No</label>
               </div>
+              <small *ngIf="isSubmitted && errorControl.artesano.errors?.required">
+                Seleccione una.
+            </small>
         </div>
         <div class="form-group p-3">
             <h4>Seleccione una </h4>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="tipoDeArtesano" id="CBfab" value="option1" checked>
+                <input class="form-check-input" type="radio" name="typeArtesano" formControlName="typeArtesano" id="CBfab" value="option1" checked>
                 <label class="form-check-label" for="CBfab">Fabricante</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="tipoDeArtesano" id="CBcomer" value="option2">
+                <input class="form-check-input" type="radio" name="typeArtesano" formControlName="typeArtesano" id="CBcomer" value="option2">
                 <label class="form-check-label" for="CBcomer">Comercializador</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="tipoDeArtesano" id="CBambas" value="option2">
+                <input class="form-check-input" type="radio" name="typeArtesano" formControlName="typeArtesano" id="CBambas" value="option3">
                 <label class="form-check-label" for="CBambas">Ambas</label>
               </div>
+              <small *ngIf="isSubmitted && errorControl.typeArtesano.errors?.required">
+                Seleccione una.
+            </small>
         </div>
         <h2>Información Clínica</h2>
         <div class="form-group p-3">
             <label>Tipo de Sangre
-                <select class="form-control" id="exampleFormControlSelect5">
-                    <option>O+</option>
-                    <option>A+</option>
-                    <option>B+</option>
-                    <option>AB+</option>
-                    <option>A+</option>
-                    <option>O-</option>
-                    <option>A-</option>
-                    <option>B-</option>
-                    <option>AB-</option>
+                <select class="form-control" name="sangre" formControlName="sangre">
+                    <option value="O+">O+</option>
+                    <option value="A+">A+</option>
+                    <option value="B+">B+</option>
+                    <option value="AB+">AB+</option>
+                    <option value="A+">A+</option>
+                    <option value="O-">O-</option>
+                    <option value="A-">A-</option>
+                    <option value="B-">B-</option>
+                    <option value="AB-">AB-</option>
                 </select>
+                <small *ngIf="isSubmitted && errorControl.sangre.errors?.required">
+                    Seleccione uno.
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
@@ -377,16 +404,22 @@
         </div>
         <div class="form-group p-3">
             <label>Enfermedades Pre-Existentes
-                <input type="text" class="form-control" id="enfermedades">
+                <input type="text" class="form-control" name="enfermedades" formControlName="enfermedades">
             </label>
+            <small *ngIf="isSubmitted && errorControl.enfermedades.errors?.required">
+                Complete este campo, por favor.
+              </small>
         </div>
         <div class="w-100"></div>
         <div class="form-group p-3">
             <label>¿A qué está afiliado usted?
-                <select class="form-control" id="exampleFormControlSelect6">
-                    <option>IESS</option>
-                    <option>ISFA</option>
+                <select class="form-control" name="seguro" formControlName="seguro">
+                    <option value="IESS">IESS</option>
+                    <option value="ISFA">ISFA</option>
                 </select>
+                <small *ngIf="isSubmitted && errorControl.seguro.errors?.required">
+                    Complete este campo, por favor.
+                  </small>
             </label>
         </div>
         <div class="form-group p-3">
@@ -410,12 +443,15 @@
         </div>
         <div class="form-group p-3">
             <label>Jubilación
-                <select class="form-control" id="exampleFormControlSelect7">
-                    <option>No</option>
-                    <option>IESS</option>
-                    <option>ISFA</option>
+                <select class="form-control" name="jubilacion" formControlName="jubilacion">
+                    <option value="No">No</option>
+                    <option value="IESS">IESS</option>
+                    <option value="ISFA">ISFA</option>
                 </select>
             </label>
+            <small *ngIf="isSubmitted && errorControl.jubilacion.errors?.required">
+                Complete este campo, por favor.
+              </small>
         </div>
         <div class="w-100" style="float: left;"><button type="submit" class="btn btn-primary">Crear una cuenta</button></div>
         <br><br>

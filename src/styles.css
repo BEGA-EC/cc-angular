@@ -8,7 +8,8 @@ body {
 }
 small {
     color: #dc3545;
-    position: absolute;
+    float: right;
+    margin-bottom: -50px;
 }
 input.ng-invalid.ng-touched {
     border-color: #dc3545;

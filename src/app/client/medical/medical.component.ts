@@ -23,6 +23,7 @@ export class MedicalComponent implements OnInit {
     this.dataForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       last: ['', [Validators.required]],
+      dob: [this.defaultDate],
       cedula: ['', [Validators.required, Validators.min(1000000000), Validators.max(9999999999)]],
       conv: ['', [Validators.required, Validators.min(1000000), Validators.max(999999999)]],
       cel: ['', [Validators.required, Validators.min(1000000000), Validators.max(9999999999)]],
@@ -34,17 +35,28 @@ export class MedicalComponent implements OnInit {
       callePri: ['', [Validators.required]],
       nomencla: ['', [Validators.required]],
       riseruc: ['', [Validators.required]],
+      negocioOw: ['', [Validators.required]],
       calleSec: ['', [Validators.required]],
       nameNeg: ['', [Validators.required]],
       razonSoc: ['', [Validators.required]],
+      producto: ['', [Validators.required]],
       numLocal: ['', [Validators.required]],
       predio: ['', [Validators.required]],
+      sector: ['', [Validators.required]],
+      planta : ['', [Validators.required]],
       pasillo: ['', [Validators.required]],
+      procedencia: ['', [Validators.required]],
+      locales: ['', [Validators.required]],
+      artesano: ['', [Validators.required]],
+      typeArtesano: ['', [Validators.required]],
+      sangre: ['', [Validators.required]],
       peso: ['', [Validators.required]],
       alergia: ['', [Validators.required]],
       medicamento: ['', [Validators.required]],
+      enfermedades: ['Ninguna', [Validators.required]],
+      seguro: ['', [Validators.required]],
       conadis: ['', [Validators.required]],
-      dob: [this.defaultDate]
+      jubilacion: ['', [Validators.required]]
     });
   }
   getDate(e) {
