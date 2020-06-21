@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-medical',
@@ -17,7 +18,7 @@ export class MedicalComponent implements OnInit {
   medicamento: String = '';
   conadis: String = '';
 
-  constructor(public formBuilder: FormBuilder) { }
+  constructor(public formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     this.dataForm = this.formBuilder.group({
@@ -87,6 +88,7 @@ export class MedicalComponent implements OnInit {
         icon: 'success',
         confirmButtonText: 'Aceptar'
       });
+      return this.router.navigate(['client/covid']);
     }
   }
 }

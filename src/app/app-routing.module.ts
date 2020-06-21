@@ -6,7 +6,8 @@ const routes: Routes = [{ path: 'client/register',
 loadChildren: () => import('./client/register/register.module').then(m => m.RegisterModule) },
 { path: 'client', loadChildren: () => import('./client/login/login.module').then(m => m.LoginModule) },
 { path: 'client/medical', loadChildren: () => import('./client/medical/medical.module').then(m => m.MedicalModule) },
-{path: '', redirectTo: 'client', pathMatch: 'full' }];
+{path: '', redirectTo: 'client', pathMatch: 'full' },
+{ path: 'client/covid', loadChildren: () => import('./client/covid/covid.module').then(m => m.CovidModule) }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

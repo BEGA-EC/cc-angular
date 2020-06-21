@@ -1,0 +1,68 @@
+h2, h3, h4 {
+    width: 100%;
+    float: left;
+    margin: 15px 0;
+}
+form {
+    background: #fff;
+    margin: 100px auto;
+    border-radius: 5px;
+    width: 100%;
+}
+form .form-group {
+    float: left;
+    width: 33%;
+    transition: all .5s ease-in-out;
+    margin: 0;
+}
+form label {
+    line-height: 35px;
+    width: 100%;
+}
+
+@media screen and (max-width:1140px) {
+    form .form-group {
+        width: 50%;
+    }
+}
+@media screen and (max-width:768px) {
+    form .form-group {
+        width: 100%;
+    }
+}
+
+.form-check-input {
+    margin-top: 0.7rem;
+}
+.form-check-inline .form-check-input {
+    margin-top: 0rem;
+}
+p, .w-100 {
+    float: left;
+    width: 100%;
+}
+.covid {
+    width: 100%!important;
+}
+
+.covid h6 {
+    width: 65%;
+    float: left;
+    margin-right: 2%;
+}
+.covid input.form-control {
+    float: left;
+    width: 23%;
+}
+.covid .form-check {
+    float: left;
+}
+.form-group.covid.p-3 {
+    border-bottom: 1px solid;
+}
+small {
+    float: none;
+}
+button {
+    margin-top: 20px;
+}
