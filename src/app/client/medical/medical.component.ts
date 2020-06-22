@@ -14,6 +14,7 @@ export class MedicalComponent implements OnInit {
   defaultDate = '1987/06/30';
   isSubmitted = false;
   riseruc: String = '';
+  artesano: String = '';
   alergia: String = '';
   medicamento: String = '';
   conadis: String = '';
@@ -36,6 +37,7 @@ export class MedicalComponent implements OnInit {
       callePri: ['', [Validators.required]],
       nomencla: ['', [Validators.required]],
       riseruc: ['', [Validators.required]],
+      riserucInput: [''],
       negocioOw: ['', [Validators.required]],
       calleSec: ['', [Validators.required]],
       nameNeg: ['', [Validators.required]],
@@ -49,14 +51,17 @@ export class MedicalComponent implements OnInit {
       procedencia: ['', [Validators.required]],
       locales: ['', [Validators.required]],
       artesano: ['', [Validators.required]],
-      typeArtesano: ['', [Validators.required]],
+      typeArtesano: [''],
       sangre: ['', [Validators.required]],
       peso: ['', [Validators.required]],
       alergia: ['', [Validators.required]],
+      alergiaInput: [''],
       medicamento: ['', [Validators.required]],
+      medicamentoInput: [''],
       enfermedades: ['Ninguna', [Validators.required]],
       seguro: ['', [Validators.required]],
       conadis: ['', [Validators.required]],
+      carnet: [''],
       jubilacion: ['', [Validators.required]]
     });
   }

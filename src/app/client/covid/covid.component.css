@@ -58,11 +58,22 @@ p, .w-100 {
     float: left;
 }
 .form-group.covid.p-3 {
-    border-bottom: 1px solid;
+    border-bottom: 1px solid #ccc;
 }
 small {
     float: none;
 }
 button {
     margin-top: 20px;
+}
+@media screen and (max-width:1140px) {
+    .covid input.form-control {
+        float: left;
+        width: 100%;
+    }
+    small {
+        float: left;
+        width: 100%!important;
+        margin: 10px 0;
+    }
 }

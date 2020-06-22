@@ -164,30 +164,30 @@
         </div>
         <div class="form-group p-3" *ngIf="riseruc == 'ruc' || riseruc == 'rise'">
             <label>RISE / RUC
-                <input type="text" class="form-control">
+                <input type="text" appOnlynumber class="form-control" name="riserucInput" formControlName="riserucInput">
             </label>
         </div>
         <h2>Información de Locales</h2>
         <div class="form-group p-3 w-100">
             <h4>En su negocio, usted es:</h4>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="negocioOw" formControlName="negocioOw" id="CBa" value="option1" checked>
+                <input class="form-check-input" type="radio" name="negocioOw" formControlName="negocioOw" id="CBa" value="owner">
                 <label class="form-check-label" for="CBa">Propietario</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="negocioOw" formControlName="negocioOw" id="CBe" value="option2">
+                <input class="form-check-input" type="radio" name="negocioOw" formControlName="negocioOw" id="CBe" value="lessee">
                 <label class="form-check-label" for="CBe">Arrendatario</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="negocioOw" formControlName="negocioOw" id="CBi" value="option3">
+                <input class="form-check-input" type="radio" name="negocioOw" formControlName="negocioOw" id="CBi" value="possessor">
                 <label class="form-check-label" for="CBi">Posecionario</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="negocioOw" formControlName="negocioOw" id="CB4" value="option4">
+                <input class="form-check-input" type="radio" name="negocioOw" formControlName="negocioOw" id="CB4" value="borrower">
                 <label class="form-check-label" for="CB4">Comodatario</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="negocioOw" formControlName="negocioOw" id="CB5" value="option5">
+                <input class="form-check-input" type="radio" name="negocioOw" formControlName="negocioOw" id="CB5" value="attorney">
                 <label class="form-check-label" for="CB5">Apoderado</label>
               </div>
               <small *ngIf="isSubmitted && errorControl.negocioOw.errors?.required">
@@ -306,18 +306,18 @@
         <div class="form-group p-3">
             <h4>¿Es Artesano Calificado? </h4>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="artesano" formControlName="artesano" id="CBsi" value="option1" checked>
+                <input class="form-check-input" type="radio" name="artesano" [(ngModel)]="artesano" formControlName="artesano" id="CBsi" value="Sí" checked>
                 <label class="form-check-label" for="CBsi">Sí</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="artesano" formControlName="artesano" id="CBno" value="option2">
+                <input class="form-check-input" type="radio" name="artesano" [(ngModel)]="artesano" formControlName="artesano" id="CBno" value="No">
                 <label class="form-check-label" for="CBno">No</label>
               </div>
               <small *ngIf="isSubmitted && errorControl.artesano.errors?.required">
                 Seleccione una.
             </small>
         </div>
-        <div class="form-group p-3">
+        <div class="form-group p-3" *ngIf="artesano == 'Sí'">
             <h4>Seleccione una </h4>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="typeArtesano" formControlName="typeArtesano" id="CBfab" value="option1" checked>
@@ -379,7 +379,7 @@
         </div>
         <div class="form-group p-3" *ngIf="alergia == 'true'">
             <label>Ingrese el medicamento
-                <input type="text" class="form-control" id="alergicoMed">
+                <input type="text" class="form-control" name="alergiaInput" formControlName="alergiaInput">
             </label>
         </div>
         <div class="w-100"></div>
@@ -399,7 +399,7 @@
         </div>
         <div class="form-group p-3" *ngIf="medicamento == 'true'">
             <label>Ingrese el medicamento
-                <input type="text" class="form-control" id="consumeMed">
+                <input type="text" class="form-control" name="medicamentoInput" formControlName="medicamentoInput">
             </label>
         </div>
         <div class="form-group p-3">
@@ -438,7 +438,7 @@
         </div>
         <div class="form-group p-3" *ngIf="conadis == 'true'">
             <label>¿Cuál carnet posee usted?
-                <input type="text" class="form-control" id="carnetInput">
+                <input type="text" class="form-control" name="carnet" formControlName="carnet">
             </label>
         </div>
         <div class="form-group p-3">
