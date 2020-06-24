@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
+import { UserService } from 'src/app/services/service.index';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,9 +14,11 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
   isSubmitted = false;
+  email: string;
 
   constructor(public formBuilder: FormBuilder,
-    private httpClient: HttpClient) { }
+    public router: Router,
+    public _userService: UserService) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -37,12 +41,15 @@ export class RegisterComponent implements OnInit {
       });
       return false;
     } else {
-      Swal.fire({
-        title: 'Genial',
-        html: `Se ha enviado una contraseña temporal a la siguiente dirección: <b>${this.registerForm.value.email}</b>`,
-        icon: 'success',
-        confirmButtonText: 'Aceptar'
-      });
+      let email = this.registerForm.value.email;
+      console.log(`Email: ${email}`)
+      this._userService.register(email);
+      // Swal.fire({
+      //   title: 'Genial',
+      //   html: `Se ha enviado una contraseña temporal a la siguiente dirección: <b>${this.registerForm.value.email}</b>`,
+      //   icon: 'success',
+      //   confirmButtonText: 'Aceptar'
+      // });
     }
   }
 }

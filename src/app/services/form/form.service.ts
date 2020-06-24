@@ -1,15 +1,43 @@
 import { Injectable } from '@angular/core';
-import { Form } from '../../models/form.model';
-import { User } from '../../models/user.model';
+import { Personal } from '../../models/personal.model';
+import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
+import { Covid } from 'src/app/models/covid.model';
+import { environment } from 'src/environments/environment';
+import { Medical } from 'src/app/models/medical.model';
+import { Comercial } from 'src/app/models/comercial.model';
+import { Tributary } from 'src/app/models/tributary.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormService {
 
-  constructor() {}
+  personalData: Personal;
+  covidData: Covid;
+  medicalData: Medical;
+  comercialData: Comercial;
+  tributaryData: Tributary;
 
+  constructor(public http: HttpClient, public router: Router) {}
+
+  async upload(tributary: Tributary, comercial: Comercial, medical: Medical ,personal: Personal,  avatar: any) {
+    let url = `${environment.endpoint}user/register/info-forms`;
+    const formData = new FormData();
+    formData.append('avatar', avatar);
+    formData.append('tributaryInformation', JSON.stringify(tributary));
+    formData.append('commercialInformation', JSON.stringify(comercial));
+    formData.append('medicalInformation', JSON.stringify(medical));
+    formData.append('personalInformation', JSON.stringify(personal));
+    this.http.post(url, formData).subscribe(
+      (resp: any) => {this.router.navigate(['/client/covid']);
+      Swal.fire({
+        title: 'Genial',
+        html: `¡Bien! Ya casi terminamos, solo hace falta un último formulario y estamos en ello.`,
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+      });}
+    );
+  }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { UserService } from 'src/app/services/service.index';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,12 +14,15 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isSubmitted = false;
 
-  constructor(public formBuilder: FormBuilder) { }
+  constructor(
+    public formBuilder: FormBuilder,
+    public _userService: UserService,
+    public router: Router) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$')]],
-      req: ['', [Validators.required]]
+      password: ['', [Validators.required]]
     });
   }
 
@@ -36,12 +41,8 @@ export class LoginComponent implements OnInit {
       });
       return false;
     } else {
-      Swal.fire({
-        title: 'Genial',
-        html: `Acá se supone que inicias sesión.`,
-        icon: 'success',
-        confirmButtonText: 'Aceptar'
-      });
+      let user = {email: this.loginForm.value.email, password: this.loginForm.value.password};
+      this._userService.login(user).subscribe( correcto => this.router.navigate(['/client/medical']));
     }
   }
 }

@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { FormService } from 'src/app/services/service.index';
+import { Tributary } from 'src/app/models/tributary.model';
+import { Medical } from 'src/app/models/medical.model';
+import { Personal } from 'src/app/models/personal.model';
+import { Comercial } from 'src/app/models/comercial.model';
 
 @Component({
   selector: 'app-medical',
@@ -13,61 +18,69 @@ export class MedicalComponent implements OnInit {
   dataForm: FormGroup;
   defaultDate = '1987/06/30';
   isSubmitted = false;
-  riseruc: String = '';
-  artesano: String = '';
-  alergia: String = '';
-  medicamento: String = '';
-  conadis: String = '';
+  taxType: String = '';
+  qualifiedCraftman: String = '';
+  allergy: String = '';
+  consumingMedicine: String = '';
+  conadisLicense: String = '';
+  retirement: String = '';
 
-  constructor(public formBuilder: FormBuilder, private router: Router) { }
+  constructor(public formBuilder: FormBuilder, private router: Router, public _formService: FormService) { }
 
   ngOnInit() {
     this.dataForm = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
-      last: ['', [Validators.required]],
-      dob: [this.defaultDate],
-      cedula: ['', [Validators.required, Validators.min(1000000000), Validators.max(9999999999)]],
-      conv: ['', [Validators.required, Validators.min(1000000), Validators.max(999999999)]],
-      cel: ['', [Validators.required, Validators.min(1000000000), Validators.max(9999999999)]],
-      emer: ['', [Validators.required, Validators.min(1000000), Validators.max(9999999999)]],
-      provincia: ['', [Validators.required]],
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required]],
+      gender: ['', [Validators.required]],
+      dateOfBirth: ['', [Validators.required]],
+      idNumber: ['', [Validators.required, Validators.min(1000000000), Validators.max(9999999999)]],
+      phoneNumber: ['', [Validators.required, Validators.min(1000000), Validators.max(999999999)]],
+      cellphoneNumber: ['', [Validators.required, Validators.min(1000000000), Validators.max(9999999999)]],
+      emergencyPhone: ['', [Validators.required, Validators.min(1000000), Validators.max(9999999999)]],
+      province: ['', [Validators.required]],
       canton: ['', [Validators.required]],
-      ciudad: ['', [Validators.required]],
-      barrio: ['', [Validators.required]],
-      callePri: ['', [Validators.required]],
-      nomencla: ['', [Validators.required]],
-      riseruc: ['', [Validators.required]],
-      riserucInput: [''],
-      negocioOw: ['', [Validators.required]],
-      calleSec: ['', [Validators.required]],
-      nameNeg: ['', [Validators.required]],
-      razonSoc: ['', [Validators.required]],
-      producto: ['', [Validators.required]],
-      numLocal: ['', [Validators.required]],
-      predio: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      neighborhood: ['', [Validators.required]],
+      mainStreet: ['', [Validators.required]],
+      nomenclature: ['', [Validators.required]],
+      secondaryStreet: ['', [Validators.required]],
+
+      taxType: ['', [Validators.required]],
+      taxNumber: [''],
+      keepAccounting: ['', [Validators.required]],
+
+      personType: ['', [Validators.required]],
+      businessName: ['', [Validators.required]],
+      socialReason: ['', [Validators.required]],
+      productsBeingSold: ['', [Validators.required]],
+      localNumber: ['', [Validators.required]],
+      predioNumber: ['', [Validators.required]],
       sector: ['', [Validators.required]],
-      planta : ['', [Validators.required]],
-      pasillo: ['', [Validators.required]],
-      procedencia: ['', [Validators.required]],
-      locales: ['', [Validators.required]],
-      artesano: ['', [Validators.required]],
-      typeArtesano: [''],
-      sangre: ['', [Validators.required]],
-      peso: ['', [Validators.required]],
-      alergia: ['', [Validators.required]],
-      alergiaInput: [''],
-      medicamento: ['', [Validators.required]],
-      medicamentoInput: [''],
-      enfermedades: ['Ninguna', [Validators.required]],
-      seguro: ['', [Validators.required]],
-      conadis: ['', [Validators.required]],
-      carnet: [''],
-      jubilacion: ['', [Validators.required]]
-    });
+      floor: ['', [Validators.required]],
+      hallNumber: ['', [Validators.required]],
+      originOfProducts: ['', [Validators.required]],
+      numberLocals: ['', [Validators.required]],
+      qualifiedCraftman: ['', [Validators.required]],
+      craftmanCalification: [''],
+      sellerType: ['', [Validators.required]] ,
+
+      bloodType: ['', [Validators.required]],
+      height: ['', [Validators.required]],
+      allergy: ['', [Validators.required]],
+      allergicTo: [''],
+      consumingMedicine: ['', [Validators.required]],
+      medicamentBeingConsumed: [''],
+      illness: ['Ninguna', [Validators.required]],
+      affiliatedTo: ['', [Validators.required]],
+      conadisLicense: ['', [Validators.required]],
+      conadisLicenseType: [''],
+      retirement: ['', [Validators.required]],
+      retirementDetails: ['']
+    }); 
   }
   getDate(e) {
     const date = new Date(e.target.value).toISOString().substring(0, 10);
-    this.dataForm.get('dob').setValue(date, {
+    this.dataForm.get('dateOfBirth').setValue(date, {
       onlyself: true
     });
   }
@@ -77,7 +90,81 @@ export class MedicalComponent implements OnInit {
   }
 
   submitForm() {
+
     this.isSubmitted = true;
+    console.log(`${this.dataForm.value.taxType} - ${this.dataForm.value.taxNumber} - ${this.dataForm.value.keepAccounting}`);
+    
+    let tributary: Tributary = {
+      taxType: this.dataForm.value.taxType,
+      taxNumber: this.dataForm.value.taxNumber,
+      keepAccounting: this.dataForm.value.keepAccounting
+    };
+
+     let comercial: Comercial = {
+      personType: this.dataForm.value.personType,
+      businessName: this.dataForm.value.businessName,
+      socialReason: this.dataForm.value.socialReason,
+      productsBeingSold: this.dataForm.value.productsBeingSold,
+      localNumber: this.dataForm.value.localNumber,
+      predioNumber: this.dataForm.value.predioNumber,
+      sector: this.dataForm.value.sector,
+      floor: this.dataForm.value.floor,
+      hallNumber: this.dataForm.value.hallNumber,
+      originOfProducts: this.dataForm.value.originOfProducts,
+      numberLocals: this.dataForm.value.numberLocals,
+      qualifiedCraftman: this.dataForm.value.qualifiedCraftman,
+      craftmanCalification: this.dataForm.value.craftmanCalification,
+      sellerType: this.dataForm.value.sellerType
+     };
+
+     let medical: Medical = {
+      bloodType: this.dataForm.value.bloodType,
+      height: this.dataForm.value.height,
+      allergy: this.dataForm.value.allergy,
+      allergicTo: this.dataForm.value.allergicTo,
+      consumingMedicine: this.dataForm.value.consumingMedicine,
+      medicamentBeingConsumed: this.dataForm.value.medicamentBeingConsumed,
+      illness: this.dataForm.value.illness,
+      affiliatedTo: this.dataForm.value.affiliatedTo,
+      conadisLicense: this.dataForm.value.conadisLicense,
+      conadisLicenseType: this.dataForm.value.conadisLicenseType,
+      retirement: this.dataForm.value.retirement,
+      retirementDetails: this.dataForm.value.retirementDetails
+     };
+
+     let personal: Personal = {
+      firstName: this.dataForm.value.firstName,
+      lastName: this.dataForm.value.lastName,
+      gender: this.dataForm.value.gender,
+      dateOfBirth: this.dataForm.value.dateOfBirth,
+      idNumber: this.dataForm.value.idNumber,
+      phoneNumber: this.dataForm.value.phoneNumber,
+      cellphoneNumber: this.dataForm.value.cellphoneNumber,
+      emergencyPhone: this.dataForm.value.emergencyPhone,
+      province: this.dataForm.value.province,
+      canton: this.dataForm.value.canton,
+      city: this.dataForm.value.city,
+      neighborhood: this.dataForm.value.neighborhood,
+      mainStreet: this.dataForm.value.mainStreet,
+      nomenclature: this.dataForm.value.nomenclature,
+      secondaryStreet: this.dataForm.value.secondaryStreet
+     };
+
+    const booleans = ['allergy', 'consumingMedicine', 'conadisLicense', 'retirement'];
+    for( let booleanParameter of booleans) {
+      medical[booleanParameter] = medical[booleanParameter] === 'true';
+    };
+    
+    const booleansComercial = ['qualifiedCraftman'];
+    for( let booleanParameter of booleansComercial) {
+      comercial[booleanParameter] = comercial[booleanParameter] === 'true';
+    };
+
+    const booleansTributary = ['keepAccounting'];
+    for( let booleanParameter of booleansTributary) {
+      tributary[booleanParameter] = tributary[booleanParameter] === 'true';
+    };
+     let avatar: any;
     if (!this.dataForm.valid) {
       Swal.fire({
         title: 'Oh no',
@@ -85,15 +172,11 @@ export class MedicalComponent implements OnInit {
         icon: 'error',
         confirmButtonText: 'Aceptar'
       });
+      console.log(comercial);
       return false;
     } else {
-      Swal.fire({
-        title: 'Genial',
-        html: `¡Bien! Ya casi terminamos, solo hace falta un último formulario y estamos en ello.`,
-        icon: 'success',
-        confirmButtonText: 'Aceptar'
-      });
-      return this.router.navigate(['client/covid']);
+      console.log(comercial);
+      this._formService.upload(tributary, comercial, medical, personal, avatar);
     }
   }
 }

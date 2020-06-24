@@ -4,88 +4,100 @@
         <h2>Formulario</h2>
         <div class="form-group p-3">
             <label>Nombres
-                <input type="text" class="form-control" name="name" formControlName="name">
-                <small *ngIf="isSubmitted && errorControl.name.errors?.required">
+                <input type="text" class="form-control" name="firstName" formControlName="firstName">
+                <small *ngIf="isSubmitted && errorControl.firstName.errors?.required">
                     Los nombres son necesarios
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label>Apellidos
-                <input type="text" class="form-control" name="last" formControlName="last">
-                <small *ngIf="isSubmitted && errorControl.last.errors?.required">
+                <input type="text" class="form-control" name="lastName" formControlName="lastName">
+                <small *ngIf="isSubmitted && errorControl.lastName.errors?.required">
                     Los apellidos son necesarios
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
+            <label>Género
+                <select class="form-control" name="gender" formControlName="gender">
+                    <option value="male">Hombre</option>
+                    <option value="female">Mujer</option>
+                    <option value="other">Otro</option>
+                </select>
+                <small *ngIf="isSubmitted && errorControl.gender.errors?.required">
+                    Seleccione uno.
+                </small>
+            </label>
+        </div>
+        <div class="form-group p-3">
             <label>Fecha de Nacimiento
-                <input type="date" class="form-control" name="dob" value="" placeholder="dd/mm/aaaa" formControlName="dob">
-                <small *ngIf="isSubmitted && errorControl.dob.errors?.required">
+                <input type="date" class="form-control" name="dateOfBirth" value="" placeholder="dd/mm/aaaa" formControlName="dateOfBirth">
+                <small *ngIf="isSubmitted && errorControl.dateOfBirth.errors?.required">
                     La fecha de nacimiento es necesaria
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label>Cédula
-                <input type="text" appOnlynumber class="form-control" name="cedula" formControlName="cedula" minlength="10" maxlength="10">
-                <small *ngIf="isSubmitted && errorControl.cedula.errors?.required">
+                <input type="text" appOnlynumber class="form-control" name="idNumber" formControlName="idNumber" minlength="10" maxlength="10">
+                <small *ngIf="isSubmitted && errorControl.idNumber.errors?.required">
                     La cédula es necesaria
                 </small>
-                <small *ngIf="isSubmitted && errorControl.cedula.errors?.min">
+                <small *ngIf="isSubmitted && errorControl.idNumber.errors?.min">
                     Debe ingresar 10 números.
                 </small>
-                <small *ngIf="isSubmitted && errorControl.cedula.errors?.max">
+                <small *ngIf="isSubmitted && errorControl.idNumber.errors?.max">
                     Debe ingresar 10 números.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label>Teléfono Convencional
-                <input type="text" appOnlynumber class="form-control" id="conv" formControlName="conv">
-                <small *ngIf="isSubmitted && errorControl.conv.errors?.required">
+                <input type="text" appOnlynumber class="form-control" id="phoneNumber" formControlName="phoneNumber">
+                <small *ngIf="isSubmitted && errorControl.phoneNumber.errors?.required">
                     El teléfono convencional es necesario.
                 </small>
-                <small *ngIf="isSubmitted && errorControl.conv.errors?.min">
+                <small *ngIf="isSubmitted && errorControl.phoneNumber.errors?.min">
                     Debe ingresar 7 números mínimo.
                 </small>
-                <small *ngIf="isSubmitted && errorControl.conv.errors?.max">
+                <small *ngIf="isSubmitted && errorControl.phoneNumber.errors?.max">
                     Debe ingresar 9 números máximo.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
-            <label for="telCelular">Teléfono Celular
-                <input type="text" appOnlynumber class="form-control" id="telCelular" formControlName="cel">
-                <small *ngIf="isSubmitted && errorControl.cel.errors?.required">
+            <label>Teléfono Celular
+                <input type="text" appOnlynumber class="form-control" name="cellphoneNumber" formControlName="cellphoneNumber">
+                <small *ngIf="isSubmitted && errorControl.cellphoneNumber.errors?.required">
                     El teléfono celular es necesario.
                 </small>
-                <small *ngIf="isSubmitted && errorControl.cel.errors?.min">
+                <small *ngIf="isSubmitted && errorControl.cellphoneNumber.errors?.min">
                     Debe ingresar 10 números.
                 </small>
-                <small *ngIf="isSubmitted && errorControl.cel.errors?.max">
+                <small *ngIf="isSubmitted && errorControl.cellphoneNumber.errors?.max">
                     Debe ingresar 10 números.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label>Número de Emergencia
-                <input type="text" appOnlynumber class="form-control" name="emer" formControlName="emer">
-                <small *ngIf="isSubmitted && errorControl.emer.errors?.required">
+                <input type="text" appOnlynumber class="form-control" name="emergencyPhone" formControlName="emergencyPhone">
+                <small *ngIf="isSubmitted && errorControl.emergencyPhone.errors?.required">
                     El número de emergencia es necesario.
                 </small>
-                <small *ngIf="isSubmitted && errorControl.emer.errors?.min">
+                <small *ngIf="isSubmitted && errorControl.emergencyPhone.errors?.min">
                     Debe ingresar 7 números mínimo.
                 </small>
-                <small *ngIf="isSubmitted && errorControl.emer.errors?.max">
+                <small *ngIf="isSubmitted && errorControl.emergencyPhone.errors?.max">
                     Debe ingresar 10 números máximo.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label>Provincia
-                <input type="text" class="form-control" name="provincia" formControlName="provincia">
-                <small *ngIf="isSubmitted && errorControl.provincia.errors?.required">
+                <input type="text" class="form-control" name="province" formControlName=province>
+                <small *ngIf="isSubmitted && errorControl.province.errors?.required">
                     La provincia es necesaria.
                 </small>
             </label>
@@ -100,142 +112,151 @@
         </div>
         <div class="form-group p-3">
             <label>Ciudad
-                <input type="text" class="form-control" name="ciudad" formControlName="ciudad">
-                <small *ngIf="isSubmitted && errorControl.ciudad.errors?.required">
+                <input type="text" class="form-control" name="city" formControlName="city">
+                <small *ngIf="isSubmitted && errorControl.city.errors?.required">
                     La ciudad es necesaria.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label>Barrio
-                <input type="text" class="form-control" name="barrio" formControlName="barrio">
-                <small *ngIf="isSubmitted && errorControl.barrio.errors?.required">
+                <input type="text" class="form-control" name="neighborhood" formControlName="neighborhood">
+                <small *ngIf="isSubmitted && errorControl.neighborhood.errors?.required">
                     El barrio es necesario.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label>Calle Principal
-                <input type="text" class="form-control" name="callePri" formControlName="callePri">
-                <small *ngIf="isSubmitted && errorControl.callePri.errors?.required">
+                <input type="text" class="form-control" name="mainStreet" formControlName="mainStreet">
+                <small *ngIf="isSubmitted && errorControl.mainStreet.errors?.required">
                     La calle principal es necesaria.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label>Nomenclatura
-                <input type="text" class="form-control" name="nomeclatura" formControlName="nomencla">
-                <small *ngIf="isSubmitted && errorControl.nomencla.errors?.required">
+                <input type="text" class="form-control" name="nomenclature" formControlName="nomenclature">
+                <small *ngIf="isSubmitted && errorControl.nomenclature.errors?.required">
                     La nomenclatura es necesaria.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label>Calle Secundaria
-                <input type="text" class="form-control" name="calleSec" formControlName="calleSec">
-                <small *ngIf="isSubmitted && errorControl.calleSec.errors?.required">
+                <input type="text" class="form-control" name="secondaryStreet" formControlName="secondaryStreet">
+                <small *ngIf="isSubmitted && errorControl.secondaryStreet.errors?.required">
                     La calle secundaria es necesaria.
                 </small>
-            </label>
-        </div>
-        <div class="form-group p-3">
-            <label>Correo Electrónico
-                <input type="email" class="form-control" readonly placeholder="mail@domain.tld">
             </label>
         </div>
         <h2>Información Tributaria</h2>
         <div class="form-group p-3">
             <h4>Seleccione una: </h4>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="riseruc" [(ngModel)]="riseruc" id="CB1" formControlName="riseruc" value="ruc">
+                <input class="form-check-input" [(ngModel)]="taxType" type="radio" name="taxType" id="CB1" formControlName="taxType" value="ruc">
                 <label class="form-check-label" for="CB1">RUC</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="riseruc" [(ngModel)]="riseruc" id="CB2" formControlName="riseruc" value="rise">
+                <input class="form-check-input" [(ngModel)]="taxType" type="radio" name="taxType" id="CB2" formControlName="taxType" value="rise">
                 <label class="form-check-label" for="CB2">RISE</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="riseruc" [(ngModel)]="riseruc" id="CB3" formControlName="riseruc" value="none" checked="true">
+                <input class="form-check-input" [(ngModel)]="taxType" type="radio" name="taxType" id="CB3" formControlName="taxType" value="none">
                 <label class="form-check-label" for="CB3">Ninguna</label>
               </div>
-              <small *ngIf="isSubmitted && errorControl.riseruc.errors?.required">
+              <small *ngIf="isSubmitted && errorControl.taxType.errors?.required">
                 La información tributaria es necesaria.
               </small>
         </div>
-        <div class="form-group p-3" *ngIf="riseruc == 'ruc' || riseruc == 'rise'">
+        <div class="form-group p-3" *ngIf="taxType == 'ruc' || taxType == 'rise'">
             <label>RISE / RUC
-                <input type="text" appOnlynumber class="form-control" name="riserucInput" formControlName="riserucInput">
+                <input type="text" appOnlynumber class="form-control" name="taxNumber" formControlName="taxNumber">
             </label>
+        </div>
+        <div class="form-group p-3 w-100">
+            <h4>Está obligado a llevar contabilidad</h4>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="keepAccounting" formControlName="keepAccounting" id="CBtrue" value="true">
+                <label class="form-check-label" for="CBtrue">Sí</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="keepAccounting" formControlName="keepAccounting" id="CBfalse" value="false">
+                <label class="form-check-label" for="CBfalse">No</label>
+              </div>
+              <small *ngIf="isSubmitted && errorControl.keepAccounting.errors?.required">
+                Por favor, rellene este campo.
+              </small>
         </div>
         <h2>Información de Locales</h2>
         <div class="form-group p-3 w-100">
             <h4>En su negocio, usted es:</h4>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="negocioOw" formControlName="negocioOw" id="CBa" value="owner">
+                <input class="form-check-input" type="radio" name="personType" formControlName="personType" id="CBa" value="owner">
                 <label class="form-check-label" for="CBa">Propietario</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="negocioOw" formControlName="negocioOw" id="CBe" value="lessee">
+                <input class="form-check-input" type="radio" name="personType" formControlName="personType" id="CBe" value="lessee">
                 <label class="form-check-label" for="CBe">Arrendatario</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="negocioOw" formControlName="negocioOw" id="CBi" value="possessor">
+                <input class="form-check-input" type="radio" name="personType" formControlName="personType" id="CBi" value="possessor">
                 <label class="form-check-label" for="CBi">Posecionario</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="negocioOw" formControlName="negocioOw" id="CB4" value="borrower">
+                <input class="form-check-input" type="radio" name="personType" formControlName="personType" id="CB4" value="borrower">
                 <label class="form-check-label" for="CB4">Comodatario</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="negocioOw" formControlName="negocioOw" id="CB5" value="attorney">
+                <input class="form-check-input" type="radio" name="personType" formControlName="personType" id="CB5" value="attorney">
                 <label class="form-check-label" for="CB5">Apoderado</label>
               </div>
-              <small *ngIf="isSubmitted && errorControl.negocioOw.errors?.required">
+              <small *ngIf="isSubmitted && errorControl.personType.errors?.required">
                 Por favor, rellene este campo.
               </small>
         </div>
         <div class="form-group p-3">
             <label>Nombre Comercial del Negocio
-                <input type="text" class="form-control" name="nameNeg" formControlName="nameNeg">
-                <small *ngIf="isSubmitted && errorControl.nameNeg.errors?.required">
+                <input type="text" class="form-control" name="businessName" formControlName="businessName">
+                <small *ngIf="isSubmitted && errorControl.businessName.errors?.required">
                     El nombre del negocio es necesario.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label>Razón Social
-                <input type="text" class="form-control" name="razonSoc" formControlName="razonSoc">
-                <small *ngIf="isSubmitted && errorControl.razonSoc.errors?.required">
+                <input type="text" class="form-control" name="socialReason" formControlName="socialReason">
+                <small *ngIf="isSubmitted && errorControl.socialReason.errors?.required">
                     La razón social es necesaria.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label>Producto que Comercializa
-                <select class="form-control" name="producto" formControlName="producto">
+                <select class="form-control" name="productsBeingSold" formControlName="productsBeingSold">
                     <option value="producto1">Producto 1</option>
                     <option value="producto2">Producto 2</option>
                     <option value="producto3">Producto 3</option>
                     <option value="producto4">Producto 4</option>
                     <option value="producto5">Producto 5</option>
                 </select>
-                <small *ngIf="isSubmitted && errorControl.producto.errors?.required">
+                <small *ngIf="isSubmitted && errorControl.productsBeingSold.errors?.required">
                     Seleccione uno.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label>Número de Local
-                <input type="text" class="form-control" name="numLocal" formControlName="numLocal">
-                <small *ngIf="isSubmitted && errorControl.numLocal.errors?.required">
+                <input type="text" class="form-control" name="localNumber" formControlName="localNumber">
+                <small *ngIf="isSubmitted && errorControl.localNumber.errors?.required">
                     El número del local es necesario.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label>Número de Predio
-                <input type="text" appOnlynumber class="form-control" name="predio" formControlName="predio">
-                <small *ngIf="isSubmitted && errorControl.predio.errors?.required">
+                <input type="text" appOnlynumber class="form-control" name="predioNumber" formControlName="predioNumber">
+                <small *ngIf="isSubmitted && errorControl.predioNumber.errors?.required">
                     El predio es necesario.
                 </small>
             </label>
@@ -259,46 +280,46 @@
         <div class="form-group p-3">
             <h4>Seleccione su planta </h4>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio"  name="planta" formControlName="planta" id="CBalta" value="option1" checked>
+                <input class="form-check-input" type="radio"  name="floor" formControlName="floor" id="CBalta" value="top">
                 <label class="form-check-label" for="CBalta">Planta Baja</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio"  name="planta" formControlName="planta" id="CBbaja" value="option2">
+                <input class="form-check-input" type="radio"  name="floor" formControlName="floor" id="CBbaja" value="bottom">
                 <label class="form-check-label" for="CBbaja">Planta Alta</label>
               </div>
-              <small *ngIf="isSubmitted && errorControl.planta.errors?.required">
+              <small *ngIf="isSubmitted && errorControl.floor.errors?.required">
                 Seleccione uno.
             </small>
         </div>
         <div class="form-group p-3">
             <label>Número de Pasillo
-                <input type="text" appOnlynumber class="form-control" name="pasillo" formControlName="pasillo">
-                <small *ngIf="isSubmitted && errorControl.pasillo.errors?.required">
+                <input type="text" appOnlynumber class="form-control" name="hallNumber" formControlName="hallNumber">
+                <small *ngIf="isSubmitted && errorControl.hallNumber.errors?.required">
                     El número del pasillo es necesario.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label>Procedencia del Producto
-                <select class="form-control" name="procedencia" formControlName="procedencia">
-                    <option value="Nacional">Nacional</option>
-                    <option value="Internacional">Internacional</option>
-                    <option value="Ambas">Ambas</option>
+                <select class="form-control" name="originOfProducts" formControlName="originOfProducts">
+                    <option value="national">Nacional</option>
+                    <option value="international">Internacional</option>
+                    <option value="both">Ambas</option>
                 </select>
-                <small *ngIf="isSubmitted && errorControl.procedencia.errors?.required">
+                <small *ngIf="isSubmitted && errorControl.originOfProducts.errors?.required">
                     Seleccione una.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label>Cantidad de Locales
-                <select class="form-control" name="locales" formControlName="locales">
-                    <option value="1 local">1 local</option>
-                    <option value="2 locales">2 locales</option>
-                    <option value="3 locales">3 locales</option>
-                    <option value="Más locales">Más de 4 locales</option>
+                <select class="form-control" name="numberLocals" formControlName="numberLocals">
+                    <option value="1">1 local</option>
+                    <option value="2">2 locales</option>
+                    <option value="3">3 locales</option>
+                    <option value="more">Más de 4 locales</option>
                 </select>
-                <small *ngIf="isSubmitted && errorControl.locales.errors?.required">
+                <small *ngIf="isSubmitted && errorControl.numberLocals.errors?.required">
                     Seleccione una.
                 </small>
             </label>
@@ -306,39 +327,44 @@
         <div class="form-group p-3">
             <h4>¿Es Artesano Calificado? </h4>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="artesano" [(ngModel)]="artesano" formControlName="artesano" id="CBsi" value="Sí" checked>
+                <input class="form-check-input" type="radio" name="qualifiedCraftman" [(ngModel)]="qualifiedCraftman" formControlName="qualifiedCraftman" id="CBsi" value="true">
                 <label class="form-check-label" for="CBsi">Sí</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="artesano" [(ngModel)]="artesano" formControlName="artesano" id="CBno" value="No">
+                <input class="form-check-input" type="radio" name="qualifiedCraftman" [(ngModel)]="qualifiedCraftman" formControlName="qualifiedCraftman" id="CBno" value="false">
                 <label class="form-check-label" for="CBno">No</label>
               </div>
-              <small *ngIf="isSubmitted && errorControl.artesano.errors?.required">
+              <small *ngIf="isSubmitted && errorControl.qualifiedCraftman.errors?.required">
                 Seleccione una.
             </small>
         </div>
-        <div class="form-group p-3" *ngIf="artesano == 'Sí'">
+        <div class="form-group p-3" *ngIf="qualifiedCraftman == 'true'">
+            <label>En caso de sí, calificación
+                <input type="text" class="form-control" name="craftmanCalification" formControlName="craftmanCalification">
+            </label>
+        </div>
+        <div class="form-group p-3">
             <h4>Seleccione una </h4>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="typeArtesano" formControlName="typeArtesano" id="CBfab" value="option1" checked>
+                <input class="form-check-input" type="radio" name="sellerType" formControlName="sellerType" id="CBfab" value="maker" checked>
                 <label class="form-check-label" for="CBfab">Fabricante</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="typeArtesano" formControlName="typeArtesano" id="CBcomer" value="option2">
+                <input class="form-check-input" type="radio" name="sellerType" formControlName="sellerType" id="CBcomer" value="marketer">
                 <label class="form-check-label" for="CBcomer">Comercializador</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="typeArtesano" formControlName="typeArtesano" id="CBambas" value="option3">
+                <input class="form-check-input" type="radio" name="sellerType" formControlName="sellerType" id="CBambas" value="both">
                 <label class="form-check-label" for="CBambas">Ambas</label>
               </div>
-              <small *ngIf="isSubmitted && errorControl.typeArtesano.errors?.required">
+              <small *ngIf="isSubmitted && errorControl.sellerType.errors?.required">
                 Seleccione una.
             </small>
         </div>
         <h2>Información Clínica</h2>
         <div class="form-group p-3">
             <label>Tipo de Sangre
-                <select class="form-control" name="sangre" formControlName="sangre">
+                <select class="form-control" name="bloodType" formControlName="bloodType">
                     <option value="O+">O+</option>
                     <option value="A+">A+</option>
                     <option value="B+">B+</option>
@@ -349,15 +375,15 @@
                     <option value="B-">B-</option>
                     <option value="AB-">AB-</option>
                 </select>
-                <small *ngIf="isSubmitted && errorControl.sangre.errors?.required">
+                <small *ngIf="isSubmitted && errorControl.bloodType.errors?.required">
                     Seleccione uno.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label>Peso
-                <input type="number" placeholder="En kg" class="form-control" id="peso" formControlName="peso">
-                <small *ngIf="isSubmitted && errorControl.peso.errors?.required">
+                <input type="number" placeholder="En kg" class="form-control" id="height" formControlName="height">
+                <small *ngIf="isSubmitted && errorControl.height.errors?.required">
                     El peso es necesario.
                 </small>
             </label>
@@ -366,58 +392,58 @@
         <div class="form-group p-3">
             <h4>¿Eres alérgico a un medicamento? </h4>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="alergia" [(ngModel)]="alergia" formControlName="alergia" id="CBmedsi" value="true">
+                <input class="form-check-input" type="radio" name="allergy" [(ngModel)]="allergy" formControlName="allergy" id="CBmedsi" value="true">
                 <label class="form-check-label" for="CBmedsi">Sí</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="alergia" [(ngModel)]="alergia" formControlName="alergia" id="CBmedno" value="false">
+                <input class="form-check-input" type="radio" name="allergy" [(ngModel)]="allergy" formControlName="allergy" id="CBmedno" value="false">
                 <label class="form-check-label" for="CBmedno">No</label>
               </div>
-              <small *ngIf="isSubmitted && errorControl.alergia.errors?.required">
+              <small *ngIf="isSubmitted && errorControl.allergy.errors?.required">
                 Complete este campo, por favor.
               </small>
         </div>
-        <div class="form-group p-3" *ngIf="alergia == 'true'">
+        <div class="form-group p-3" *ngIf="allergy == 'true'">
             <label>Ingrese el medicamento
-                <input type="text" class="form-control" name="alergiaInput" formControlName="alergiaInput">
+                <input type="text" class="form-control" name="allergicTo" formControlName="allergicTo">
             </label>
         </div>
         <div class="w-100"></div>
         <div class="form-group p-3">
             <h4>¿Consume algún medicamento? </h4>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="medicamento" [(ngModel)]="medicamento" formControlName="medicamento" id="CBconsumesi" value="true">
+                <input class="form-check-input" type="radio" name="consumingMedicine" [(ngModel)]="consumingMedicine" formControlName="consumingMedicine" id="CBconsumesi" value="true">
                 <label class="form-check-label" for="CBconsumesi">Sí</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="medicamento" [(ngModel)]="medicamento" formControlName="medicamento" id="CBconsumeno" value="false">
+                <input class="form-check-input" type="radio" name="consumingMedicine" [(ngModel)]="consumingMedicine" formControlName="consumingMedicine" id="CBconsumeno" value="false">
                 <label class="form-check-label" for="CBconsumeno">No</label>
               </div>
-              <small *ngIf="isSubmitted && errorControl.medicamento.errors?.required">
+              <small *ngIf="isSubmitted && errorControl.consumingMedicine.errors?.required">
                 Complete este campo, por favor.
               </small>
         </div>
-        <div class="form-group p-3" *ngIf="medicamento == 'true'">
+        <div class="form-group p-3" *ngIf="consumingMedicine == 'true'">
             <label>Ingrese el medicamento
-                <input type="text" class="form-control" name="medicamentoInput" formControlName="medicamentoInput">
+                <input type="text" class="form-control" name="medicamentBeingConsumed" formControlName="medicamentBeingConsumed">
             </label>
         </div>
         <div class="form-group p-3">
             <label>Enfermedades Pre-Existentes
-                <input type="text" class="form-control" name="enfermedades" formControlName="enfermedades">
+                <input type="text" class="form-control" name="illness" formControlName="illness">
             </label>
-            <small *ngIf="isSubmitted && errorControl.enfermedades.errors?.required">
+            <small *ngIf="isSubmitted && errorControl.illness.errors?.required">
                 Complete este campo, por favor.
               </small>
         </div>
         <div class="w-100"></div>
         <div class="form-group p-3">
             <label>¿A qué está afiliado usted?
-                <select class="form-control" name="seguro" formControlName="seguro">
+                <select class="form-control" name="affiliatedTo" formControlName="affiliatedTo">
                     <option value="IESS">IESS</option>
                     <option value="ISFA">ISFA</option>
                 </select>
-                <small *ngIf="isSubmitted && errorControl.seguro.errors?.required">
+                <small *ngIf="isSubmitted && errorControl.affiliatedTo.errors?.required">
                     Complete este campo, por favor.
                   </small>
             </label>
@@ -425,33 +451,40 @@
         <div class="form-group p-3">
             <h4>¿Posee carnet de Conadis? </h4>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="conadis" [(ngModel)]="conadis" formControlName="conadis" id="CBcarnetSi" value="true">
+                <input class="form-check-input" type="radio" name="conadisLicense" [(ngModel)]="conadisLicense" formControlName="conadisLicense" id="CBcarnetSi" value="true">
                 <label class="form-check-label" for="CBcarnetSi">Sí</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="conadis" [(ngModel)]="conadis" formControlName="conadis" id="CBcarnetNo" value="false">
+                <input class="form-check-input" type="radio" name="conadisLicense" [(ngModel)]="conadisLicense" formControlName="conadisLicense" id="CBcarnetNo" value="false">
                 <label class="form-check-label" for="CBcarnetNo">No</label>
               </div>
-              <small *ngIf="isSubmitted && errorControl.conadis.errors?.required">
+              <small *ngIf="isSubmitted && errorControl.conadisLicense.errors?.required">
                 Complete este campo, por favor.
               </small>
         </div>
-        <div class="form-group p-3" *ngIf="conadis == 'true'">
+        <div class="form-group p-3" *ngIf="conadisLicense == 'true'">
             <label>¿Cuál carnet posee usted?
-                <input type="text" class="form-control" name="carnet" formControlName="carnet">
+                <input type="text" class="form-control" name="conadisLicenseType" formControlName="conadisLicenseType">
             </label>
         </div>
         <div class="form-group p-3">
             <label>Jubilación
-                <select class="form-control" name="jubilacion" formControlName="jubilacion">
-                    <option value="No">No</option>
+                <select class="form-control" name="retirement" [(ngModel)]="retirement" formControlName="retirement">
+                    <option value="true">Si</option>
+                    <option value="false">No</option>
+                </select>
+            </label>
+            <small *ngIf="isSubmitted && errorControl.retirement.errors?.required">
+                Complete este campo, por favor.
+              </small>
+        </div>
+        <div class="form-group p-3" *ngIf="retirement == 'true'">
+            <label>Tipo de Jubilación
+                <select class="form-control" name="retirementDetails" formControlName="retirementDetails">
                     <option value="IESS">IESS</option>
                     <option value="ISFA">ISFA</option>
                 </select>
             </label>
-            <small *ngIf="isSubmitted && errorControl.jubilacion.errors?.required">
-                Complete este campo, por favor.
-              </small>
         </div>
         <div class="w-100" style="float: left;"><button type="submit" class="btn btn-primary">Crear una cuenta</button></div>
         <br><br>

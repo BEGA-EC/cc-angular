@@ -2,22 +2,23 @@
     <div class="row">
         <form class="p-3" [formGroup]="covidForm" (ngSubmit)="submitForm()" novalidate>
             <h2>Encuesta - COVID</h2>
+  
             <h3>Fase Clínica</h3>
             <p>¿Presenta usted alguno de estos síntomas?</p>
             <div class="form-group covid p-3">
                 <h6>Tos</h6>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="tos" formControlName="tos" value="true">Sí
+                        <input class="form-check-input" type="radio" name="cough" formControlName="cough" value="true">Sí
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="tos" formControlName="tos" value="false">No
+                        <input class="form-check-input" type="radio" name="cough" formControlName="cough" value="false">No
                     </label>
                   </div>
-                  <input class="form-control" placeholder="Comentarios (Opcional)" name="tosComment" formControlName="tosComment">
-                  <small *ngIf="isSubmitted && errorControl.tos.errors?.required">
+                  <input class="form-control" placeholder="Comentarios (Opcional)" name="coughComment" formControlName="coughComment">
+                  <small *ngIf="isSubmitted && errorControl.cough.errors?.required">
                     Seleccione una opción, por favor.
                   </small>
             </div>
@@ -25,16 +26,16 @@
                 <h6>Fiebre</h6>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="fiebre" formControlName="fiebre" value="true">Sí
+                        <input class="form-check-input" type="radio" name="fever" formControlName="fever" value="true">Sí
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="fiebre" formControlName="fiebre" value="false">No
+                        <input class="form-check-input" type="radio" name="fever" formControlName="fever" value="false">No
                     </label>
                   </div>
-                  <input class="form-control" placeholder="Comentarios (Opcional)" name="fiebreComment" formControlName="fiebreComment">
-                  <small *ngIf="isSubmitted && errorControl.fiebre.errors?.required">
+                  <input class="form-control" placeholder="Comentarios (Opcional)" name="feverComment" formControlName="feverComment">
+                  <small *ngIf="isSubmitted && errorControl.fever.errors?.required">
                     Seleccione una opción, por favor.
                   </small>
             </div>
@@ -42,16 +43,16 @@
                 <h6>Cefalea</h6>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="cefalea" formControlName="cefalea" value="true">Sí
+                        <input class="form-check-input" type="radio" name="headache" formControlName="headache" value="true">Sí
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="cefalea" formControlName="cefalea" value="false">No
+                        <input class="form-check-input" type="radio" name="headache" formControlName="headache" value="false">No
                     </label>
                   </div>
-                  <input class="form-control" placeholder="Comentarios (Opcional)" name="cefaleaComment" formControlName="cefaleaComment">
-                  <small *ngIf="isSubmitted && errorControl.cefalea.errors?.required">
+                  <input class="form-control" placeholder="Comentarios (Opcional)" name="headacheComment" formControlName="headacheComment">
+                  <small *ngIf="isSubmitted && errorControl.headache.errors?.required">
                     Seleccione una opción, por favor.
                   </small>
             </div>
@@ -59,50 +60,33 @@
                 <h6>Disnea</h6>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="disnea" formControlName="disnea" value="true">Sí
+                        <input class="form-check-input" type="radio" name="dyspnoea" formControlName="dyspnoea" value="true">Sí
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="disnea" formControlName="disnea" value="false">No
+                        <input class="form-check-input" type="radio" name="dyspnoea" formControlName="dyspnoea" value="false">No
                     </label>
                   </div>
-                  <input class="form-control" placeholder="Comentarios (Opcional)" name="disneaComment" formControlName="disneaComment">
-                  <small *ngIf="isSubmitted && errorControl.disnea.errors?.required">
+                  <input class="form-control" placeholder="Comentarios (Opcional)" name="dyspnoeaComment" formControlName="dyspnoeaComment">
+                  <small *ngIf="isSubmitted && errorControl.dyspnoea.errors?.required">
                     Seleccione una opción, por favor.
                   </small>
             </div>
             <div class="form-group covid p-3">
-                <h6>Diarrea</h6>
+                <h6>Diarrea o Vómito</h6>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="diarrea" formControlName="diarrea" value="true">Sí
+                        <input class="form-check-input" type="radio" name="diarrheaOrVomiting" formControlName="diarrheaOrVomiting" value="true">Sí
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="diarrea" formControlName="diarrea" value="false">No
+                        <input class="form-check-input" type="radio" name="diarrheaOrVomiting" formControlName="diarrheaOrVomiting" value="false">No
                     </label>
                   </div>
-                  <input class="form-control" placeholder="Comentarios (Opcional)" name="diarreaComment" formControlName="diarreaComment">
-                  <small *ngIf="isSubmitted && errorControl.diarrea.errors?.required">
-                    Seleccione una opción, por favor.
-                  </small>
-            </div>
-            <div class="form-group covid p-3">
-                <h6>Vómito</h6>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="vomito" formControlName="vomito" value="true">Sí
-                    </label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="vomito" formControlName="vomito" value="false">No
-                    </label>
-                  </div>
-                  <input class="form-control" placeholder="Comentarios (Opcional)" name="vomitoComment" formControlName="vomitoComment">
-                  <small *ngIf="isSubmitted && errorControl.vomito.errors?.required">
+                  <input class="form-control" placeholder="Comentarios (Opcional)" name="diarrheaOrVomitingComment" formControlName="diarrheaOrVomitingComment">
+                  <small *ngIf="isSubmitted && errorControl.diarrheaOrVomiting.errors?.required">
                     Seleccione una opción, por favor.
                   </small>
             </div>
@@ -110,16 +94,16 @@
                 <h6>Pérdida del Olfato</h6>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="perdidaOlfato" formControlName="perdidaOlfato" value="true">Sí
+                        <input class="form-check-input" type="radio" name="lossOfSmell" formControlName="lossOfSmell" value="true">Sí
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="perdidaOlfato" formControlName="perdidaOlfato" value="false">No
+                        <input class="form-check-input" type="radio" name="lossOfSmell" formControlName="lossOfSmell" value="false">No
                     </label>
                   </div>
-                  <input class="form-control" placeholder="Comentarios (Opcional)" name="perdidaOlfatoComment" formControlName="perdidaOlfatoComment">
-                  <small *ngIf="isSubmitted && errorControl.perdidaOlfato.errors?.required">
+                  <input class="form-control" placeholder="Comentarios (Opcional)" name="lossOfSmellComment" formControlName="lossOfSmellComment">
+                  <small *ngIf="isSubmitted && errorControl.lossOfSmell.errors?.required">
                     Seleccione una opción, por favor.
                   </small>
             </div>
@@ -127,16 +111,16 @@
                 <h6>Pérdida del Gusto</h6>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="perdidaGusto" formControlName="perdidaGusto" value="true">Sí
+                        <input class="form-check-input" type="radio" name="lossOfTaste" formControlName="lossOfTaste" value="true">Sí
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="perdidaGusto" formControlName="perdidaGusto" value="false">No
+                        <input class="form-check-input" type="radio" name="lossOfTaste" formControlName="lossOfTaste" value="false">No
                     </label>
                   </div>
-                  <input class="form-control" placeholder="Comentarios (Opcional)" name="perdidaGustoComment" formControlName="perdidaGustoComment">
-                  <small *ngIf="isSubmitted && errorControl.perdidaGusto.errors?.required">
+                  <input class="form-control" placeholder="Comentarios (Opcional)" name="lossOfTasteComment" formControlName="lossOfTasteComment">
+                  <small *ngIf="isSubmitted && errorControl.lossOfTaste.errors?.required">
                     Seleccione una opción, por favor.
                   </small>
             </div>
@@ -147,16 +131,16 @@
                 <h6>¿Ha estado en contacto con personas expuestas a sintomas respiratorios, como tos o fiebre?</h6>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="contactoConPersonas" formControlName="contactoConPersonas" value="true">Sí
+                        <input class="form-check-input" type="radio" name="inContactWithFeverOrCoughSickPeople" formControlName="inContactWithFeverOrCoughSickPeople" value="true">Sí
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="contactoConPersonas" formControlName="contactoConPersonas" value="false">No
+                        <input class="form-check-input" type="radio" name="inContactWithFeverOrCoughSickPeople" formControlName="inContactWithFeverOrCoughSickPeople" value="false">No
                     </label>
                   </div>
-                  <input class="form-control" placeholder="Comentarios (Opcional)" name="contactoConPersonasComment" formControlName="contactoConPersonasComment">
-                  <small *ngIf="isSubmitted && errorControl.contactoConPersonas.errors?.required">
+                  <input class="form-control" placeholder="Comentarios (Opcional)" name="inContactWithFeverOrCoughSickPeopleComment" formControlName="inContactWithFeverOrCoughSickPeopleComment">
+                  <small *ngIf="isSubmitted && errorControl.inContactWithFeverOrCoughSickPeople.errors?.required">
                     Seleccione una opción, por favor.
                   </small>
             </div>
@@ -164,16 +148,16 @@
                 <h6>¿Ha realizado algun viaje en un periodo de 14 días?</h6>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="viaje" formControlName="viaje" value="true">Sí
+                        <input class="form-check-input" type="radio" name="hasTravaledInThePast14Days" formControlName="hasTravaledInThePast14Days" value="true">Sí
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="viaje" formControlName="viaje" value="false">No
+                        <input class="form-check-input" type="radio" name="hasTravaledInThePast14Days" formControlName="hasTravaledInThePast14Days" value="false">No
                     </label>
                   </div>
-                  <input class="form-control" placeholder="Comentarios (Opcional)" name="viajeComment" formControlName="viajeComment">
-                  <small *ngIf="isSubmitted && errorControl.viaje.errors?.required">
+                  <input class="form-control" placeholder="Comentarios (Opcional)" name="hasTravaledInThePast14DaysComment" formControlName="hasTravaledInThePast14DaysComment">
+                  <small *ngIf="isSubmitted && errorControl.hasTravaledInThePast14Days.errors?.required">
                     Seleccione una opción, por favor.
                   </small>
             </div>
@@ -181,16 +165,16 @@
                 <h6>¿Ha acudido a algun medico por alguna sintomatologia respiratoria en los últimos 14 días?</h6>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="acudidoMedico" formControlName="acudidoMedico" value="true">Sí
+                        <input class="form-check-input" type="radio" name="hasGoneToDoctorDueToRespiratorySymptoms" formControlName="hasGoneToDoctorDueToRespiratorySymptoms" value="true">Sí
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="acudidoMedico" formControlName="acudidoMedico" value="false">No
+                        <input class="form-check-input" type="radio" name="hasGoneToDoctorDueToRespiratorySymptoms" formControlName="hasGoneToDoctorDueToRespiratorySymptoms" value="false">No
                     </label>
                   </div>
-                  <input class="form-control" placeholder="Comentarios (Opcional)" name="acudidoMedicoComment" formControlName="acudidoMedicoComment">
-                  <small *ngIf="isSubmitted && errorControl.acudidoMedico.errors?.required">
+                  <input class="form-control" placeholder="Comentarios (Opcional)" name="hasGoneToDoctorDueToRespiratorySymptomsComment" formControlName="hasGoneToDoctorDueToRespiratorySymptomsComment">
+                  <small *ngIf="isSubmitted && errorControl.hasGoneToDoctorDueToRespiratorySymptoms.errors?.required">
                     Seleccione una opción, por favor.
                   </small>
             </div>
@@ -198,16 +182,16 @@
                 <h6>¿Ha tomado o está tomando algún medicamento antiviral o antibiótico para algún proceso respiratorio en los últimos 14 días?</h6>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="medicamento" formControlName="medicamento" value="true">Sí
+                        <input class="form-check-input" type="radio" name="consumedRespiratoryMedicamentInThePast14Days" formControlName="consumedRespiratoryMedicamentInThePast14Days" value="true">Sí
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="medicamento" formControlName="medicamento" value="false">No
+                        <input class="form-check-input" type="radio" name="consumedRespiratoryMedicamentInThePast14Days" formControlName="consumedRespiratoryMedicamentInThePast14Days" value="false">No
                     </label>
                   </div>
-                  <input class="form-control" placeholder="Comentarios (Opcional)" name="medicamentoComment" formControlName="medicamentoComment">
-                  <small *ngIf="isSubmitted && errorControl.medicamento.errors?.required">
+                  <input class="form-control" placeholder="Comentarios (Opcional)" name="consumedRespiratoryMedicamentInThePast14DaysComment" formControlName="consumedRespiratoryMedicamentInThePast14DaysComment">
+                  <small *ngIf="isSubmitted && errorControl.consumedRespiratoryMedicamentInThePast14Days.errors?.required">
                     Seleccione una opción, por favor.
                   </small>
             </div>
@@ -215,16 +199,16 @@
                 <h6>¿Ha estado libre de fiebre durante al menos los últimos 3 días, sin haber tomado medicamentos antifebriles como el paracetamol o el ibuprofeno?</h6>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="libreDeFiebre" formControlName="libreDeFiebre" value="true">Sí
+                        <input class="form-check-input" type="radio" name="withoutFeverLast3DaysWithoutMedicaments" formControlName="withoutFeverLast3DaysWithoutMedicaments" value="true">Sí
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="libreDeFiebre" formControlName="libreDeFiebre" value="false">No
+                        <input class="form-check-input" type="radio" name="withoutFeverLast3DaysWithoutMedicaments" formControlName="withoutFeverLast3DaysWithoutMedicaments" value="false">No
                     </label>
                   </div>
-                  <input class="form-control" placeholder="Comentarios (Opcional)" name="libreDeFiebreComment" formControlName="libreDeFiebreComment">
-                  <small *ngIf="isSubmitted && errorControl.libreDeFiebre.errors?.required">
+                  <input class="form-control" placeholder="Comentarios (Opcional)" name="withoutFeverLast3DaysWithoutMedicamentsComment" formControlName="withoutFeverLast3DaysWithoutMedicamentsComment">
+                  <small *ngIf="isSubmitted && errorControl.withoutFeverLast3DaysWithoutMedicaments.errors?.required">
                     Seleccione una opción, por favor.
                   </small>
             </div>
@@ -232,16 +216,16 @@
                 <h6>¿En los últimos 14 días ha recibido a algún familiar de otro país o de otra ciudad del país con riesgo de Covid - 19?</h6>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="familiar14Dias" formControlName="familiar14Dias" value="true">Sí
+                        <input class="form-check-input" type="radio" name="haveReceivedARelativeWithRiskOfCovidInThePast14Days" formControlName="haveReceivedARelativeWithRiskOfCovidInThePast14Days" value="true">Sí
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="familiar14Dias" formControlName="familiar14Dias" value="false">No
+                        <input class="form-check-input" type="radio" name="haveReceivedARelativeWithRiskOfCovidInThePast14Days" formControlName="haveReceivedARelativeWithRiskOfCovidInThePast14Days" value="false">No
                     </label>
                   </div>
-                  <input class="form-control" placeholder="Comentarios (Opcional)" name="familiar14DiasComment" formControlName="familiar14DiasComment">
-                  <small *ngIf="isSubmitted && errorControl.familiar14Dias.errors?.required">
+                  <input class="form-control" placeholder="Comentarios (Opcional)" name="haveReceivedARelativeWithRiskOfCovidInThePast14DaysComment" formControlName="haveReceivedARelativeWithRiskOfCovidInThePast14DaysComment">
+                  <small *ngIf="isSubmitted && errorControl.haveReceivedARelativeWithRiskOfCovidInThePast14Days.errors?.required">
                     Seleccione una opción, por favor.
                   </small>
             </div>
@@ -249,16 +233,16 @@
                 <h6>¿En los últimos 14 días en su hogas se hospeda una persona de otro país o de otra ciudad del país con riesgo de Covid - 19?</h6>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="persona14Dias" formControlName="persona14Dias" value="true">Sí
+                        <input class="form-check-input" type="radio" name="haveLivedWithSomeoneWithRiskOfCovidInThePast14Days" formControlName="haveLivedWithSomeoneWithRiskOfCovidInThePast14Days" value="true">Sí
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="persona14Dias" formControlName="persona14Dias" value="false">No
+                        <input class="form-check-input" type="radio" name="haveLivedWithSomeoneWithRiskOfCovidInThePast14Days" formControlName="haveLivedWithSomeoneWithRiskOfCovidInThePast14Days" value="false">No
                     </label>
                   </div>
-                  <input class="form-control" placeholder="Comentarios (Opcional)" name="persona14DiasComment" formControlName="persona14DiasComment">
-                  <small *ngIf="isSubmitted && errorControl.persona14Dias.errors?.required">
+                  <input class="form-control" placeholder="Comentarios (Opcional)" name="haveLivedWithSomeoneWithRiskOfCovidInThePast14DaysComment" formControlName="haveLivedWithSomeoneWithRiskOfCovidInThePast14DaysComment">
+                  <small *ngIf="isSubmitted && errorControl.haveLivedWithSomeoneWithRiskOfCovidInThePast14Days.errors?.required">
                     Seleccione una opción, por favor.
                   </small>
             </div>
@@ -286,16 +270,16 @@
                 <h6>Enfermedades Cardio-Respiratorias</h6>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="cardioRespiratorias" formControlName="cardioRespiratorias" value="true">Sí
+                        <input class="form-check-input" type="radio" name="cardiorespiratoryDiseases" formControlName="cardiorespiratoryDiseases" value="true">Sí
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="cardioRespiratorias" formControlName="cardioRespiratorias" value="false">No
+                        <input class="form-check-input" type="radio" name="cardiorespiratoryDiseases" formControlName="cardiorespiratoryDiseases" value="false">No
                     </label>
                   </div>
-                  <input class="form-control" placeholder="Comentarios (Opcional)" name="cardioRespiratoriasComment" formControlName="cardioRespiratoriasComment">
-                  <small *ngIf="isSubmitted && errorControl.cardioRespiratorias.errors?.required">
+                  <input class="form-control" placeholder="Comentarios (Opcional)" name="cardiorespiratoryDiseasesComment" formControlName="cardiorespiratoryDiseasesComment">
+                  <small *ngIf="isSubmitted && errorControl.cardiorespiratoryDiseases.errors?.required">
                     Seleccione una opción, por favor.
                   </small>
             </div>
@@ -303,16 +287,16 @@
                 <h6>Enfermedades Renales</h6>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="renales" formControlName="renales" value="true">Sí
+                        <input class="form-check-input" type="radio" name="kidneyDiseases" formControlName="kidneyDiseases" value="true">Sí
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="renales" formControlName="renales" value="false">No
+                        <input class="form-check-input" type="radio" name="kidneyDiseases" formControlName="kidneyDiseases" value="false">No
                     </label>
                   </div>
-                  <input class="form-control" placeholder="Comentarios (Opcional)" name="renalesComment" formControlName="renalesComment">
-                  <small *ngIf="isSubmitted && errorControl.renales.errors?.required">
+                  <input class="form-control" placeholder="Comentarios (Opcional)" name="kidneyDiseasesComment" formControlName="kidneyDiseasesComment">
+                  <small *ngIf="isSubmitted && errorControl.kidneyDiseases.errors?.required">
                     Seleccione una opción, por favor.
                   </small>
             </div>
@@ -320,16 +304,16 @@
                 <h6>Enfermedades Respiratorias</h6>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="respiratorias" formControlName="respiratorias" value="true">Sí
+                        <input class="form-check-input" type="radio" name="respiratoryDiseases" formControlName="respiratoryDiseases" value="true">Sí
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="respiratorias" formControlName="respiratorias" value="false">No
+                        <input class="form-check-input" type="radio" name="respiratoryDiseases" formControlName="respiratoryDiseases" value="false">No
                     </label>
                   </div>
-                  <input class="form-control" placeholder="Comentarios (Opcional)" name="respiratoriasComment" formControlName="respiratoriasComment">
-                  <small *ngIf="isSubmitted && errorControl.respiratorias.errors?.required">
+                  <input class="form-control" placeholder="Comentarios (Opcional)" name="respiratoryDiseasesComment" formControlName="respiratoryDiseasesComment">
+                  <small *ngIf="isSubmitted && errorControl.respiratoryDiseases.errors?.required">
                     Seleccione una opción, por favor.
                   </small>
             </div>
@@ -337,16 +321,16 @@
                 <h6>Inmunodeficiencia</h6>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="inmunodeficiencia" formControlName="inmunodeficiencia" value="true">Sí
+                        <input class="form-check-input" type="radio" name="immunodeficiency" formControlName="immunodeficiency" value="true">Sí
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="inmunodeficiencia" formControlName="inmunodeficiencia" value="false">No
+                        <input class="form-check-input" type="radio" name="immunodeficiency" formControlName="immunodeficiency" value="false">No
                     </label>
                   </div>
-                  <input class="form-control" placeholder="Comentarios (Opcional)" name="inmunodeficienciaComment" formControlName="inmunodeficienciaComment">
-                  <small *ngIf="isSubmitted && errorControl.inmunodeficiencia.errors?.required">
+                  <input class="form-control" placeholder="Comentarios (Opcional)" name="immunodeficiencyComment" formControlName="immunodeficiencyComment">
+                  <small *ngIf="isSubmitted && errorControl.immunodeficiency.errors?.required">
                     Seleccione una opción, por favor.
                   </small>
             </div>
@@ -354,16 +338,16 @@
                 <h6>Embarazo o periodo de lactancia</h6>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="embarazo" formControlName="embarazo" value="true">Sí
+                        <input class="form-check-input" type="radio" name="pregnantOrLactancy" formControlName="pregnantOrLactancy" value="true">Sí
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="embarazo" formControlName="embarazo" value="false">No
+                        <input class="form-check-input" type="radio" name="pregnantOrLactancy" formControlName="pregnantOrLactancy" value="false">No
                     </label>
                   </div>
-                  <input class="form-control" placeholder="Comentarios (Opcional)" name="embarazoComment" formControlName="embarazoComment">
-                  <small *ngIf="isSubmitted && errorControl.embarazo.errors?.required">
+                  <input class="form-control" placeholder="Comentarios (Opcional)" name="pregnantOrLactancyComment" formControlName="pregnantOrLactancyComment">
+                  <small *ngIf="isSubmitted && errorControl.pregnantOrLactancy.errors?.required">
                     Seleccione una opción, por favor.
                   </small>
             </div>
@@ -388,19 +372,28 @@
                 <h6>Es usted mayor de 60 años</h6>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="mayor60" formControlName="mayor60" value="true">Sí
+                        <input class="form-check-input" type="radio" name="over60YearsOld" formControlName="over60YearsOld" value="true">Sí
                     </label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="mayor60" formControlName="mayor60" value="false">No
+                        <input class="form-check-input" type="radio" name="over60YearsOld" formControlName="over60YearsOld" value="false">No
                     </label>
                   </div>
-                  <input class="form-control" placeholder="Comentarios (Opcional)" name="mayor60Comment" formControlName="mayor60Comment">
-                  <small *ngIf="isSubmitted && errorControl.mayor60.errors?.required">
+                  <input class="form-control" placeholder="Comentarios (Opcional)" name="over60YearsOldComment" formControlName="over60YearsOldComment">
+                  <small *ngIf="isSubmitted && errorControl.over60YearsOld.errors?.required">
                     Seleccione una opción, por favor.
                   </small>
             </div>
+            <div class="form-group p-3 w-100">
+              <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="allInformationIsTrue" id="CB1" formControlName="allInformationIsTrue" value="true">
+                  <label class="form-check-label" for="CB1">Declaro que toda la información en este formulario es verdadera, concreta, completa y de mi entero conocimiento</label>
+                </div>
+                <small *ngIf="isSubmitted && errorControl.allInformationIsTrue.errors?.required">
+                  Debe validar esta opción para continuar
+                </small>
+          </div>
             <div class="w-100" style="float: left;"><button type="submit" class="btn btn-primary">Crear una cuenta</button></div>
         <br><br>
         </form>
