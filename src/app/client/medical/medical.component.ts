@@ -35,7 +35,7 @@ export class MedicalComponent implements OnInit {
       dateOfBirth: ['', [Validators.required]],
       idNumber: ['', [Validators.required, Validators.min(1000000000), Validators.max(9999999999)]],
       phoneNumber: ['', [Validators.required, Validators.min(1000000), Validators.max(999999999)]],
-      cellphoneNumber: ['', [Validators.required, Validators.min(1000000000), Validators.max(9999999999)]],
+      cellphoneNumber: ['', [Validators.required, Validators.min(100000000), Validators.max(9999999999)]],
       emergencyPhone: ['', [Validators.required, Validators.min(1000000), Validators.max(9999999999)]],
       province: ['', [Validators.required]],
       canton: ['', [Validators.required]],
