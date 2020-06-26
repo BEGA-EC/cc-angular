@@ -16,14 +16,14 @@ export class AdminGuard implements CanActivate {
     if ( this._userService.inLog() ) {
       return true;
     }else {
-      // Swal.fire({
-      //   title: '¡Espera!',
-      //   html: `Inicia sesión antes`,
-      //   icon: 'info',
-      //   confirmButtonText: 'Aceptar'
-      // });
-      // this.router.navigate(['/client']);
-      // return false;
+      Swal.fire({
+        title: '¡Espera!',  
+        html: `Inicia sesión antes`,
+        icon: 'info',
+        confirmButtonText: 'Aceptar'
+      });
+      this.router.navigate(['/client']);
+      return false;
     }
 
   }

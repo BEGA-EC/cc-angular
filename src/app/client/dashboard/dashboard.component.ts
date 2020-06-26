@@ -12,9 +12,8 @@ export class DashboardComponent implements OnInit {
   user: any;
 
   constructor(public http: HttpClient) { 
-    this.http.get(`${environment.endpoint}user/me`).subscribe(data => {
-      this.user = data;
-      console.log(data);
+    this.http.get(`${environment.endpoint}user/me`).subscribe((data: any) => {
+      this.user = data.user;
     });
   }
 

@@ -16,6 +16,8 @@ export class UserService {
   endpoint: String;
   password: string;
   code: string;
+  done: any;
+  userForm: any;
 
   constructor(
     public http: HttpClient,
@@ -26,6 +28,20 @@ export class UserService {
 
   inLog() {
     return ( this.token.length > 5 ) ? true : false;
+  }
+
+  covid() {
+    this.http.get(`${environment.endpoint}covid-poll/done`).subscribe((data: any) => {
+      this.done = data.done;
+    });
+    return ( this.done = true) ? true : false;
+  }
+
+  inForm() {
+    this.http.get(`${environment.endpoint}user/me`).subscribe((data: any) => {
+      this.userForm = data.user.name;
+    });
+    return ( this.userForm !== null) ? true : false;
   }
 
   loadStorage() {

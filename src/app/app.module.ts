@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './http-interceptor/login-interceptor';
 import { AdminGuard } from './services/guards/admin.guard';
+import { ConfGuard } from './services/guards/conf.guard';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { AdminGuard } from './services/guards/admin.guard';
     NgbModule,
     HttpClientModule
   ],
-  providers: [AdminGuard,
+  providers: [AdminGuard, ConfGuard,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
