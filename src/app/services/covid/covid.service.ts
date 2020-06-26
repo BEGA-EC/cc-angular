@@ -24,6 +24,25 @@ export class CovidService {
         icon: 'success',
         confirmButtonText: 'Aceptar'
       });
-    }
-  )}
+    }, err => {
+      console.log(err);
+      if (err.error.description == 'User already has a poll') {
+        Swal.fire({
+          title: 'Un momento',
+          html: `Parece que ya has realizado esta encuesta antes. ¡No puedes repetir!`,
+          icon: 'warning',
+          confirmButtonText: 'Aceptar'
+        });
+        this.router.navigate(['/client/dashboard']);
+      }
+      else {
+        Swal.fire({
+          title: 'Vaya...',
+          html: `El servidor no ha recibido los datos. ¿Puedes intentarlo de nuevo? ¡Notifica el error si se repite!<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      }
+    });
+  }
 }

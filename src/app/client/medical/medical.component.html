@@ -3,6 +3,11 @@
       <form class="p-3" [formGroup]="dataForm" (ngSubmit)="submitForm()" novalidate>
         <h2>Formulario</h2>
         <div class="form-group p-3">
+            <label>Imagen de Perfil
+                <input type="file" class="form-control-file" id="file" (change)="fileUpload($event.target.files)" formControlName="avatar" name="avatar">
+            </label>
+          </div>
+        <div class="form-group p-3">
             <label>Nombres
                 <input type="text" class="form-control" name="firstName" formControlName="firstName">
                 <small *ngIf="isSubmitted && errorControl.firstName.errors?.required">
@@ -40,7 +45,7 @@
         </div>
         <div class="form-group p-3">
             <label>Cédula
-                <input type="text" appOnlynumber class="form-control" name="idNumber" formControlName="idNumber" minlength="10" maxlength="10">
+                <input type="text" appOnlynumber class="form-control" name="idNumber" formControlName="idNumber" minlength="9" maxlength="10">
                 <small *ngIf="isSubmitted && errorControl.idNumber.errors?.required">
                     La cédula es necesaria
                 </small>
@@ -54,7 +59,7 @@
         </div>
         <div class="form-group p-3">
             <label>Teléfono Convencional
-                <input type="text" appOnlynumber class="form-control" id="phoneNumber" formControlName="phoneNumber">
+                <input type="text" appOnlynumber class="form-control" id="phoneNumber" formControlName="phoneNumber" minlength="9" maxlength="10">
                 <small *ngIf="isSubmitted && errorControl.phoneNumber.errors?.required">
                     El teléfono convencional es necesario.
                 </small>
@@ -68,7 +73,7 @@
         </div>
         <div class="form-group p-3">
             <label>Teléfono Celular
-                <input type="text" appOnlynumber class="form-control" name="cellphoneNumber" formControlName="cellphoneNumber">
+                <input type="text" appOnlynumber class="form-control" name="cellphoneNumber" formControlName="cellphoneNumber" minlength="9" maxlength="10">
                 <small *ngIf="isSubmitted && errorControl.cellphoneNumber.errors?.required">
                     El teléfono celular es necesario.
                 </small>
@@ -82,7 +87,7 @@
         </div>
         <div class="form-group p-3">
             <label>Número de Emergencia
-                <input type="text" appOnlynumber class="form-control" name="emergencyPhone" formControlName="emergencyPhone">
+                <input type="text" appOnlynumber class="form-control" name="emergencyPhone" formControlName="emergencyPhone" minlength="9" maxlength="10">
                 <small *ngIf="isSubmitted && errorControl.emergencyPhone.errors?.required">
                     El número de emergencia es necesario.
                 </small>
@@ -96,7 +101,32 @@
         </div>
         <div class="form-group p-3">
             <label>Provincia
-                <input type="text" class="form-control" name="province" formControlName=province>
+                <select class="form-control" name="province" formControlName="province" (change)="check($event)">
+                    <option value="Azuay — 02">Azuay — 02</option>
+                    <option value="Bolívar — 03">Bolívar — 03</option>
+                    <option value="Cañar — 07">Cañar — 07</option>
+                    <option value="Carchi — 06">Carchi — 06</option>
+                    <option value="Chimborazo — 03">Chimborazo — 03</option>
+                    <option value="Cotopaxi — 03">Cotopaxi — 03</option>
+                    <option value="El Oro — 07">El Oro — 07</option>
+                    <option value="Esmeraldas — 06">Esmeraldas — 06</option>
+                    <option value="Galápagos — 05">Galápagos — 05</option>
+                    <option value="Guayas — 04">Guayas — 04</option>
+                    <option value="Imbabura — 06">Imbabura — 06</option>
+                    <option value="Loja — 07">Loja — 07</option>
+                    <option value="Los Ríos — 05">Los Ríos — 05</option>
+                    <option value="Manabí — 05">Manabí — 05</option>
+                    <option value="Morona Santiago — 07">Morona Santiago — 07</option>
+                    <option value="Napo — 06">Napo — 06</option>
+                    <option value="Orellana — 06">Orellana — 06</option>
+                    <option value="Pastaza — 03">Pastaza — 03</option>
+                    <option value="Pichincha — 02">Pichincha — 02</option>
+                    <option value="Santa Elena — 04">Santa Elena — 04</option>
+                    <option value="Santo Domingo — 02">Santo Domingo — 02</option>
+                    <option value="Sucumbíos — 06">Sucumbíos — 06</option>
+                    <option value="Tungurahua — 03">Tungurahua — 03</option>
+                    <option value="Zamora Chinchipe — 07">Zamora Chinchipe — 07</option>
+                </select>
                 <small *ngIf="isSubmitted && errorControl.province.errors?.required">
                     La provincia es necesaria.
                 </small>
@@ -104,9 +134,11 @@
         </div>
         <div class="form-group p-3">
             <label>Cantón
-                <input type="text" class="form-control" name="canton" formControlName="canton">
+                <select class="form-control" name="canton" formControlName="canton">
+                    <option *ngFor="let item of cantones" value="{{item.name}}" innerHTML="{{item.name}}"></option>
+                </select>
                 <small *ngIf="isSubmitted && errorControl.canton.errors?.required">
-                    El cantón es necesario.
+                    La provincia es necesaria.
                 </small>
             </label>
         </div>
@@ -174,7 +206,7 @@
                 <input type="text" appOnlynumber class="form-control" name="taxNumber" formControlName="taxNumber">
             </label>
         </div>
-        <div class="form-group p-3 w-100">
+        <div class="form-group p-3 w-100" *ngIf="taxType == 'ruc'">
             <h4>Está obligado a llevar contabilidad</h4>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="keepAccounting" formControlName="keepAccounting" id="CBtrue" value="true">
@@ -231,16 +263,69 @@
                 </small>
             </label>
         </div>
-        <div class="form-group p-3">
-            <label>Producto que Comercializa
-                <select class="form-control" name="productsBeingSold" formControlName="productsBeingSold">
-                    <option value="producto1">Producto 1</option>
-                    <option value="producto2">Producto 2</option>
-                    <option value="producto3">Producto 3</option>
-                    <option value="producto4">Producto 4</option>
-                    <option value="producto5">Producto 5</option>
+        <div class="form-group p-3 productos">
+            <label>Producto
+                <select class="form-control" [(ngModel)]="productsBeingSold" name="productsBeingSold" formControlName="productsBeingSold">
+                    <option value="Blusas">Blusas</option>
+                    <option value="Calzado">Calzado</option>
+                    <option value="Calzado">Calzado</option>
+                    <option value="Camisetas">Camisetas</option>
+                    <option value="Chompas">Chompas</option>
+                    <option value="Jean">Jean</option>
+                    <option value="Lencería">Lencería</option>
+                    <option value="Pantalón de Tela">Pantalón de Tela</option>
+                    <option value="Ropa de bebé">Ropa de bebé</option>
+                    <option value="Ropa de dormir">Ropa de dormir</option>
+                    <option value="Ropa de cuero">Ropa de cuero</option>
+                    <option value="Ropa de Niños">Ropa de Niños</option>
+                    <option value="Suéter">Suéter</option>
+                    <option value="Trajes hombre">Trajes hombre</option>
+                    <option value="Trajes mujer">Trajes mujer</option>
+                    <option value="Varios">Varios</option>
                 </select>
                 <small *ngIf="isSubmitted && errorControl.productsBeingSold.errors?.required">
+                    Seleccione uno.
+                </small>
+                <select class="form-control" [(ngModel)]="productsBeingSoldSec" name="productsBeingSoldSec" formControlName="productsBeingSoldSec" *ngIf="productsBeingSold">
+                    <option value="Blusas">Blusas</option>
+                    <option value="Calzado">Calzado</option>
+                    <option value="Calzado">Calzado</option>
+                    <option value="Camisetas">Camisetas</option>
+                    <option value="Chompas">Chompas</option>
+                    <option value="Jean">Jean</option>
+                    <option value="Lencería">Lencería</option>
+                    <option value="Pantalón de Tela">Pantalón de Tela</option>
+                    <option value="Ropa de bebé">Ropa de bebé</option>
+                    <option value="Ropa de dormir">Ropa de dormir</option>
+                    <option value="Ropa de cuero">Ropa de cuero</option>
+                    <option value="Ropa de Niños">Ropa de Niños</option>
+                    <option value="Suéter">Suéter</option>
+                    <option value="Trajes hombre">Trajes hombre</option>
+                    <option value="Trajes mujer">Trajes mujer</option>
+                    <option value="Varios">Varios</option>
+                </select>
+                <small *ngIf="isSubmitted && errorControl.productsBeingSoldSec.errors?.required">
+                    Seleccione uno.
+                </small>
+                <select class="form-control" name="productsBeingSoldTri" formControlName="productsBeingSoldTri" *ngIf="productsBeingSoldSec">
+                    <option value="Blusas">Blusas</option>
+                    <option value="Calzado">Calzado</option>
+                    <option value="Calzado">Calzado</option>
+                    <option value="Camisetas">Camisetas</option>
+                    <option value="Chompas">Chompas</option>
+                    <option value="Jean">Jean</option>
+                    <option value="Lencería">Lencería</option>
+                    <option value="Pantalón de Tela">Pantalón de Tela</option>
+                    <option value="Ropa de bebé">Ropa de bebé</option>
+                    <option value="Ropa de dormir">Ropa de dormir</option>
+                    <option value="Ropa de cuero">Ropa de cuero</option>
+                    <option value="Ropa de Niños">Ropa de Niños</option>
+                    <option value="Suéter">Suéter</option>
+                    <option value="Trajes hombre">Trajes hombre</option>
+                    <option value="Trajes mujer">Trajes mujer</option>
+                    <option value="Varios">Varios</option>
+                </select>
+                <small *ngIf="isSubmitted && errorControl.productsBeingSoldTri.errors?.required">
                     Seleccione uno.
                 </small>
             </label>
@@ -262,15 +347,17 @@
             </label>
         </div>
         <div class="form-group p-3">
-            <label>Número de Sector
+            <label>Asociación
                 <select class="form-control" name="sector" formControlName="sector">
-                    <option value="sector1">Sector 1</option>
-                    <option value="sector2">Sector 2</option>
-                    <option value="sector3">Sector 3</option>
-                    <option value="sector4">Sector 4</option>
-                    <option value="sector5">Sector 5</option>
-                    <option value="sector6">Sector 6</option>
-                    <option value="sector7">Sector 7</option>
+                    <option value="2 de Octubre">2 de Octubre</option>
+                    <option value="El Cebollar">El Cebollar</option>
+                    <option value="La Campana">La Campana</option>
+                    <option value="24 de Mayo">24 de Mayo</option>
+                    <option value="29 de Enero">29 de Enero</option>
+                    <option value="Chimborazo">Chimborazo</option>
+                    <option value="Alianza Para el Progreso">Alianza Para el Progreso</option>
+                    <option value="Tunhurahua">Tunhurahua</option>
+                    <option value="12 de Febrero">12 de Febrero</option>
                 </select>
                 <small *ngIf="isSubmitted && errorControl.sector.errors?.required">
                     Seleccione uno.
@@ -382,7 +469,7 @@
         </div>
         <div class="form-group p-3">
             <label>Peso
-                <input type="number" placeholder="En kg" class="form-control" id="height" formControlName="height">
+                <input type="number" placeholder="En kg" class="form-control" id="height" formControlName="height" step="any">
                 <small *ngIf="isSubmitted && errorControl.height.errors?.required">
                     El peso es necesario.
                 </small>
@@ -429,7 +516,7 @@
             </label>
         </div>
         <div class="form-group p-3">
-            <label>Enfermedades Pre-Existentes
+            <label>Enfermedades Pre-Existentes o Crónicas
                 <input type="text" class="form-control" name="illness" formControlName="illness">
             </label>
             <small *ngIf="isSubmitted && errorControl.illness.errors?.required">
@@ -439,13 +526,19 @@
         <div class="w-100"></div>
         <div class="form-group p-3">
             <label>¿A qué está afiliado usted?
-                <select class="form-control" name="affiliatedTo" formControlName="affiliatedTo">
+                <select class="form-control" name="affiliatedTo" formControlName="affiliatedTo" [(ngModel)]="affiliatedTo">
                     <option value="IESS">IESS</option>
                     <option value="ISFA">ISFA</option>
+                    <option value="private">Privado</option>
                 </select>
                 <small *ngIf="isSubmitted && errorControl.affiliatedTo.errors?.required">
                     Complete este campo, por favor.
                   </small>
+            </label>
+        </div>
+        <div class="form-group p-3" *ngIf="affiliatedTo == 'private'">
+            <label>Ingrese su seguro privado
+                <input type="text" class="form-control" name="affiliatedToPrivate" formControlName="affiliatedToPrivate">
             </label>
         </div>
         <div class="form-group p-3">
@@ -486,7 +579,7 @@
                 </select>
             </label>
         </div>
-        <div class="w-100" style="float: left;"><button type="submit" class="btn btn-primary">Crear una cuenta</button></div>
+        <div class="w-100" style="float: left;"><button type="submit" class="btn btn-primary">Siguiente</button></div>
         <br><br>
       </form>
     </div>

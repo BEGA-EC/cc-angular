@@ -1,27 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UserService, CodeService } from '../services/service.index';
+import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
-import { map } from 'rxjs/operators';
-import { UserService, CodeService } from 'src/app/services/service.index';
-import { Router } from '@angular/router';
-
 
 @Component({
-  selector: 'app-code',
-  templateUrl: './code.component.html',
-  styleUrls: ['./code.component.css']
+  selector: 'app-confirmation',
+  templateUrl: './confirmation.component.html',
+  styleUrls: ['./confirmation.component.css']
 })
-export class CodeComponent implements OnInit {
+export class ConfirmationComponent implements OnInit {
 
-  
   codeForm: FormGroup;
   isSubmitted = false;
+  code: string;
 
   constructor(
     public formBuilder: FormBuilder,
     public _userService: UserService,
     public _codeService: CodeService,
-    public router: Router) { }
+    public router: Router,
+    public activatedRoute: ActivatedRoute) { 
+      console.log('Called Constructor');
+      this.activatedRoute.queryParams.subscribe(params => {
+      this.code = params['code'];
+      console.log(this.code);
+      this._codeService.postCode(this.code);
+    });
+    }
 
   ngOnInit() {
     this.codeForm = this.formBuilder.group({

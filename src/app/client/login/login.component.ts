@@ -42,7 +42,27 @@ export class LoginComponent implements OnInit {
       return false;
     } else {
       let user = {email: this.loginForm.value.email, password: this.loginForm.value.password};
-      this._userService.login(user).subscribe( correcto => this.router.navigate(['/client/medical']));
-    }
+      this._userService.login(user).subscribe(correcto =>{
+        console.log(correcto);
+        this.router.navigate(['/client/medical/']);
+      }, err => {
+        console.log(err);
+          if (err.status == 400) {
+            Swal.fire({
+              title: '¡Intento fallido!',
+              text: `La combinación de email y contraseña que has usado es incorrecta. Intenta nuevamente.`,
+              icon: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          } else {
+            Swal.fire({
+              title: 'Vaya...',
+              html: `El servidor no ha recibido los datos. ¿Puedes intentarlo de nuevo? ¡Notifica el error si se repite!<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
+              icon: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          }
+        }
+      )}
   }
 }

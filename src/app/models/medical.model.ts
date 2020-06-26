@@ -7,6 +7,7 @@ export interface Medical {
     medicamentBeingConsumed?: String,
     illness?: String,
     affiliatedTo?: String,
+    affiliatedToPrivate?: String,
     conadisLicense?: Boolean,
     conadisLicenseType?: String,
     retirement?: Boolean,

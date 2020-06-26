@@ -29,7 +29,6 @@ export class UserService {
   }
 
   loadStorage() {
-
     if ( localStorage.getItem('token')) {
       this.token = localStorage.getItem('token');
       this.user = JSON.parse( localStorage.getItem('user') );
@@ -71,20 +70,33 @@ export class UserService {
   register(email: string) {
     return new Promise(resolve => {
       let url = `${environment.endpoint}user/register`
-      return this.http.post(url, {email}).pipe(map( (resp: {code: string, password:string}) => {
-        this.registerStorage(resp.password, resp.code);
-      }))
-      .subscribe((resp: any) => {
-        this.password = localStorage.getItem('password');
-        this.code = localStorage.getItem('code');
-        Swal.fire({
+      return this.http.post(url, {email}).pipe(map( (resp) => {
+      })).subscribe( async _resp => {
+        await Swal.fire({
           title: '¡Excelente!',
-          html: `Tu contraseña es:<br><br><span>${this.password}</span><br><br>Tu código es:<br><br><span>${this.code}</span><br><br>¡Cópialos y guárdalos para no perderlos! Ahora podrás confirmar tu código, y luego iniciar sesión con esa contraseña.`,
+          html: `Hemos enviado un email de confirmación. Revisa tu corrreo electrónico.`,
           icon: 'success',
           confirmButtonText: 'Aceptar'
         });
-        this.router.navigate(['/client/code']);
-         return resolve(true)
+        return resolve(true);
+      }, err => {
+        console.log(err.error.description == "Email already in use");
+        if ( err.status == 400) {
+          Swal.fire({
+            title: 'Oh no',
+            html: `El correo que ingresaste, ya se encuentra en uso.<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+         }
+        else {
+          Swal.fire({
+            title: 'Vaya...',
+            html: `El servidor no ha recibido los datos. ¿Puedes intentarlo de nuevo? ¡Notifica el error si se repite!<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }  
       });
     });
   }

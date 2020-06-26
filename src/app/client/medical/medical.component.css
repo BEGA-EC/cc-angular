@@ -39,3 +39,6 @@ form label {
 .w-100 {
     float: left;
 }
+.productos select {
+    margin-bottom: 20px;
+}

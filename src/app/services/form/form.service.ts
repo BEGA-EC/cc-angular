@@ -30,14 +30,32 @@ export class FormService {
     formData.append('commercialInformation', JSON.stringify(comercial));
     formData.append('medicalInformation', JSON.stringify(medical));
     formData.append('personalInformation', JSON.stringify(personal));
-    this.http.post(url, formData).subscribe(
-      (resp: any) => {this.router.navigate(['/client/covid']);
-      Swal.fire({
-        title: 'Genial',
-        html: `¡Bien! Ya casi terminamos, solo hace falta un último formulario y estamos en ello.`,
-        icon: 'success',
-        confirmButtonText: 'Aceptar'
-      });}
+    this.http.post(url, formData).subscribe( (resp: any) => 
+      {this.router.navigate(['/client/covid']);
+        Swal.fire({
+          title: 'Genial',
+          html: `¡Bien! Ya casi terminamos, solo hace falta un último formulario y estamos en ello.`,
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        });
+      }, err => {
+        if ( err.status == 400) {
+          Swal.fire({
+            title: 'Oh no',
+            html: `Parece que algo ha salido mal. ¿Ingresaste bien los datos?<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        else {
+          Swal.fire({
+            title: 'Vaya...',
+            html: `El servidor no ha recibido los datos. ¿Puedes intentarlo de nuevo? ¡Notifica el error si se repite!<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+      }
     );
   }
 }

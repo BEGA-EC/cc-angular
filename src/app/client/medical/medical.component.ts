@@ -16,25 +16,791 @@ import { Comercial } from 'src/app/models/comercial.model';
 export class MedicalComponent implements OnInit {
 
   dataForm: FormGroup;
-  defaultDate = '1987/06/30';
   isSubmitted = false;
   taxType: String = '';
   qualifiedCraftman: String = '';
   allergy: String = '';
   consumingMedicine: String = '';
+  affiliatedTo: String = '';
   conadisLicense: String = '';
   retirement: String = '';
+  fileToUpload: File = null;
+  productsBeingSold: String = '';
+  productsBeingSoldSec: String = '';
+
+  cantones: {};
 
   constructor(public formBuilder: FormBuilder, private router: Router, public _formService: FormService) { }
 
+  check(e){
+    console.log(e)
+    console.log(e.target.checked)
+    console.log(e.target.value)
+    if (e.target.value == "Azuay — 02") {
+      this.cantones = [
+        {
+          name: "Chordelog"
+        },
+        {
+          name: "Cuenca"
+        },
+        {
+          name: "El Pan"
+        },
+        {
+          name: "El Girón"
+        },
+        {
+          name: "Guachapala"
+        },
+        {
+          name: "Gualeco"
+        },
+        {
+          name: "Nabón"
+        },
+        {
+          name: "Oña"
+        },
+        {
+          name: "Paute"
+        },
+        {
+          name: "Ponce Enriquez"
+        },
+        {
+          name: "Pucará"
+        },
+        {
+          name: "San Fernando"
+        },
+        {
+          name: "Santa Isabel"
+        },
+        {
+          name: "Sevilla de Oro"
+        },
+        {
+          name: "Sígsig"
+        }
+      ];
+    }
+    if (e.target.value == "Bolívar — 03") {
+      this.cantones = [
+        {
+          name: "Caluma"
+        },
+        {
+          name: "Chillanes"
+        },
+        {
+          name: "Chimbo"
+        },
+        {
+          name: "Echeandía"
+        },
+        {
+          name: "Guaranda"
+        },
+        {
+          name: "Las Naves"
+        },
+        {
+          name: "San Miguel"
+        }
+      ];
+    }
+    if (e.target.value == "Cañar — 07") {
+      this.cantones = [
+        {
+          name: "Azogues"
+        },
+        {
+          name: "Biblián"
+        },
+        {
+          name: "Cañar"
+        },
+        {
+          name: "Déleg"
+        },
+        {
+          name: "El Tambo"
+        },
+        {
+          name: "La Troncal"
+        },
+        {
+          name: "Suscal"
+        }
+      ];
+    }
+    if (e.target.value == "Carchi — 06") {
+      this.cantones = [
+        {
+          name: "Bolívar"
+        },
+        {
+          name: "Espejo"
+        },
+        {
+          name: "Mira"
+        },
+        {
+          name: "Montúfar"
+        },
+        {
+          name: "San Pedro de Huaca"
+        },
+        {
+          name: "Tulcán"
+        }
+      ];
+    }
+    if (e.target.value == "Chimborazo — 03") {
+      this.cantones = [
+        {
+          name: "Alausí"
+        },
+        {
+          name: "Chambo"
+        },
+        {
+          name: "Chunchi"
+        },
+        {
+          name: "Colta"
+        },
+        {
+          name: "Cumandá"
+        },
+        {
+          name: "Guamote"
+        },
+        {
+          name: "Guano"
+        },
+        {
+          name: "Pallatanga"
+        },
+        {
+          name: "Penipe"
+        },
+        {
+          name: "Riobamba"
+        }
+      ];
+    }
+    if (e.target.value == "Cotopaxi — 03") {
+      this.cantones = [
+        {
+          name: "La Maná"
+        },
+        {
+          name: "Latacunga"
+        },
+        {
+          name: "Pangua"
+        },
+        {
+          name: "Pujilí"
+        },
+        {
+          name: "Salcedo"
+        },
+        {
+          name: "Saquisilí"
+        },
+        {
+          name: "Sigchos"
+        }
+      ];
+    }
+    if (e.target.value == "El Oro — 07") {
+      this.cantones = [
+        {
+          name: "Arenillas"
+        },
+        {
+          name: "Atahualpa"
+        },
+        {
+          name: "Balsas"
+        },
+        {
+          name: "Chilla"
+        },
+        {
+          name: "El Guabo"
+        },
+        {
+          name: "Huaquillas"
+        },
+        {
+          name: "Las Lajas"
+        },
+        {
+          name: "Machala"
+        },
+        {
+          name: "Marcabelí"
+        },
+        {
+          name: "Pasaje"
+        },
+        {
+          name: "Piñas"
+        },
+        {
+          name: "Portovelo"
+        },
+        {
+          name: "Santa Rosa"
+        },
+        {
+          name: "Zaruma"
+        }
+      ];
+    }
+    if (e.target.value == "Esmeraldas — 06") {
+      this.cantones = [
+        {
+          name: "Atacames"
+        },
+        {
+          name: "Eloy Alfaro"
+        },
+        {
+          name: "Esmeraldas"
+        },
+        {
+          name: "Muisne"
+        },
+        {
+          name: "Quinindé"
+        },
+        {
+          name: "Rioverde"
+        },
+        {
+          name: "San Lorenzo"
+        }
+      ];
+    }
+    if (e.target.value == "Galápagos — 05") {
+      this.cantones = [
+        {
+          name: "Isabela"
+        },
+        {
+          name: "San Cristóbal"
+        },
+        {
+          name: "Santa Cruz"
+        }
+      ];
+    }
+    if (e.target.value == "Guayas — 04") {
+      this.cantones = [
+        {
+          name: "Alfredo Baquerizo Moreno"
+        },
+        {
+          name: "Balao"
+        },
+        {
+          name: "Balzar"
+        },
+        {
+          name: "Colimes"
+        },
+        {
+          name: "Coronel Marcelino Maridueña"
+        },
+        {
+          name: "Daule"
+        },
+        {
+          name: "Durán"
+        },
+        {
+          name: "El Empalme"
+        },
+        {
+          name: "El Triunfo"
+        },
+        {
+          name: "General Antonio Elizalde"
+        },
+        {
+          name: "Guayaquil"
+        },
+        {
+          name: "Isidro Ayora"
+        },
+        {
+          name: "Lomas de Sargentillo"
+        },
+        {
+          name: "Milagro"
+        },
+        {
+          name: "Naranjal"
+        },
+        {
+          name: "Naranjito"
+        },
+        {
+          name: "Nobol"
+        },
+        {
+          name: "Palestina"
+        },
+        {
+          name: "Pedro Carbo"
+        },
+        {
+          name: "Playas"
+        },
+        {
+          name: "Salitre"
+        },
+        {
+          name: "Samborondón"
+        },
+        {
+          name: "Santa Lucía"
+        },
+        {
+          name: "Simón Bolívar"
+        },
+        {
+          name: "Yaguachi"
+        }
+      ];
+    }
+    if (e.target.value == "Imbabura — 06") {
+      this.cantones = [
+        {
+          name: "Antonio Ante"
+        },
+        {
+          name: "Cotacachi"
+        },
+        {
+          name: "Ibarra"
+        },
+        {
+          name: "Otavalo"
+        },
+        {
+          name: "Pimampiro"
+        },
+        {
+          name: "San Miguel de Urcuquí"
+        }
+      ];
+    }
+    if (e.target.value == "Loja — 07") {
+      this.cantones = [
+        {
+          name: "Calvas"
+        },
+        {
+          name: "Catamayo"
+        },
+        {
+          name: "Celica"
+        },
+        {
+          name: "Chaguarpamba"
+        },
+        {
+          name: "Espíndola"
+        },
+        {
+          name: "Gonzanamá"
+        },
+        {
+          name: "Loja"
+        },
+        {
+          name: "Macará"
+        },
+        {
+          name: "Olmedo"
+        },
+        {
+          name: "Paltas"
+        },
+        {
+          name: "Pindal"
+        },
+        {
+          name: "Puyango"
+        },
+        {
+          name: "Quilanga"
+        },
+        {
+          name: "Saraguro"
+        },
+        {
+          name: "Sozoranga"
+        },
+        {
+          name: "Zapotillo"
+        }
+      ];
+    }
+    if (e.target.value == "Los Ríos — 05") {
+      this.cantones = [
+        {
+          name: "Baba"
+        },
+        {
+          name: "Babahoyo"
+        },
+        {
+          name: "Buena Fe"
+        },
+        {
+          name: "Mocache"
+        },
+        {
+          name: "Montalvo"
+        },
+        {
+          name: "Palenque"
+        },
+        {
+          name: "Puebloviejo"
+        },
+        {
+          name: "Quevedo"
+        },
+        {
+          name: "Quinsaloma"
+        },
+        {
+          name: "Urdaneta"
+        },
+        {
+          name: "Valencia"
+        },
+        {
+          name: "Ventanas"
+        },
+        {
+          name: "Vinces"
+        }
+      ];
+    }
+    if (e.target.value == "Manabí — 05") {
+      this.cantones = [
+        {
+          name: "Bolívar"
+        },
+        {
+          name: "Chone"
+        },
+        {
+          name: "El Carmen"
+        },
+        {
+          name: "Flavio Alfaro"
+        },
+        {
+          name: "Jama"
+        },
+        {
+          name: "Jaramijó"
+        },
+        {
+          name: "Jipijapa"
+        },
+        {
+          name: "Junín"
+        },
+        {
+          name: "Manta"
+        },
+        {
+          name: "Montecristi"
+        },
+        {
+          name: "Olmedo"
+        },
+        {
+          name: "Paján"
+        },
+        {
+          name: "Pedernales"
+        },
+        {
+          name: "Pichincha"
+        },
+        {
+          name: "Portoviejo"
+        },
+        {
+          name: "Puerto López"
+        },
+        {
+          name: "Rocafuerte"
+        },
+        {
+          name: "San Vicente"
+        },
+        {
+          name: "Santa Ana"
+        },
+        {
+          name: "Sucre"
+        },
+        {
+          name: "Tosagua"
+        },
+        {
+          name: "Veinticuatro de Mayo"
+        }
+      ];
+    }
+    if (e.target.value == "Morona Santiago — 07"  ) {
+      this.cantones = [
+        {
+          name: "Gualaquiza"
+        },
+        {
+          name: "Huamboya"
+        },
+        {
+          name: "Logroño"
+        },
+        {
+          name: "Morona"
+        },
+        {
+          name: "Pablo Sexto"
+        },
+        {
+          name: "Palora"
+        },
+        {
+          name: "San Juan Bosco"
+        },
+        {
+          name: "Santiago"
+        },
+        {
+          name: "Sucúa"
+        },
+        {
+          name: "Taisha"
+        }
+      ];
+    }
+    if (e.target.value == "Napo — 06") {
+      this.cantones = [
+        {
+          name: "Archidona"
+        },
+        {
+          name: "Carlos Julio Arosemena Tola"
+        },
+        {
+          name: "El Chaco"
+        },
+        {
+          name: "Quijos"
+        },
+        {
+          name: "Tena"
+        }
+      ];
+    }
+    if (e.target.value == "Orellana — 06") {
+      this.cantones = [
+        {
+          name: "Aguarico"
+        },
+        {
+          name: "Orellana"
+        },
+        {
+          name: "La Joya de los Sachas"
+        },
+        {
+          name: "Loreto"
+        }
+      ];
+    }
+    if (e.target.value == "Pastaza — 03") {
+      this.cantones = [
+        {
+          name: "Arajuno"
+        },
+        {
+          name: "Mera"
+        },
+        {
+          name: "Pastaza"
+        },
+        {
+          name: "Santa Clara"
+        }
+      ];
+    }
+    if (e.target.value == "Pichincha — 02") {
+      this.cantones = [
+        {
+          name: "Cayambe"
+        },
+        {
+          name: "Mejía"
+        },
+        {
+          name: "Pedro Moncayo"
+        },
+        {
+          name: "Pedro Vicente Maldonado"
+        },
+        {
+          name: "Puerto Quito"
+        },
+        {
+          name: "Distrito Metropolitano de Quito"
+        },
+        {
+          name: "Rumiñahui"
+        },
+        {
+          name: "San Miguel de Los Bancos"
+        }
+      ];
+    }
+    if (e.target.value == "Santa Elena — 04") {
+      this.cantones = [
+        {
+          name: "La Libertad"
+        },
+        {
+          name: "Salinas"
+        },
+        {
+          name: "Santa Elena"
+        }
+      ];
+    }
+    if (e.target.value == "Santo Domingo — 02") {
+      this.cantones = [
+        {
+          name: "La Concordia"
+        },
+        {
+          name: "Santo Domingo"
+        }
+      ];
+    }
+    if (e.target.value == "Sucumbíos — 06") {
+      this.cantones = [
+        {
+          name: "Cascales"
+        },
+        {
+          name: "Cuyabeno"
+        },
+        {
+          name: "Gonzalo Pizarro"
+        },
+        {
+          name: "Lago Agrio"
+        },
+        {
+          name: "Putumayo"
+        },
+        {
+          name: "Shushufindi"
+        },
+        {
+          name: "Sucumbíos"
+        }
+      ];
+    }
+    if (e.target.value == "Tungurahua — 03") {
+      this.cantones = [
+        {
+          name: "Ambato"
+        },
+        {
+          name: "Baños de Agua Santa"
+        },
+        {
+          name: "Cevallos"
+        },
+        {
+          name: "Mocha"
+        },
+        {
+          name: "Patate"
+        },
+        {
+          name: "Pelileo"
+        },
+        {
+          name: "Píllaro"
+        },
+        {
+          name: "Quero"
+        },
+        {
+          name: "Tisaleo"
+        }
+      ];
+    }
+    if (e.target.value == "Zamora Chinchipe — 07") {
+      this.cantones = [
+        {
+          name: "Centinela del Cóndor"
+        },
+        {
+          name: "Chinchipe"
+        },
+        {
+          name: "El Pangui"
+        },
+        {
+          name: "Nangaritza"
+        },
+        {
+          name: "Palanda"
+        },
+        {
+          name: "Paquisha"
+        },
+        {
+          name: "Yacuambi"
+        },
+        {
+          name: "Yantzaza"
+        },
+        {
+          name: "Zamora"
+        }
+      ];
+    }
+  }
+
   ngOnInit() {
     this.dataForm = this.formBuilder.group({
+      avatar: ['', [Validators.required]],
+
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required]],
       gender: ['', [Validators.required]],
       dateOfBirth: ['', [Validators.required]],
-      idNumber: ['', [Validators.required, Validators.min(1000000000), Validators.max(9999999999)]],
-      phoneNumber: ['', [Validators.required, Validators.min(1000000), Validators.max(999999999)]],
+      idNumber: ['', [Validators.required, Validators.min(100000000), Validators.max(9999999999)]],
+      phoneNumber: ['', [Validators.required, Validators.min(1000000), Validators.max(9999999999)]],
       cellphoneNumber: ['', [Validators.required, Validators.min(100000000), Validators.max(9999999999)]],
       emergencyPhone: ['', [Validators.required, Validators.min(1000000), Validators.max(9999999999)]],
       province: ['', [Validators.required]],
@@ -47,12 +813,12 @@ export class MedicalComponent implements OnInit {
 
       taxType: ['', [Validators.required]],
       taxNumber: [''],
-      keepAccounting: ['', [Validators.required]],
+      keepAccounting: [false, [Validators.required]],
 
       personType: ['', [Validators.required]],
       businessName: ['', [Validators.required]],
       socialReason: ['', [Validators.required]],
-      productsBeingSold: ['', [Validators.required]],
+      productsBeingSold: ['', [Validators.required]], productsBeingSoldSec: ['', [Validators.required]], productsBeingSoldTri: ['', [Validators.required]],
       localNumber: ['', [Validators.required]],
       predioNumber: ['', [Validators.required]],
       sector: ['', [Validators.required]],
@@ -72,13 +838,19 @@ export class MedicalComponent implements OnInit {
       medicamentBeingConsumed: [''],
       illness: ['Ninguna', [Validators.required]],
       affiliatedTo: ['', [Validators.required]],
+      affiliatedToPrivate: [''],
       conadisLicense: ['', [Validators.required]],
       conadisLicenseType: [''],
       retirement: ['', [Validators.required]],
       retirementDetails: ['']
     }); 
   }
-  getDate(e) {
+
+  fileUpload(files: FileList) {
+    this.fileToUpload = files.item(0);
+}
+
+  getDate(e: any) {
     const date = new Date(e.target.value).toISOString().substring(0, 10);
     this.dataForm.get('dateOfBirth').setValue(date, {
       onlyself: true
@@ -90,9 +862,7 @@ export class MedicalComponent implements OnInit {
   }
 
   submitForm() {
-
     this.isSubmitted = true;
-    console.log(`${this.dataForm.value.taxType} - ${this.dataForm.value.taxNumber} - ${this.dataForm.value.keepAccounting}`);
     
     let tributary: Tributary = {
       taxType: this.dataForm.value.taxType,
@@ -100,55 +870,56 @@ export class MedicalComponent implements OnInit {
       keepAccounting: this.dataForm.value.keepAccounting
     };
 
-     let comercial: Comercial = {
-      personType: this.dataForm.value.personType,
-      businessName: this.dataForm.value.businessName,
-      socialReason: this.dataForm.value.socialReason,
-      productsBeingSold: this.dataForm.value.productsBeingSold,
-      localNumber: this.dataForm.value.localNumber,
-      predioNumber: this.dataForm.value.predioNumber,
-      sector: this.dataForm.value.sector,
-      floor: this.dataForm.value.floor,
-      hallNumber: this.dataForm.value.hallNumber,
-      originOfProducts: this.dataForm.value.originOfProducts,
-      numberLocals: this.dataForm.value.numberLocals,
-      qualifiedCraftman: this.dataForm.value.qualifiedCraftman,
-      craftmanCalification: this.dataForm.value.craftmanCalification,
-      sellerType: this.dataForm.value.sellerType
-     };
+    let comercial: Comercial = {
+     personType: this.dataForm.value.personType,
+     businessName: this.dataForm.value.businessName,
+     socialReason: this.dataForm.value.socialReason,
+     productsBeingSold: `${this.dataForm.value.productsBeingSold}, ${this.dataForm.value.productsBeingSoldSec}, ${this.dataForm.value.productsBeingSoldTri}`,
+     localNumber: this.dataForm.value.localNumber,
+     predioNumber: this.dataForm.value.predioNumber,
+     sector: this.dataForm.value.sector,
+     floor: this.dataForm.value.floor,
+     hallNumber: this.dataForm.value.hallNumber,
+     originOfProducts: this.dataForm.value.originOfProducts,
+     numberLocals: this.dataForm.value.numberLocals,
+     qualifiedCraftman: this.dataForm.value.qualifiedCraftman,
+     craftmanCalification: this.dataForm.value.craftmanCalification,
+     sellerType: this.dataForm.value.sellerType
+    };
 
-     let medical: Medical = {
-      bloodType: this.dataForm.value.bloodType,
-      height: this.dataForm.value.height,
-      allergy: this.dataForm.value.allergy,
-      allergicTo: this.dataForm.value.allergicTo,
-      consumingMedicine: this.dataForm.value.consumingMedicine,
-      medicamentBeingConsumed: this.dataForm.value.medicamentBeingConsumed,
-      illness: this.dataForm.value.illness,
-      affiliatedTo: this.dataForm.value.affiliatedTo,
-      conadisLicense: this.dataForm.value.conadisLicense,
-      conadisLicenseType: this.dataForm.value.conadisLicenseType,
-      retirement: this.dataForm.value.retirement,
-      retirementDetails: this.dataForm.value.retirementDetails
-     };
+    let medical: Medical = {
+     bloodType: this.dataForm.value.bloodType,
+     height: this.dataForm.value.height,
+     allergy: this.dataForm.value.allergy,
+     allergicTo: this.dataForm.value.allergicTo,
+     consumingMedicine: this.dataForm.value.consumingMedicine,
+     medicamentBeingConsumed: this.dataForm.value.medicamentBeingConsumed,
+     illness: this.dataForm.value.illness,
+     affiliatedToPrivate: this.dataForm.value.affiliatedToPrivate,
+     affiliatedTo: this.dataForm.value.affiliatedTo,
+     conadisLicense: this.dataForm.value.conadisLicense,
+     conadisLicenseType: this.dataForm.value.conadisLicenseType,
+     retirement: this.dataForm.value.retirement,
+     retirementDetails: this.dataForm.value.retirementDetails
+    };
 
-     let personal: Personal = {
-      firstName: this.dataForm.value.firstName,
-      lastName: this.dataForm.value.lastName,
-      gender: this.dataForm.value.gender,
-      dateOfBirth: this.dataForm.value.dateOfBirth,
-      idNumber: this.dataForm.value.idNumber,
-      phoneNumber: this.dataForm.value.phoneNumber,
-      cellphoneNumber: this.dataForm.value.cellphoneNumber,
-      emergencyPhone: this.dataForm.value.emergencyPhone,
-      province: this.dataForm.value.province,
-      canton: this.dataForm.value.canton,
-      city: this.dataForm.value.city,
-      neighborhood: this.dataForm.value.neighborhood,
-      mainStreet: this.dataForm.value.mainStreet,
-      nomenclature: this.dataForm.value.nomenclature,
-      secondaryStreet: this.dataForm.value.secondaryStreet
-     };
+    let personal: Personal = {
+     firstName: this.dataForm.value.firstName,
+     lastName: this.dataForm.value.lastName,
+     gender: this.dataForm.value.gender,
+     dateOfBirth: this.dataForm.value.dateOfBirth,
+     idNumber: this.dataForm.value.idNumber,
+     phoneNumber: this.dataForm.value.phoneNumber,
+     cellphoneNumber: this.dataForm.value.cellphoneNumber,
+     emergencyPhone: this.dataForm.value.emergencyPhone,
+     province: this.dataForm.value.province,
+     canton: this.dataForm.value.canton,
+     city: this.dataForm.value.city,
+     neighborhood: this.dataForm.value.neighborhood,
+     mainStreet: this.dataForm.value.mainStreet,
+     nomenclature: this.dataForm.value.nomenclature,
+     secondaryStreet: this.dataForm.value.secondaryStreet
+    };
 
     const booleans = ['allergy', 'consumingMedicine', 'conadisLicense', 'retirement'];
     for( let booleanParameter of booleans) {
@@ -164,7 +935,9 @@ export class MedicalComponent implements OnInit {
     for( let booleanParameter of booleansTributary) {
       tributary[booleanParameter] = tributary[booleanParameter] === 'true';
     };
-     let avatar: any;
+
+    let avatar = this.fileToUpload;
+    
     if (!this.dataForm.valid) {
       Swal.fire({
         title: 'Oh no',
@@ -172,10 +945,12 @@ export class MedicalComponent implements OnInit {
         icon: 'error',
         confirmButtonText: 'Aceptar'
       });
-      console.log(comercial);
+      console.log(`Tributario: ${JSON.stringify(tributary)}\nComercial: ${JSON.stringify(comercial)}\n Médico: ${JSON.stringify(medical)}\n Personal: ${JSON.stringify(personal)}\n Avatar: ${avatar}`);
+      console.log(comercial.productsBeingSold);
+      console.log(this.cantones);
       return false;
     } else {
-      console.log(comercial);
+      console.log(`Tributario: ${JSON.stringify(tributary)}\nComercial: ${JSON.stringify(comercial)}\n Médico: ${JSON.stringify(medical)}\n Personal: ${JSON.stringify(personal)}\n Avatar: ${avatar}`);
       this._formService.upload(tributary, comercial, medical, personal, avatar);
     }
   }

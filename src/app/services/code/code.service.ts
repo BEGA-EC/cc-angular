@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +15,39 @@ export class CodeService {
   ) { }
   
   postCode(code: string) {
-    let url = `${environment.endpoint}user/confirmation-code`;
-    this.http.post(url, {code: code}).pipe(map( (resp: boolean) => {
-      this.router.navigate(['/client']);
-    })
-  )}
+    return new Promise(resolve => {
+      let url = `${environment.endpoint}user/confirmation-code`;
+      this.http.post(url, {code: code}).subscribe( (resp: any) => {
+        console.log(`La resp es ${resp}`);
+        this.router.navigate(['/client/']);
+        Swal.fire({
+          title: 'Genial',
+          html: `Tu código ha sido confirmado. Puedes iniciar sesión.`,
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        });
+        return resolve(true);
+      }, err =>{
+        console.log(err);
+        if ( err.status == 400) {
+          console.log('pene')
+          Swal.fire({
+            title: 'Oh no',
+            html: `Parece que algo ha salido mal. ¿Ingresaste un código correcto?<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        else {
+          Swal.fire({
+            title: 'Vaya...',
+            html: `El servidor no ha recibido los datos. ¿Puedes intentarlo de nuevo? ¡Notifica el error si se repite!<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+      });
+    });
+  }
 }
+  
