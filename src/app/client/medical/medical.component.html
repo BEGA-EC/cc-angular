@@ -59,7 +59,7 @@
         </div>
         <div class="form-group p-3">
             <label>Teléfono Convencional
-                <input type="text" appOnlynumber class="form-control" id="phoneNumber" formControlName="phoneNumber" minlength="9" maxlength="10">
+                <input type="text" appOnlynumber class="form-control" id="phoneNumber" formControlName="phoneNumber" minlength="7" maxlength="10">
                 <small *ngIf="isSubmitted && errorControl.phoneNumber.errors?.required">
                     El teléfono convencional es necesario.
                 </small>
@@ -87,7 +87,7 @@
         </div>
         <div class="form-group p-3">
             <label>Número de Emergencia
-                <input type="text" appOnlynumber class="form-control" name="emergencyPhone" formControlName="emergencyPhone" minlength="9" maxlength="10">
+                <input type="text" appOnlynumber class="form-control" name="emergencyPhone" formControlName="emergencyPhone" minlength="7" maxlength="10">
                 <small *ngIf="isSubmitted && errorControl.emergencyPhone.errors?.required">
                     El número de emergencia es necesario.
                 </small>
