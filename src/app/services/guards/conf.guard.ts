@@ -17,19 +17,11 @@ export class ConfGuard implements CanActivate {
     public http: HttpClient
   ) { }
   canActivate() {
-    this.http.get(`${environment.endpoint}user/me`).subscribe((data: any) => {
-        this.user = data.user.name;
-      });
-      this.http.get(`${environment.endpoint}covid-poll/done`).subscribe((data: any) => {
-        this.done = data.done;
 
-      });
-      console.log(this._userService.inForm())
-      console.log(this._userService.covid())
-    if ( this._userService.inForm() || this._userService.covid()) {
+    if ( !this._userService.inLog() ) {
       return true;
     }else {
-      this.router.navigate(['/client/medical']);
+      this.router.navigate(['/client/dashboard']);
       return false;
     }
 
