@@ -27,6 +27,8 @@ export class MedicalComponent implements OnInit {
   fileToUpload: File = null;
   productsBeingSold: String = '';
   productsBeingSoldSec: String = '';
+  productsBeingSoldTri: String = '';
+  productsBeingSoldCua: String = '';
 
   cantones: {};
 
@@ -815,13 +817,14 @@ export class MedicalComponent implements OnInit {
       secondaryStreet: ['', [Validators.required]],
 
       taxType: ['', [Validators.required]],
-      taxNumber: [''],
+      taxNumberRuc: ['', [ Validators.min(100000000000), Validators.max(9999999999999), Validators.pattern('^(([0-1][0-9])|([2][0-4])|30)[0-9]{8}(([0][0][1]))')]],
+      taxNumberRise: ['', [Validators.min(100000000), Validators.max(9999999999), Validators.pattern('^(([0-1][0-9])|([2][0-4])|30)[0-9]*')]],
       keepAccounting: [false, [Validators.required]],
 
       personType: ['', [Validators.required]],
       businessName: ['', [Validators.required]],
       socialReason: ['', [Validators.required]],
-      productsBeingSold: ['', [Validators.required]], productsBeingSoldSec: ['', [Validators.required]], productsBeingSoldTri: ['', [Validators.required]],
+      productsBeingSold: ['', [Validators.required]], productsBeingSoldSec: [''], productsBeingSoldTri: [''], productsBeingSoldCua: [''], productsBeingSoldQui: [''],
       localNumber: ['', [Validators.required]],
       predioNumber: ['', [Validators.required]],
       sector: ['', [Validators.required]],
@@ -843,7 +846,7 @@ export class MedicalComponent implements OnInit {
       affiliatedTo: ['', [Validators.required]],
       affiliatedToPrivate: [''],
       conadisLicense: ['', [Validators.required]],
-      conadisLicenseType: [''],
+      conadisLicenseType: ['', [Validators.pattern('^(([1-9])|([1-9][0-9])|100)')]],
       retirement: ['', [Validators.required]],
       retirementDetails: ['']
     }); 
@@ -879,10 +882,16 @@ export class MedicalComponent implements OnInit {
 
   submitForm() {
     this.isSubmitted = true;
+
+    if (!this.dataForm.value.taxNumberRuc) {
+      var taxNum = this.dataForm.value.taxNumberRise;
+    } else {
+      var taxNum = this.dataForm.value.taxNumberRuc;
+    }
     
     let tributary: Tributary = {
       taxType: this.dataForm.value.taxType,
-      taxNumber: this.dataForm.value.taxNumber,
+      taxNumber: taxNum,
       keepAccounting: this.dataForm.value.keepAccounting
     };
 
@@ -890,12 +899,12 @@ export class MedicalComponent implements OnInit {
      personType: this.dataForm.value.personType,
      businessName: this.dataForm.value.businessName,
      socialReason: this.dataForm.value.socialReason,
-     productsBeingSold: `${this.dataForm.value.productsBeingSold}, ${this.dataForm.value.productsBeingSoldSec}, ${this.dataForm.value.productsBeingSoldTri}`,
+     productsBeingSold: `${this.dataForm.value.productsBeingSold}, ${this.dataForm.value.productsBeingSoldSec}, ${this.dataForm.value.productsBeingSoldTri}, ${this.dataForm.value.productsBeingSoldCua}, ${this.dataForm.value.productsBeingSoldQui}`,
      localNumber: this.dataForm.value.localNumber,
      predioNumber: this.dataForm.value.predioNumber,
      sector: this.dataForm.value.sector,
      floor: this.dataForm.value.floor,
-     hallNumber: this.dataForm.value.hallNumber,
+     hallNumber: this.dataForm.value.hallNumber.toUpperCase(),
      originOfProducts: this.dataForm.value.originOfProducts,
      numberLocals: this.dataForm.value.numberLocals,
      qualifiedCraftman: this.dataForm.value.qualifiedCraftman,
@@ -961,8 +970,7 @@ export class MedicalComponent implements OnInit {
         icon: 'error',
         confirmButtonText: 'Aceptar'
       });
-      console.log(comercial.productsBeingSold);
-      console.log(this.cantones);
+      console.log(tributary, comercial, medical, personal, avatar);
       return false;
     } else {
       this._formService.upload(tributary, comercial, medical, personal, avatar);

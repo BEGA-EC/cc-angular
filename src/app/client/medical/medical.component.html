@@ -63,7 +63,7 @@
                     {{errorControl.idNumber.errors?.idValidator}}
                 </small>
                 <small *ngIf="isSubmitted && !errorControl.idNumber.errors?.min && errorControl.idNumber.errors?.pattern">
-                    Cédula inválida.
+                    Documento inválido.
                 </small>
             </label>
         </div>
@@ -211,10 +211,39 @@
                 La información tributaria es necesaria.
               </small>
         </div>
-        <div class="form-group p-3" *ngIf="taxType == 'ruc' || taxType == 'rise'">
-            <label>RISE / RUC
-                <input type="text" appOnlynumber class="form-control" name="taxNumber" formControlName="taxNumber">
+        <div class="form-group p-3" *ngIf="taxType == 'ruc'">
+            <label>RUC
+                <input type="text" appOnlynumber class="form-control" name="taxNumberRuc" formControlName="taxNumberRuc" minlength="12" maxlength="13" idValidator>
             </label>
+            <small *ngIf="isSubmitted && errorControl.taxNumberRuc.errors?.min">
+                Debe ingresar 13 números.
+            </small>
+            <small *ngIf="isSubmitted && errorControl.taxNumberRuc.errors?.max">
+                Debe ingresar 13 números.
+            </small>
+            <small *ngIf="isSubmitted && !errorControl.taxNumberRuc.errors?.min && errorControl.taxNumberRuc.errors?.idValidator">
+                {{errorControl.taxNumberRuc.errors?.idValidator}}
+            </small>
+            <small *ngIf="isSubmitted && !errorControl.taxNumberRuc.errors?.min && errorControl.taxNumberRuc.errors?.pattern">
+                Documento inválido.
+            </small>
+        </div>
+        <div class="form-group p-3" *ngIf="taxType == 'rise'">
+            <label>RISE
+                <input type="text" appOnlynumber class="form-control" name="taxNumberRise" formControlName="taxNumberRise" minlength="9" maxlength="10" idValidator>
+            </label>
+            <small *ngIf="isSubmitted && errorControl.taxNumberRise.errors?.min">
+                Debe ingresar 13 números.
+            </small>
+            <small *ngIf="isSubmitted && errorControl.taxNumberRise.errors?.max">
+                Debe ingresar 13 números.
+            </small>
+            <small *ngIf="isSubmitted && !errorControl.taxNumberRise.errors?.min && errorControl.taxNumberRise.errors?.idValidator">
+                {{errorControl.taxNumberRise.errors?.idValidator}}
+            </small>
+            <small *ngIf="isSubmitted && !errorControl.taxNumberRise.errors?.min && errorControl.taxNumberRise.errors?.pattern">
+                Documento inválido.
+            </small>
         </div>
         <div class="form-group p-3 w-100" *ngIf="taxType == 'ruc'">
             <h4>Está obligado a llevar contabilidad</h4>
@@ -296,7 +325,8 @@
                 <small *ngIf="isSubmitted && errorControl.productsBeingSold.errors?.required">
                     Seleccione uno.
                 </small>
-                <select class="form-control" [(ngModel)]="productsBeingSoldSec" name="productsBeingSoldSec" formControlName="productsBeingSoldSec">
+                <select class="form-control" [(ngModel)]="productsBeingSoldSec" name="productsBeingSoldSec" formControlName="productsBeingSoldSec" *ngIf="productsBeingSold">
+                    <option value="">Seleccione otro (Opcional)</option>
                     <option value="Blusas" *ngIf="productsBeingSold != 'Blusas'">Blusas</option>
                     <option value="Calzado" *ngIf="productsBeingSold != 'Calzado'">Calzado</option>
                     <option value="Camisa" *ngIf="productsBeingSold != 'Camisa'">Camisa</option>
@@ -317,7 +347,8 @@
                 <small *ngIf="isSubmitted && errorControl.productsBeingSoldSec.errors?.required">
                     Seleccione uno.
                 </small>
-                <select class="form-control" name="productsBeingSoldTri" formControlName="productsBeingSoldTri">
+                <select class="form-control" [(ngModel)]="productsBeingSoldTri" name="productsBeingSoldTri" formControlName="productsBeingSoldTri" *ngIf="productsBeingSoldSec">
+                    <option value="">Seleccione otro (Opcional)</option>
                     <option value="Blusas" *ngIf="productsBeingSoldSec != 'Blusas' && productsBeingSold != 'Blusas'">Blusas</option>
                     <option value="Calzado" *ngIf="productsBeingSoldSec != 'Calzado' && productsBeingSold != 'Calzado'">Calzado</option>
                     <option value="Camisa" *ngIf="productsBeingSoldSec != 'Camisa' && productsBeingSold != 'Camisa'">Camisa</option>
@@ -336,6 +367,50 @@
                     <option value="Varios" *ngIf="productsBeingSoldSec != 'Varios' && productsBeingSold != 'Varios'">Varios</option>
                 </select>
                 <small *ngIf="isSubmitted && errorControl.productsBeingSoldTri.errors?.required">
+                    Seleccione uno.
+                </small>
+                <select class="form-control" [(ngModel)]="productsBeingSoldCua" name="productsBeingSoldCua" formControlName="productsBeingSoldCua" *ngIf="productsBeingSoldTri">
+                    <option value="">Seleccione otro (Opcional)</option>
+                    <option value="Blusas" *ngIf="productsBeingSoldTri != 'Blusas' && productsBeingSoldSec != 'Blusas' && productsBeingSold != 'Blusas'">Blusas</option>
+                    <option value="Calzado" *ngIf="productsBeingSoldTri != 'Calzado' && productsBeingSoldSec != 'Calzado' && productsBeingSold != 'Calzado'">Calzado</option>
+                    <option value="Camisa" *ngIf="productsBeingSoldTri != 'Camisa' && productsBeingSoldSec != 'Camisa' && productsBeingSold != 'Camisa'">Camisa</option>
+                    <option value="Camisetas" *ngIf="productsBeingSoldTri != 'Camisetas' && productsBeingSoldSec != 'Camisetas' && productsBeingSold != 'Camisetas'">Camisetas</option>
+                    <option value="Chompas" *ngIf="productsBeingSoldTri != 'Chompas' && productsBeingSoldSec != 'Chompas' && productsBeingSold != 'Chompas'">Chompas</option>
+                    <option value="Jean" *ngIf="productsBeingSoldTri != 'Jean' && productsBeingSoldSec != 'Jean' && productsBeingSold != 'Jean'">Jean</option>
+                    <option value="Lencería" *ngIf="productsBeingSoldTri != 'Lencería' && productsBeingSoldSec != 'Lencería' && productsBeingSold != 'Lencería'">Lencería</option>
+                    <option value="Pantalón de Tela" *ngIf="productsBeingSoldTri != 'Pantalón de Tela' && productsBeingSoldSec != 'Pantalón de Tela' && productsBeingSold != 'Pantalón de Tela'">Pantalón de Tela</option>
+                    <option value="Ropa de bebé" *ngIf="productsBeingSoldTri != 'Ropa de bebé' && productsBeingSoldSec != 'Ropa de bebé' && productsBeingSold != 'Ropa de bebé'">Ropa de bebé</option>
+                    <option value="Ropa de dormir" *ngIf="productsBeingSoldTri != 'Ropa de dormir' && productsBeingSoldSec != 'Ropa de dormir' && productsBeingSold != 'Ropa de dormir'">Ropa de dormir</option>
+                    <option value="Ropa de cuero" *ngIf="productsBeingSoldTri != 'Ropa de cuero' && productsBeingSoldSec != 'Ropa de cuero' && productsBeingSold != 'Ropa de cuero'">Ropa de cuero</option>
+                    <option value="Ropa de Niños" *ngIf="productsBeingSoldTri != 'Ropa de Niños' && productsBeingSoldSec != 'Ropa de Niños' && productsBeingSold != 'Ropa de Niños'">Ropa de Niños</option>
+                    <option value="Suéter" *ngIf="productsBeingSoldTri != 'Suéter' && productsBeingSoldSec != 'Suéter' && productsBeingSold != 'Suéter'">Suéter</option>
+                    <option value="Trajes hombre" *ngIf="productsBeingSoldTri != 'Trajes hombre' && productsBeingSoldSec != 'Trajes hombre' && productsBeingSold != 'Trajes hombre'">Trajes hombre</option>
+                    <option value="Trajes mujer" *ngIf="productsBeingSoldTri != 'Trajes mujer' && productsBeingSoldSec != 'Trajes mujer' && productsBeingSold != 'Trajes mujer'">Trajes mujer</option>
+                    <option value="Varios" *ngIf="productsBeingSoldTri != 'Varios' && productsBeingSoldSec != 'Varios' && productsBeingSold != 'Varios'">Varios</option>
+                </select>
+                <small *ngIf="isSubmitted && errorControl.productsBeingSoldCua.errors?.required">
+                    Seleccione uno.
+                </small>
+                <select class="form-control" name="productsBeingSoldQui" formControlName="productsBeingSoldQui" *ngIf="productsBeingSoldCua">
+                    <option value="">Seleccione otro (Opcional)</option>
+                    <option value="Blusas" *ngIf="productsBeingSoldCua != 'Blusas' && productsBeingSoldTri != 'Blusas' && productsBeingSoldSec != 'Blusas' && productsBeingSold != 'Blusas'">Blusas</option>
+                    <option value="Calzado" *ngIf="productsBeingSoldCua != 'Calzado' && productsBeingSoldTri != 'Calzado' && productsBeingSoldSec != 'Calzado' && productsBeingSold != 'Calzado'">Calzado</option>
+                    <option value="Camisa" *ngIf="productsBeingSoldCua != 'Camisa' && productsBeingSoldTri != 'Camisa' && productsBeingSoldSec != 'Camisa' && productsBeingSold != 'Camisa'">Camisa</option>
+                    <option value="Camisetas" *ngIf="productsBeingSoldCua != 'Camisetas' && productsBeingSoldTri != 'Camisetas' && productsBeingSoldSec != 'Camisetas' && productsBeingSold != 'Camisetas'">Camisetas</option>
+                    <option value="Chompas" *ngIf="productsBeingSoldCua != 'Chompas' && productsBeingSoldTri != 'Chompas' && productsBeingSoldSec != 'Chompas' && productsBeingSold != 'Chompas'">Chompas</option>
+                    <option value="Jean" *ngIf="productsBeingSoldCua != 'Jean' && productsBeingSoldTri != 'Jean' && productsBeingSoldSec != 'Jean' && productsBeingSold != 'Jean'">Jean</option>
+                    <option value="Lencería" *ngIf="productsBeingSoldCua != 'Lencería' && productsBeingSoldTri != 'Lencería' && productsBeingSoldSec != 'Lencería' && productsBeingSold != 'Lencería'">Lencería</option>
+                    <option value="Pantalón de Tela" *ngIf="productsBeingSoldCua != 'Pantalón de Tela' && productsBeingSoldTri != 'Pantalón de Tela' && productsBeingSoldSec != 'Pantalón de Tela' && productsBeingSold != 'Pantalón de Tela'">Pantalón de Tela</option>
+                    <option value="Ropa de bebé" *ngIf="productsBeingSoldCua != 'Ropa de bebé' && productsBeingSoldTri != 'Ropa de bebé' && productsBeingSoldSec != 'Ropa de bebé' && productsBeingSold != 'Ropa de bebé'">Ropa de bebé</option>
+                    <option value="Ropa de dormir" *ngIf="productsBeingSoldCua != 'Ropa de dormir' && productsBeingSoldTri != 'Ropa de dormir' && productsBeingSoldSec != 'Ropa de dormir' && productsBeingSold != 'Ropa de dormir'">Ropa de dormir</option>
+                    <option value="Ropa de cuero" *ngIf="productsBeingSoldCua != 'Ropa de cuero' && productsBeingSoldTri != 'Ropa de cuero' && productsBeingSoldSec != 'Ropa de cuero' && productsBeingSold != 'Ropa de cuero'">Ropa de cuero</option>
+                    <option value="Ropa de Niños" *ngIf="productsBeingSoldCua != 'Ropa de Niños' && productsBeingSoldTri != 'Ropa de Niños' && productsBeingSoldSec != 'Ropa de Niños' && productsBeingSold != 'Ropa de Niños'">Ropa de Niños</option>
+                    <option value="Suéter" *ngIf="productsBeingSoldCua != 'Suéter' && productsBeingSoldTri != 'Suéter' && productsBeingSoldSec != 'Suéter' && productsBeingSold != 'Suéter'">Suéter</option>
+                    <option value="Trajes hombre" *ngIf="productsBeingSoldCua != 'Trajes hombre' && productsBeingSoldTri != 'Trajes hombre' && productsBeingSoldSec != 'Trajes hombre' && productsBeingSold != 'Trajes hombre'">Trajes hombre</option>
+                    <option value="Trajes mujer" *ngIf="productsBeingSoldCua != 'Trajes mujer' && productsBeingSoldTri != 'Trajes mujer' && productsBeingSoldSec != 'Trajes mujer' && productsBeingSold != 'Trajes mujer'">Trajes mujer</option>
+                    <option value="Varios" *ngIf="productsBeingSoldCua != 'Varios' && productsBeingSoldTri != 'Varios' && productsBeingSoldSec != 'Varios' && productsBeingSold != 'Varios'">Varios</option>
+                </select>
+                <small *ngIf="isSubmitted && errorControl.productsBeingSoldQui.errors?.required">
                     Seleccione uno.
                 </small>
             </label>
@@ -569,8 +644,11 @@
               </small>
         </div>
         <div class="form-group p-3" *ngIf="conadisLicense == 'true'">
-            <label>¿Cuál carnet posee usted?
-                <input type="text" class="form-control" name="conadisLicenseType" formControlName="conadisLicenseType">
+            <label>Porcentaje de discapacidad
+                <input type="text" appOnlynumber class="form-control" name="conadisLicenseType" formControlName="conadisLicenseType">
+                <small *ngIf="isSubmitted && errorControl.conadisLicenseType.errors?.pattern">
+                    Válido de 1 a 100.
+                </small>
             </label>
         </div>
         <div class="form-group p-3">

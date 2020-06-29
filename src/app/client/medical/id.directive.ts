@@ -18,7 +18,7 @@ import {Directive} from '@angular/core';
       validate(control: AbstractControl) : ValidationErrors | null {
 
         function idNumber(idNum: boolean) {
-          var number = control.value; 
+          var number = control.value.substr(0,10); 
           var nCheck = 0, nDigit = 0, bEven = false;
           number = number.replace(/\D/g, "");
           for (var n = number.length - 1; n >= 0; n--) {
@@ -36,7 +36,7 @@ import {Directive} from '@angular/core';
         if (idNumber(control.value)) {
           return null; // Tamos bien
         }
-        return {idValidator: 'Cédula inválida.'};
+        return {idValidator: 'Documento inválido.'};
 
       }
 }
