@@ -4,14 +4,18 @@
         <h2>Formulario</h2>
         <div class="form-group p-3">
             <label>Imagen de Perfil
-                <input type="file" class="form-control-file" id="file" (change)="fileUpload($event.target.files)" formControlName="avatar" name="avatar">
+                <input #file type="file" class="form-control-file" id="file" (change)="fileUpload($event.target.files)" formControlName="avatar" name="avatar" (change)="preview(file.files)" accept="image/x-png,image/gif,image/jpeg">
+                <img [src]="imgURL" height="200" *ngIf="imgURL">
+                <small *ngIf="isSubmitted && errorControl.avatar.errors?.required">
+                    La imagen de perfil es necesaria.
+                </small>
             </label>
           </div>
         <div class="form-group p-3">
             <label>Nombres
                 <input type="text" class="form-control" name="firstName" formControlName="firstName">
                 <small *ngIf="isSubmitted && errorControl.firstName.errors?.required">
-                    Los nombres son necesarios
+                    Los nombres son necesarios.
                 </small>
             </label>
         </div>
@@ -19,7 +23,7 @@
             <label>Apellidos
                 <input type="text" class="form-control" name="lastName" formControlName="lastName">
                 <small *ngIf="isSubmitted && errorControl.lastName.errors?.required">
-                    Los apellidos son necesarios
+                    Los apellidos son necesarios.
                 </small>
             </label>
         </div>
@@ -39,21 +43,27 @@
             <label>Fecha de Nacimiento
                 <input type="date" class="form-control" name="dateOfBirth" value="" placeholder="dd/mm/aaaa" formControlName="dateOfBirth">
                 <small *ngIf="isSubmitted && errorControl.dateOfBirth.errors?.required">
-                    La fecha de nacimiento es necesaria
+                    La fecha de nacimiento es necesaria.
                 </small>
             </label>
         </div>
         <div class="form-group p-3">
             <label>Cédula
-                <input type="text" appOnlynumber class="form-control" name="idNumber" formControlName="idNumber" minlength="9" maxlength="10">
+                <input type="text" appOnlynumber class="form-control" name="idNumber" formControlName="idNumber" minlength="9" maxlength="10" idValidator>
                 <small *ngIf="isSubmitted && errorControl.idNumber.errors?.required">
-                    La cédula es necesaria
+                    La cédula es necesaria.
                 </small>
                 <small *ngIf="isSubmitted && errorControl.idNumber.errors?.min">
                     Debe ingresar 10 números.
                 </small>
                 <small *ngIf="isSubmitted && errorControl.idNumber.errors?.max">
                     Debe ingresar 10 números.
+                </small>
+                <small *ngIf="isSubmitted && !errorControl.idNumber.errors?.min && errorControl.idNumber.errors?.idValidator">
+                    {{errorControl.idNumber.errors?.idValidator}}
+                </small>
+                <small *ngIf="isSubmitted && !errorControl.idNumber.errors?.min && errorControl.idNumber.errors?.pattern">
+                    Cédula inválida.
                 </small>
             </label>
         </div>
@@ -268,7 +278,7 @@
                 <select class="form-control" [(ngModel)]="productsBeingSold" name="productsBeingSold" formControlName="productsBeingSold">
                     <option value="Blusas">Blusas</option>
                     <option value="Calzado">Calzado</option>
-                    <option value="Calzado">Calzado</option>
+                    <option value="Camisa">Camisa</option>
                     <option value="Camisetas">Camisetas</option>
                     <option value="Chompas">Chompas</option>
                     <option value="Jean">Jean</option>
@@ -286,44 +296,44 @@
                 <small *ngIf="isSubmitted && errorControl.productsBeingSold.errors?.required">
                     Seleccione uno.
                 </small>
-                <select class="form-control" [(ngModel)]="productsBeingSoldSec" name="productsBeingSoldSec" formControlName="productsBeingSoldSec" *ngIf="productsBeingSold">
-                    <option value="Blusas">Blusas</option>
-                    <option value="Calzado">Calzado</option>
-                    <option value="Calzado">Calzado</option>
-                    <option value="Camisetas">Camisetas</option>
-                    <option value="Chompas">Chompas</option>
-                    <option value="Jean">Jean</option>
-                    <option value="Lencería">Lencería</option>
-                    <option value="Pantalón de Tela">Pantalón de Tela</option>
-                    <option value="Ropa de bebé">Ropa de bebé</option>
-                    <option value="Ropa de dormir">Ropa de dormir</option>
-                    <option value="Ropa de cuero">Ropa de cuero</option>
-                    <option value="Ropa de Niños">Ropa de Niños</option>
-                    <option value="Suéter">Suéter</option>
-                    <option value="Trajes hombre">Trajes hombre</option>
-                    <option value="Trajes mujer">Trajes mujer</option>
-                    <option value="Varios">Varios</option>
+                <select class="form-control" [(ngModel)]="productsBeingSoldSec" name="productsBeingSoldSec" formControlName="productsBeingSoldSec">
+                    <option value="Blusas" *ngIf="productsBeingSold != 'Blusas'">Blusas</option>
+                    <option value="Calzado" *ngIf="productsBeingSold != 'Calzado'">Calzado</option>
+                    <option value="Camisa" *ngIf="productsBeingSold != 'Camisa'">Camisa</option>
+                    <option value="Camisetas" *ngIf="productsBeingSold != 'Camisetas'">Camisetas</option>
+                    <option value="Chompas" *ngIf="productsBeingSold != 'Chompas'">Chompas</option>
+                    <option value="Jean" *ngIf="productsBeingSold != 'Jean'">Jean</option>
+                    <option value="Lencería" *ngIf="productsBeingSold != 'Lencería'">Lencería</option>
+                    <option value="Pantalón de Tela" *ngIf="productsBeingSold != 'Pantalón de Tela'">Pantalón de Tela</option>
+                    <option value="Ropa de bebé" *ngIf="productsBeingSold != 'Ropa de bebé'">Ropa de bebé</option>
+                    <option value="Ropa de dormir" *ngIf="productsBeingSold != 'Ropa de dormir'">Ropa de dormir</option>
+                    <option value="Ropa de cuero" *ngIf="productsBeingSold != 'Ropa de cuero'">Ropa de cuero</option>
+                    <option value="Ropa de Niños" *ngIf="productsBeingSold != 'Ropa de Niños'">Ropa de Niños</option>
+                    <option value="Suéter" *ngIf="productsBeingSold != 'Suéter'">Suéter</option>
+                    <option value="Trajes hombre" *ngIf="productsBeingSold != 'Trajes hombre'">Trajes hombre</option>
+                    <option value="Trajes mujer" *ngIf="productsBeingSold != 'Trajes mujer'">Trajes mujer</option>
+                    <option value="Varios" *ngIf="productsBeingSold != 'Varios'">Varios</option>
                 </select>
                 <small *ngIf="isSubmitted && errorControl.productsBeingSoldSec.errors?.required">
                     Seleccione uno.
                 </small>
-                <select class="form-control" name="productsBeingSoldTri" formControlName="productsBeingSoldTri" *ngIf="productsBeingSoldSec">
-                    <option value="Blusas">Blusas</option>
-                    <option value="Calzado">Calzado</option>
-                    <option value="Calzado">Calzado</option>
-                    <option value="Camisetas">Camisetas</option>
-                    <option value="Chompas">Chompas</option>
-                    <option value="Jean">Jean</option>
-                    <option value="Lencería">Lencería</option>
-                    <option value="Pantalón de Tela">Pantalón de Tela</option>
-                    <option value="Ropa de bebé">Ropa de bebé</option>
-                    <option value="Ropa de dormir">Ropa de dormir</option>
-                    <option value="Ropa de cuero">Ropa de cuero</option>
-                    <option value="Ropa de Niños">Ropa de Niños</option>
-                    <option value="Suéter">Suéter</option>
-                    <option value="Trajes hombre">Trajes hombre</option>
-                    <option value="Trajes mujer">Trajes mujer</option>
-                    <option value="Varios">Varios</option>
+                <select class="form-control" name="productsBeingSoldTri" formControlName="productsBeingSoldTri">
+                    <option value="Blusas" *ngIf="productsBeingSoldSec != 'Blusas' && productsBeingSold != 'Blusas'">Blusas</option>
+                    <option value="Calzado" *ngIf="productsBeingSoldSec != 'Calzado' && productsBeingSold != 'Calzado'">Calzado</option>
+                    <option value="Camisa" *ngIf="productsBeingSoldSec != 'Camisa' && productsBeingSold != 'Camisa'">Camisa</option>
+                    <option value="Camisetas" *ngIf="productsBeingSoldSec != 'Camisetas' && productsBeingSold != 'Camisetas'">Camisetas</option>
+                    <option value="Chompas" *ngIf="productsBeingSoldSec != 'Chompas' && productsBeingSold != 'Chompas'">Chompas</option>
+                    <option value="Jean" *ngIf="productsBeingSoldSec != 'Jean' && productsBeingSold != 'Jean'">Jean</option>
+                    <option value="Lencería" *ngIf="productsBeingSoldSec != 'Lencería' && productsBeingSold != 'Lencería'">Lencería</option>
+                    <option value="Pantalón de Tela" *ngIf="productsBeingSoldSec != 'Pantalón de Tela' && productsBeingSold != 'Pantalón de Tela'">Pantalón de Tela</option>
+                    <option value="Ropa de bebé" *ngIf="productsBeingSoldSec != 'Ropa de bebé' && productsBeingSold != 'Ropa de bebé'">Ropa de bebé</option>
+                    <option value="Ropa de dormir" *ngIf="productsBeingSoldSec != 'Ropa de dormir' && productsBeingSold != 'Ropa de dormir'">Ropa de dormir</option>
+                    <option value="Ropa de cuero" *ngIf="productsBeingSoldSec != 'Ropa de cuero' && productsBeingSold != 'Ropa de cuero'">Ropa de cuero</option>
+                    <option value="Ropa de Niños" *ngIf="productsBeingSoldSec != 'Ropa de Niños' && productsBeingSold != 'Ropa de Niños'">Ropa de Niños</option>
+                    <option value="Suéter" *ngIf="productsBeingSoldSec != 'Suéter' && productsBeingSold != 'Suéter'">Suéter</option>
+                    <option value="Trajes hombre" *ngIf="productsBeingSoldSec != 'Trajes hombre' && productsBeingSold != 'Trajes hombre'">Trajes hombre</option>
+                    <option value="Trajes mujer" *ngIf="productsBeingSoldSec != 'Trajes mujer' && productsBeingSold != 'Trajes mujer'">Trajes mujer</option>
+                    <option value="Varios" *ngIf="productsBeingSoldSec != 'Varios' && productsBeingSold != 'Varios'">Varios</option>
                 </select>
                 <small *ngIf="isSubmitted && errorControl.productsBeingSoldTri.errors?.required">
                     Seleccione uno.
@@ -332,7 +342,7 @@
         </div>
         <div class="form-group p-3">
             <label>Número de Local
-                <input type="text" class="form-control" name="localNumber" formControlName="localNumber">
+                <input type="text" appOnlynumber class="form-control" name="localNumber" formControlName="localNumber">
                 <small *ngIf="isSubmitted && errorControl.localNumber.errors?.required">
                     El número del local es necesario.
                 </small>
@@ -380,10 +390,13 @@
         </div>
         <div class="form-group p-3">
             <label>Número de Pasillo
-                <input type="text" appOnlynumber class="form-control" name="hallNumber" formControlName="hallNumber">
+                <input type="text" class="form-control" name="hallNumber" formControlName="hallNumber">
                 <small *ngIf="isSubmitted && errorControl.hallNumber.errors?.required">
                     El número del pasillo es necesario.
                 </small>
+                <small *ngIf="isSubmitted && errorControl.hallNumber.errors?.pattern">
+                    Debe ingresar el número seguido de la letra.
+                    </small>
             </label>
         </div>
         <div class="form-group p-3">

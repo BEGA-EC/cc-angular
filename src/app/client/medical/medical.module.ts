@@ -5,10 +5,11 @@ import { MedicalRoutingModule } from './medical-routing.module';
 import { MedicalComponent } from './medical.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OnlynumberDirective } from './onlynumber.directive';
+import { IdValidator } from './id.directive';
 
 
 @NgModule({
-  declarations: [MedicalComponent, OnlynumberDirective],
+  declarations: [MedicalComponent, OnlynumberDirective, IdValidator],
   imports: [
     CommonModule,
     MedicalRoutingModule,

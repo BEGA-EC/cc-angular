@@ -42,3 +42,6 @@ form label {
 .productos select {
     margin-bottom: 20px;
 }
+.productos small {
+    margin-top: -28px;
+}

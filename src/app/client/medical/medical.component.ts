@@ -30,6 +30,9 @@ export class MedicalComponent implements OnInit {
 
   cantones: {};
 
+  public imagePath;
+  imgURL: any;
+
   constructor(public formBuilder: FormBuilder, private router: Router, public _formService: FormService) { }
 
   check(e){
@@ -799,7 +802,7 @@ export class MedicalComponent implements OnInit {
       lastName: ['', [Validators.required]],
       gender: ['', [Validators.required]],
       dateOfBirth: ['', [Validators.required]],
-      idNumber: ['', [Validators.required, Validators.min(100000000), Validators.max(9999999999)]],
+      idNumber: ['', [Validators.required, Validators.min(100000000), Validators.max(9999999999), Validators.pattern('^(([0-1][0-9])|([2][0-4])|30)[0-9]*')]],
       phoneNumber: ['', [Validators.required, Validators.min(1000000), Validators.max(9999999999)]],
       cellphoneNumber: ['', [Validators.required, Validators.min(100000000), Validators.max(9999999999)]],
       emergencyPhone: ['', [Validators.required, Validators.min(1000000), Validators.max(9999999999)]],
@@ -823,7 +826,7 @@ export class MedicalComponent implements OnInit {
       predioNumber: ['', [Validators.required]],
       sector: ['', [Validators.required]],
       floor: ['', [Validators.required]],
-      hallNumber: ['', [Validators.required]],
+      hallNumber: ['', [Validators.required, Validators.pattern('[0-9]{1,2}[a-bA-B]{1}$')]],
       originOfProducts: ['', [Validators.required]],
       numberLocals: ['', [Validators.required]],
       qualifiedCraftman: ['', [Validators.required]],
@@ -848,7 +851,20 @@ export class MedicalComponent implements OnInit {
 
   fileUpload(files: FileList) {
     this.fileToUpload = files.item(0);
-}
+  }
+
+
+  preview(files: FileList) {
+    if (files.length === 0)
+      return;
+ 
+    var reader = new FileReader();
+    this.imagePath = files;
+    reader.readAsDataURL(files[0]); 
+    reader.onload = (_event) => { 
+      this.imgURL = reader.result; 
+    }
+  }
 
   getDate(e: any) {
     const date = new Date(e.target.value).toISOString().substring(0, 10);
@@ -945,12 +961,10 @@ export class MedicalComponent implements OnInit {
         icon: 'error',
         confirmButtonText: 'Aceptar'
       });
-      console.log(`Tributario: ${JSON.stringify(tributary)}\nComercial: ${JSON.stringify(comercial)}\n Médico: ${JSON.stringify(medical)}\n Personal: ${JSON.stringify(personal)}\n Avatar: ${avatar}`);
       console.log(comercial.productsBeingSold);
       console.log(this.cantones);
       return false;
     } else {
-      console.log(`Tributario: ${JSON.stringify(tributary)}\nComercial: ${JSON.stringify(comercial)}\n Médico: ${JSON.stringify(medical)}\n Personal: ${JSON.stringify(personal)}\n Avatar: ${avatar}`);
       this._formService.upload(tributary, comercial, medical, personal, avatar);
     }
   }
