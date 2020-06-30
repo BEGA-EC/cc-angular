@@ -6,7 +6,7 @@ import { ConfGuard } from './services/guards/conf.guard';
 
 const routes: Routes = [{ path: 'client/register', loadChildren: () => import('./client/register/register.module').then(m => m.RegisterModule), canActivate: [ConfGuard] },
 { path: 'client', loadChildren: () => import('./client/login/login.module').then(m => m.LoginModule), canActivate: [ConfGuard] },
-{ path: 'client/medical', loadChildren: () => import('./client/medical/medical.module').then(m => m.MedicalModule), canActivate: [] },
+{ path: 'client/medical', loadChildren: () => import('./client/medical/medical.module').then(m => m.MedicalModule), canActivate: [AdminGuard] },
 { path: 'client/covid', loadChildren: () => import('./client/covid/covid.module').then(m => m.CovidModule), canActivate: [AdminGuard] },
 { path: 'client/dashboard', loadChildren: () => import('./client/dashboard/dashboard.module').then(m => m.DashboardModule), canActivate: [AdminGuard] },
 { path: 'confirmation', loadChildren: () => import('./confirmation/confirmation.module').then(m => m.ConfirmationModule) },
