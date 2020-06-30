@@ -41,7 +41,7 @@
         </div>
         <div class="form-group p-3">
             <label>Fecha de Nacimiento
-                <input type="date" class="form-control" name="dateOfBirth" value="" placeholder="dd/mm/aaaa" formControlName="dateOfBirth">
+                <input type="date" class="form-control" name="dateOfBirth" placeholder="dd/mm/aaaa" formControlName="dateOfBirth">
                 <small *ngIf="isSubmitted && errorControl.dateOfBirth.errors?.required">
                     La fecha de nacimiento es necesaria.
                 </small>
@@ -213,7 +213,7 @@
         </div>
         <div class="form-group p-3" *ngIf="taxType == 'ruc'">
             <label>RUC
-                <input type="text" appOnlynumber class="form-control" name="taxNumberRuc" formControlName="taxNumberRuc" minlength="12" maxlength="13" idValidator>
+                <input type="text" appOnlynumber class="form-control" name="taxNumberRuc" formControlName="taxNumberRuc" minlength="12" maxlength="13" idValidator requerid>
             </label>
             <small *ngIf="isSubmitted && errorControl.taxNumberRuc.errors?.min">
                 Debe ingresar 13 números.
@@ -230,7 +230,7 @@
         </div>
         <div class="form-group p-3" *ngIf="taxType == 'rise'">
             <label>RISE
-                <input type="text" appOnlynumber class="form-control" name="taxNumberRise" formControlName="taxNumberRise" minlength="9" maxlength="10" idValidator>
+                <input type="text" appOnlynumber class="form-control" name="taxNumberRise" formControlName="taxNumberRise" minlength="9" maxlength="10" idValidator requerid>
             </label>
             <small *ngIf="isSubmitted && errorControl.taxNumberRise.errors?.min">
                 Debe ingresar 13 números.

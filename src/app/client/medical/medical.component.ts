@@ -7,6 +7,7 @@ import { Tributary } from 'src/app/models/tributary.model';
 import { Medical } from 'src/app/models/medical.model';
 import { Personal } from 'src/app/models/personal.model';
 import { Comercial } from 'src/app/models/comercial.model';
+import { strict } from 'assert';
 
 @Component({
   selector: 'app-medical',
@@ -882,12 +883,55 @@ export class MedicalComponent implements OnInit {
 
   submitForm() {
     this.isSubmitted = true;
+    var taxNum: String;
+    var products: {};
 
-    if (!this.dataForm.value.taxNumberRuc) {
-      var taxNum = this.dataForm.value.taxNumberRise;
-    } else {
-      var taxNum = this.dataForm.value.taxNumberRuc;
+    if (this.dataForm.value.taxType == "ruc") {
+      taxNum = this.dataForm.value.taxNumberRuc;
     }
+    else if (this.dataForm.value.taxType == "rise") {
+      taxNum = this.dataForm.value.taxNumberRise;
+    }
+    else {
+      taxNum = '';
+    }
+
+    if (!this.dataForm.value.productsBeingSoldSec) {
+      products = {
+        "1": this.dataForm.value.productsBeingSold
+      }
+    }
+    else if (!this.dataForm.value.productsBeingSoldTri) {
+      products = {
+        "1": this.dataForm.value.productsBeingSold,
+        "2": this.dataForm.value.productsBeingSoldSec
+      }
+    }
+    else if (!this.dataForm.value.productsBeingSoldCua) {
+      products = {
+        "1": this.dataForm.value.productsBeingSold,
+        "2": this.dataForm.value.productsBeingSoldSec,
+        "3": this.dataForm.value.productsBeingSoldTri
+      }
+    }
+    else if (!this.dataForm.value.productsBeingSoldQui) {
+      products = {
+        "1": this.dataForm.value.productsBeingSold,
+        "2": this.dataForm.value.productsBeingSoldSec,
+        "3": this.dataForm.value.productsBeingSoldTri,
+        "4": this.dataForm.value.productsBeingSoldCua
+      }
+    }
+    else if (this.dataForm.value.productsBeingSoldQui) {
+      products = {
+        "1": this.dataForm.value.productsBeingSold,
+        "2": this.dataForm.value.productsBeingSoldSec,
+        "3": this.dataForm.value.productsBeingSoldTri,
+        "4": this.dataForm.value.productsBeingSoldCua,
+        "5": this.dataForm.value.productsBeingSoldQui
+      }
+    }
+    
     
     let tributary: Tributary = {
       taxType: this.dataForm.value.taxType,
@@ -899,7 +943,7 @@ export class MedicalComponent implements OnInit {
      personType: this.dataForm.value.personType,
      businessName: this.dataForm.value.businessName,
      socialReason: this.dataForm.value.socialReason,
-     productsBeingSold: `${this.dataForm.value.productsBeingSold}, ${this.dataForm.value.productsBeingSoldSec}, ${this.dataForm.value.productsBeingSoldTri}, ${this.dataForm.value.productsBeingSoldCua}, ${this.dataForm.value.productsBeingSoldQui}`,
+     productsBeingSold: JSON.stringify(products),
      localNumber: this.dataForm.value.localNumber,
      predioNumber: this.dataForm.value.predioNumber,
      sector: this.dataForm.value.sector,
