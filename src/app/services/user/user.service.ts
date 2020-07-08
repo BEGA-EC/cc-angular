@@ -76,12 +76,12 @@ export class UserService {
   }
 
     login( user: User) {
-    let url = `${environment.endpoint}user/login`;
-    return this.http.post( url, user ).pipe(map( (resp: any) => {
-      this.saveStorage( resp.token, resp.expiredAt);
-      return true;
-    }));
-  }
+      let url = `${environment.endpoint}user/login`;
+      return this.http.post( url, user ).pipe(map( (resp: any) => {
+        this.saveStorage( resp.token, resp.expiredAt);
+        return true;
+      }));
+    }
 
   register(email: string) {
     return new Promise(resolve => {

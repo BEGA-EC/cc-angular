@@ -39,6 +39,7 @@ export class FormService {
           confirmButtonText: 'Aceptar'
         });
       }, err => {
+        console.log(err);
         if ( err.status == 400) {
           Swal.fire({
             title: 'Oh no',

@@ -30,6 +30,27 @@ export class MedicalComponent implements OnInit {
   productsBeingSoldSec: String = '';
   productsBeingSoldTri: String = '';
   productsBeingSoldCua: String = '';
+  numberLocals: String = '';
+
+  localNumberTwo: String = '';
+  localNumberTri: String = '';
+
+  predioNumberTwo: String = '';
+  predioNumberTri: String = '';
+
+  disability: String = '';
+  disabilityPer: String = '';
+
+  medicamentBeingConsumed: String = '';
+
+  allergicTo: String = '';
+
+  taxNumberRuc: String = '';
+  taxNumberRise: String = '';
+
+  craftmanCalification: String = '';
+
+  retirementDetails: String = '';
 
   cantones: {};
 
@@ -39,9 +60,6 @@ export class MedicalComponent implements OnInit {
   constructor(public formBuilder: FormBuilder, private router: Router, public _formService: FormService) { }
 
   check(e){
-    console.log(e)
-    console.log(e.target.checked)
-    console.log(e.target.value)
     if (e.target.value == "Azuay — 02") {
       this.cantones = [
         {
@@ -826,8 +844,8 @@ export class MedicalComponent implements OnInit {
       businessName: ['', [Validators.required]],
       socialReason: ['', [Validators.required]],
       productsBeingSold: ['', [Validators.required]], productsBeingSoldSec: [''], productsBeingSoldTri: [''], productsBeingSoldCua: [''], productsBeingSoldQui: [''],
-      localNumber: ['', [Validators.required]],
-      predioNumber: ['', [Validators.required]],
+      localNumber: ['', [Validators.required]], localNumberTwo: [''], localNumberTri: [''],
+      predioNumber: ['', [Validators.required]], predioNumberTwo: [''], predioNumberTri: [''],
       sector: ['', [Validators.required]],
       floor: ['', [Validators.required]],
       hallNumber: ['', [Validators.required, Validators.pattern('[0-9]{1,2}[a-bA-B]{1}$')]],
@@ -847,7 +865,7 @@ export class MedicalComponent implements OnInit {
       affiliatedTo: ['', [Validators.required]],
       affiliatedToPrivate: [''],
       conadisLicense: ['', [Validators.required]],
-      conadisLicenseType: ['', [Validators.pattern('^(([1-9])|([1-9][0-9])|100)')]],
+      disability: [''], disabilityPer: ['', [Validators.pattern('^(([1-9])|([1-9][0-9]))')]],
       retirement: ['', [Validators.required]],
       retirementDetails: ['']
     }); 
@@ -885,6 +903,9 @@ export class MedicalComponent implements OnInit {
     this.isSubmitted = true;
     var taxNum: String;
     var products: {};
+    var numLocal: {};
+    var numPredio: {};
+    var licenseType: {};
 
     if (this.dataForm.value.taxType == "ruc") {
       taxNum = this.dataForm.value.taxNumberRuc;
@@ -894,7 +915,7 @@ export class MedicalComponent implements OnInit {
     }
     else {
       taxNum = '';
-    }
+    } 
 
     if (!this.dataForm.value.productsBeingSoldSec) {
       products = {
@@ -931,7 +952,46 @@ export class MedicalComponent implements OnInit {
         "5": this.dataForm.value.productsBeingSoldQui
       }
     }
+
+    if (this.dataForm.value.numberLocals == '1') {
+      numLocal = {
+        "1": this.dataForm.value.localNumber
+      }
+      numPredio = {
+        "1": this.dataForm.value.predioNumber
+      }
+    }
+
+    else if (this.dataForm.value.numberLocals == '2') {
+      numLocal = {
+        "1": this.dataForm.value.localNumber,
+        "2": this.dataForm.value.localNumberTwo
+      }
+      numPredio = {
+        "1": this.dataForm.value.predioNumber,
+        "2": this.dataForm.value.predioNumberTwo
+      }
+    }
     
+    else if (this.dataForm.value.numberLocals == '3') {
+      numLocal = {
+        "1": this.dataForm.value.localNumber,
+        "2": this.dataForm.value.localNumberTwo,
+        "3": this.dataForm.value.localNumberTri
+      }
+      numPredio = {
+        "1": this.dataForm.value.predioNumber,
+        "2": this.dataForm.value.predioNumberTwo,
+        "3": this.dataForm.value.predioNumberTri
+      }
+    }
+
+    if (this.dataForm.value.conadisLicense == "true") {
+      licenseType = {
+        "type": this.dataForm.value.disability,
+        "percentage": this.dataForm.value.disabilityPer
+      }
+    }
     
     let tributary: Tributary = {
       taxType: this.dataForm.value.taxType,
@@ -944,8 +1004,8 @@ export class MedicalComponent implements OnInit {
      businessName: this.dataForm.value.businessName,
      socialReason: this.dataForm.value.socialReason,
      productsBeingSold: JSON.stringify(products),
-     localNumber: this.dataForm.value.localNumber,
-     predioNumber: this.dataForm.value.predioNumber,
+     localNumber: JSON.stringify(numLocal),
+     predioNumber: JSON.stringify(numPredio),
      sector: this.dataForm.value.sector,
      floor: this.dataForm.value.floor,
      hallNumber: this.dataForm.value.hallNumber.toUpperCase(),
@@ -967,7 +1027,7 @@ export class MedicalComponent implements OnInit {
      affiliatedToPrivate: this.dataForm.value.affiliatedToPrivate,
      affiliatedTo: this.dataForm.value.affiliatedTo,
      conadisLicense: this.dataForm.value.conadisLicense,
-     conadisLicenseType: this.dataForm.value.conadisLicenseType,
+     conadisLicenseType: JSON.stringify(licenseType),
      retirement: this.dataForm.value.retirement,
      retirementDetails: this.dataForm.value.retirementDetails
     };
@@ -1014,7 +1074,6 @@ export class MedicalComponent implements OnInit {
         icon: 'error',
         confirmButtonText: 'Aceptar'
       });
-      console.log(tributary, comercial, medical, personal, avatar);
       return false;
     } else {
       this._formService.upload(tributary, comercial, medical, personal, avatar);
