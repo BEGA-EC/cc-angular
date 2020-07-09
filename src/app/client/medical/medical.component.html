@@ -652,7 +652,7 @@
         </div>
         <div class="w-100"></div>
         <div class="form-group p-3">
-            <label>¿A qué está afiliado usted?
+            <label>Seguro
                 <select class="form-control" name="affiliatedTo" formControlName="affiliatedTo" [(ngModel)]="affiliatedTo">
                     <option value="IESS">IESS</option>
                     <option value="ISFA">ISFA</option>
@@ -692,7 +692,7 @@
         </div>
         <div class="form-group p-3" *ngIf="conadisLicense == 'true'">
             <label>Porcentaje de discapacidad
-                <input type="text" appOnlynumber class="form-control" name="disabilityPer" [(ngModel)]="disabilityPer" required formControlName="disabilityPer">
+                <input type="text" appOnlynumber class="form-control" name="disabilityPer" [(ngModel)]="disabilityPer" required formControlName="disabilityPer" maxlength="2">
                 <small *ngIf="isSubmitted && !disabilityPer">
                     Este campo es necesario.
                 </small>

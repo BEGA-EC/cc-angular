@@ -44,10 +44,10 @@ import {Directive} from '@angular/core';
         };
 
         if (idNumber(control.value)) {
-          return null; // Tamos bien
+          return null;
         }
         else if (checkDigit(control.value)) {
-          return null; // Tamos bien
+          return null;
         }
         return {idValidator: 'Documento inválido PENE.'};
 
