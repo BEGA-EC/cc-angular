@@ -17,6 +17,10 @@
           <label style="width: 100%;">Imagen de Perfil</label>
           <img src="{{user.avatar}}">
           <p>¡Acá están tus datos! Cuando el panel de administración esté completo, acá podrás manejar tu tienda virtual.</p>
+          <button routerLink="/client" (click)="_userService.logout()" class="btn btn-danger">Cerrar Sesión</button>
       </form>
     </div>
+  </div>
+  <div id="preloader" *ngIf="_loadingService.loading$ | async">
+    <div id="loader"></div>
   </div>

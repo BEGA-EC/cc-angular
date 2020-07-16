@@ -13,6 +13,7 @@ export class UserService {
 
   user: User;
   token: String;
+  expireAt: any;
   endpoint: String;
   password: string;
   code: string;
@@ -33,8 +34,52 @@ export class UserService {
   covid() {
     this.http.get(`${environment.endpoint}covid-poll/done`).subscribe((data: any) => {
       this.done = data.done;
+    }, err => {
+      if ( err.status == 403) {
+        Swal.fire({
+          title: '¡Alto!',
+          html: `Confirma tu correo electrónico antes de acceder.<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+        this.token = '';
+        this.expireAt = null;
+        localStorage.removeItem('token');
+        localStorage.removeItem('expireAt');
+        this.router.navigate(['/client/']);
+       }
+       else if ( err.status == 401) {
+        Swal.fire({
+          title: '¡Alto!',
+          html: `No tienes permisos de estar acá. Inicia sesión y confirma tu correo electrónico antes de acceder a este sitio.<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
+          icon: 'warning',
+          confirmButtonText: 'Aceptar'
+        });
+        this.token = '';
+        this.expireAt = null;
+        localStorage.removeItem('token');
+        localStorage.removeItem('expireAt');
+        this.router.navigate(['/client/']);
+       }
+      else {
+        Swal.fire({
+          title: 'Vaya...',
+          html: `Algo ha ocurrido mal. ¡Notifica el error si se repite!<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+        this.token = '';
+        this.expireAt = null;
+        localStorage.removeItem('token');
+        localStorage.removeItem('expireAt');
+        this.router.navigate(['/client/']);
+      }  
     });
-    return ( this.done = true) ? true : false;
+    if (this.done) {
+      return true
+    } else {
+      return false
+    }
   }
 
   inForm() {
@@ -54,13 +99,6 @@ export class UserService {
     }
   }
 
-  registerStorage(password: string, code: string) {
-    localStorage.setItem('password', password );
-    localStorage.setItem('code', code );
-    this.password = localStorage.getItem('password');
-    this.code = localStorage.getItem('code');
-  }
-
   saveStorage(token: string, expireAt: string) {
     localStorage.setItem('token', token );
     localStorage.setItem('expireAt', expireAt );
@@ -69,10 +107,15 @@ export class UserService {
 
   logout() {
     this.token = '';
-    this.user = null;
+    this.expireAt = null;
     localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    this.router.navigate(['/']);
+    localStorage.removeItem('expireAt');
+    Swal.fire({
+      title: 'Has cerrado sesión',
+      html: `Nos vemos pronto.`,
+      icon: 'success',
+      confirmButtonText: 'Aceptar'
+    });
   }
 
     login( user: User) {
@@ -94,9 +137,9 @@ export class UserService {
           icon: 'success',
           confirmButtonText: 'Aceptar'
         });
+        this.router.navigate(['/client/']);
         return resolve(true);
       }, err => {
-        console.log(err.error.description == "Email already in use");
         if ( err.status == 400) {
           Swal.fire({
             title: 'Oh no',

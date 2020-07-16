@@ -24,34 +24,10 @@ export class ConfirmationComponent implements OnInit {
       console.log('Called Constructor');
       this.activatedRoute.queryParams.subscribe(params => {
       this.code = params['code'];
-      console.log(this.code);
       this._codeService.postCode(this.code);
     });
     }
 
   ngOnInit() {
-    this.codeForm = this.formBuilder.group({
-      code: ['', [Validators.required]]
-    });
-  }
-
-  get errorControl() {
-    return this.codeForm.controls;
-  }
-
-  submitForm() {
-    this.isSubmitted = true;
-    if (!this.codeForm.valid) {
-      Swal.fire({
-        title: 'Oh no',
-        text: `Debes ingresar un código de verificación.`,
-        icon: 'error',
-        confirmButtonText: 'Aceptar'
-      });
-      return false;
-    } else {
-      let code = this.codeForm.value.code;
-      this._codeService.postCode(code);
-    }
   }
 }

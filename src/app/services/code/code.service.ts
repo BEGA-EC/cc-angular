@@ -19,13 +19,13 @@ export class CodeService {
       let url = `${environment.endpoint}user/confirmation-code`;
       this.http.post(url, {code: code}).subscribe( (resp: any) => {
         console.log(`La resp es ${resp}`);
-        this.router.navigate(['/client/']);
         Swal.fire({
           title: 'Genial',
           html: `Tu código ha sido confirmado. Puedes iniciar sesión.`,
           icon: 'success',
           confirmButtonText: 'Aceptar'
         });
+        this.router.navigate(['/client/']);
         return resolve(true);
       }, err =>{
         console.log(err);
@@ -33,10 +33,11 @@ export class CodeService {
           console.log('pene')
           Swal.fire({
             title: 'Oh no',
-            html: `Parece que algo ha salido mal. ¿Ingresaste un código correcto?<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
+            html: `Parece que algo ha salido mal. El enlace es incorrecto.<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
             icon: 'error',
             confirmButtonText: 'Aceptar'
           });
+          this.router.navigate(['/client/']);
         }
         else {
           Swal.fire({
@@ -45,6 +46,7 @@ export class CodeService {
             icon: 'error',
             confirmButtonText: 'Aceptar'
           });
+          this.router.navigate(['/client/']);
         }
       });
     });

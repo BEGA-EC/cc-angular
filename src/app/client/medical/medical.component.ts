@@ -7,7 +7,6 @@ import { Tributary } from 'src/app/models/tributary.model';
 import { Medical } from 'src/app/models/medical.model';
 import { Personal } from 'src/app/models/personal.model';
 import { Comercial } from 'src/app/models/comercial.model';
-import { strict } from 'assert';
 
 @Component({
   selector: 'app-medical',
@@ -31,12 +30,6 @@ export class MedicalComponent implements OnInit {
   productsBeingSoldTri: String = '';
   productsBeingSoldCua: String = '';
   numberLocals: String = '';
-
-  localNumberTwo: String = '';
-  localNumberTri: String = '';
-
-  predioNumberTwo: String = '';
-  predioNumberTri: String = '';
 
   disability: String = '';
   disabilityPer: String = '';
@@ -844,13 +837,13 @@ export class MedicalComponent implements OnInit {
       businessName: ['', [Validators.required]],
       socialReason: ['', [Validators.required]],
       productsBeingSold: ['', [Validators.required]], productsBeingSoldSec: [''], productsBeingSoldTri: [''], productsBeingSoldCua: [''], productsBeingSoldQui: [''],
-      localNumber: ['', [Validators.required]], localNumberTwo: [''], localNumberTri: [''],
-      predioNumber: ['', [Validators.required]], predioNumberTwo: [''], predioNumberTri: [''],
-      sector: ['', [Validators.required]],
-      floor: ['', [Validators.required]],
-      hallNumber: ['', [Validators.required, Validators.pattern('[0-9]{1,2}[a-bA-B]{1}$')]],
-      originOfProducts: ['', [Validators.required]],
       numberLocals: ['', [Validators.required]],
+      localNumberOne: ['', [Validators.required]], localNumberTwo: [''], localNumberTri: [''],
+      predioNumberOne: ['', [Validators.required]], predioNumberTwo: [''], predioNumberTri: [''],
+      sectorOne: ['', [Validators.required]], sectorTwo: [''], sectorTri: [''],
+      floorOne: ['', [Validators.required]], floorTwo: [''], floorTri: [''],
+      hallNumberOne: ['', [Validators.required, Validators.pattern('[0-9]{1,2}[a-bA-B]{1}$')]], hallNumberTwo: ['', [Validators.pattern('[0-9]{1,2}[a-bA-B]{1}$')]], hallNumberTri: ['', [Validators.pattern('[0-9]{1,2}[a-bA-B]{1}$')]],
+      originOfProducts: ['', [Validators.required]],
       qualifiedCraftman: ['', [Validators.required]],
       craftmanCalification: [''],
       sellerType: ['', [Validators.required]] ,

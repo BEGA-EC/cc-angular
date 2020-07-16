@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { UserService } from 'src/app/services/service.index';
 import { Router } from '@angular/router';
+import { LoadingService } from 'src/app/services/loading/loading.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     public _userService: UserService,
-    public router: Router) { }
+    public router: Router,
+    public _loadingService: LoadingService) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -43,7 +45,6 @@ export class LoginComponent implements OnInit {
     } else {
       let user = {email: this.loginForm.value.email, password: this.loginForm.value.password};
       this._userService.login(user).subscribe(correcto =>{
-        console.log(correcto);
         this.router.navigate(['/client/medical/']);
       }, err => {
         console.log(err);

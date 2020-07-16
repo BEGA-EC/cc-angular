@@ -19,12 +19,10 @@ export class ConfGuard implements CanActivate {
   canActivate() {
 
     if ( !this._userService.inLog() ) {
-      return true;
-    }else {
+        return true;
+    } else {
       this.router.navigate(['/client/dashboard']);
       return false;
     }
-
   }
-
 }

@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from 'src/app/services/service.index';
 import { Router } from '@angular/router';
+import { LoadingService } from 'src/app/services/loading/loading.service';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
     public router: Router,
-    public _userService: UserService) { }
+    public _userService: UserService,
+    public _loadingService: LoadingService) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -44,12 +46,6 @@ export class RegisterComponent implements OnInit {
       let email = this.registerForm.value.email;
       console.log(`Email: ${email}`)
       this._userService.register(email);
-      // Swal.fire({
-      //   title: 'Genial',
-      //   html: `Se ha enviado una contraseña temporal a la siguiente dirección: <b>${this.registerForm.value.email}</b>`,
-      //   icon: 'success',
-      //   confirmButtonText: 'Aceptar'
-      // });
     }
   }
 }

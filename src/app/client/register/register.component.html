@@ -16,7 +16,9 @@
         <br><br>
         <a routerLink="/client">Iniciar Sesión</a>
         <br>
-        <a routerLink="/client/dashboard">Panel de administración</a>
         </form>
     </div>
 </div>
+<div id="preloader" *ngIf="_loadingService.loading$ | async">
+    <div id="loader"></div>
+  </div>
