@@ -3,6 +3,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { CovidService } from 'src/app/services/service.index';
 import { Covid } from 'src/app/models/covid.model';
+import { LoadingService } from 'src/app/services/loading/loading.service';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-covid',
@@ -14,7 +18,7 @@ export class CovidComponent implements OnInit {
   covidForm: FormGroup;
   isSubmitted = false;
 
-  constructor(public formBuilder: FormBuilder, public _covidService: CovidService) { }
+  constructor(public formBuilder: FormBuilder, public _covidService: CovidService, public _loadingService: LoadingService, public http: HttpClient, public router: Router) { }
 
   ngOnInit() {
     this.covidForm = this.formBuilder.group({
@@ -63,6 +67,11 @@ export class CovidComponent implements OnInit {
       over60YearsOld: ['', [Validators.required]],
       over60YearsOldComment: [''],
       allInformationIsTrue: ['', [Validators.required]]
+    });
+    this.http.get(`${environment.endpoint}covid-poll/done`).subscribe((data: any) => {
+      if (data.done) {
+        this.router.navigate(['/client/dashboard'])
+      }
     });
   }
 
@@ -159,7 +168,6 @@ export class CovidComponent implements OnInit {
       });
       return false;
     } else {
-      console.log(poll);
       this._covidService.postCode(poll);
     }
   }

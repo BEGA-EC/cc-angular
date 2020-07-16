@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
 import { FormService } from 'src/app/services/service.index';
 import { Tributary } from 'src/app/models/tributary.model';
 import { Medical } from 'src/app/models/medical.model';
 import { Personal } from 'src/app/models/personal.model';
 import { Comercial } from 'src/app/models/comercial.model';
+import { LoadingService } from 'src/app/services/loading/loading.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-medical',
@@ -30,19 +33,6 @@ export class MedicalComponent implements OnInit {
   productsBeingSoldTri: String = '';
   productsBeingSoldCua: String = '';
   numberLocals: String = '';
-
-  disability: String = '';
-  disabilityPer: String = '';
-
-  medicamentBeingConsumed: String = '';
-
-  allergicTo: String = '';
-
-  taxNumberRuc: String = '';
-  taxNumberRise: String = '';
-
-  craftmanCalification: String = '';
-
   retirementDetails: String = '';
 
   cantones: {};
@@ -50,7 +40,7 @@ export class MedicalComponent implements OnInit {
   public imagePath;
   imgURL: any;
 
-  constructor(public formBuilder: FormBuilder, private router: Router, public _formService: FormService) { }
+  constructor(public formBuilder: FormBuilder, public _formService: FormService, public _loadingService: LoadingService, public http: HttpClient, public router: Router) { }
 
   check(e){
     if (e.target.value == "Azuay — 02") {
@@ -809,6 +799,23 @@ export class MedicalComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.buildForm();
+    this.setlocalsValidator();
+    this.setTributaryValidator();
+    this.setQualifiedValidator();
+    this.setAllergyValidator();
+    this.setConsumedValidator();
+    this.setRetirementValidator();
+    this.setConadisValidator();
+    this.setPrivateValidator();
+    this.http.get(`${environment.endpoint}covid-poll/done`).subscribe((data: any) => {
+      if (data.done) {
+        this.router.navigate(['/client/dashboard'])
+      }
+    });
+  }
+
+  buildForm() {
     this.dataForm = this.formBuilder.group({
       avatar: ['', [Validators.required]],
 
@@ -829,16 +836,16 @@ export class MedicalComponent implements OnInit {
       secondaryStreet: ['', [Validators.required]],
 
       taxType: ['', [Validators.required]],
-      taxNumberRuc: ['', [ Validators.min(100000000000), Validators.max(9999999999999), Validators.pattern('^(([0-1][0-9])|([2][0-4])|30)[0-9]{8}(([0][0][1]))')]],
-      taxNumberRise: ['', [Validators.min(100000000), Validators.max(9999999999), Validators.pattern('^(([0-1][0-9])|([2][0-4])|30)[0-9]*')]],
-      keepAccounting: [false, [Validators.required]],
+      taxNumberRuc: [''],
+      taxNumberRise: [''],
+      keepAccounting: [false],
 
       personType: ['', [Validators.required]],
       businessName: ['', [Validators.required]],
       socialReason: ['', [Validators.required]],
       productsBeingSold: ['', [Validators.required]], productsBeingSoldSec: [''], productsBeingSoldTri: [''], productsBeingSoldCua: [''], productsBeingSoldQui: [''],
       numberLocals: ['', [Validators.required]],
-      localNumberOne: ['', [Validators.required]], localNumberTwo: [''], localNumberTri: [''],
+      localNumberOne: ['', [Validators.required]], localNumberTwo: ['', null], localNumberTri: ['', null],
       predioNumberOne: ['', [Validators.required]], predioNumberTwo: [''], predioNumberTri: [''],
       sectorOne: ['', [Validators.required]], sectorTwo: [''], sectorTri: [''],
       floorOne: ['', [Validators.required]], floorTwo: [''], floorTri: [''],
@@ -858,10 +865,200 @@ export class MedicalComponent implements OnInit {
       affiliatedTo: ['', [Validators.required]],
       affiliatedToPrivate: [''],
       conadisLicense: ['', [Validators.required]],
-      disability: [''], disabilityPer: ['', [Validators.pattern('^(([1-9])|([1-9][0-9]))')]],
+      disability: [''], 
+      disabilityPer: [''],
       retirement: ['', [Validators.required]],
       retirementDetails: ['']
-    }); 
+    });
+  }
+
+  setlocalsValidator() {
+    const localNumberTwoControl = this.dataForm.get('localNumberTwo');
+    const localNumberTriControl = this.dataForm.get('localNumberTri');
+    const predioNumberTwoControl = this.dataForm.get('predioNumberTwo');
+    const predioNumberTriControl = this.dataForm.get('predioNumberTri');
+    const sectorTwoControl = this.dataForm.get('sectorTwo');
+    const sectorTriControl = this.dataForm.get('sectorTri');
+    const floorTwoControl = this.dataForm.get('floorTwo');
+    const floorTriControl = this.dataForm.get('floorTri');
+    const hallNumberTwoControl = this.dataForm.get('hallNumberTwo');
+    const hallNumberTriControl = this.dataForm.get('hallNumberTri');
+
+    this.dataForm.get('numberLocals').valueChanges
+      .subscribe(numberLocals => {
+        if (numberLocals === '1') {
+          localNumberTwoControl.setValidators(null);
+          predioNumberTwoControl.setValidators(null);
+          sectorTwoControl.setValidators(null);
+          floorTwoControl.setValidators(null);
+          hallNumberTwoControl.setValidators(null);
+          
+          localNumberTriControl.setValidators(null);
+          predioNumberTriControl.setValidators(null);
+          sectorTriControl.setValidators(null);
+          floorTriControl.setValidators(null);
+          hallNumberTriControl.setValidators(null);
+        }
+        if (numberLocals === '2') {
+          localNumberTwoControl.setValidators([Validators.required]);
+          predioNumberTwoControl.setValidators([Validators.required]);
+          sectorTwoControl.setValidators([Validators.required]);
+          floorTwoControl.setValidators([Validators.required]);
+          hallNumberTwoControl.setValidators([Validators.required]);
+
+          localNumberTriControl.setValidators(null);
+          predioNumberTriControl.setValidators(null);
+          sectorTriControl.setValidators(null);
+          floorTriControl.setValidators(null);
+          hallNumberTriControl.setValidators(null);
+        }
+        if (numberLocals === '3' ) {
+          localNumberTwoControl.setValidators([Validators.required]);
+          predioNumberTwoControl.setValidators([Validators.required]);
+          sectorTwoControl.setValidators([Validators.required]);
+          floorTwoControl.setValidators([Validators.required]);
+          hallNumberTwoControl.setValidators([Validators.required]);
+          
+          localNumberTriControl.setValidators([Validators.required]);
+          predioNumberTriControl.setValidators([Validators.required]);
+          sectorTriControl.setValidators([Validators.required]);
+          floorTriControl.setValidators([Validators.required]);
+          hallNumberTriControl.setValidators([Validators.required]);
+        }
+        localNumberTwoControl.updateValueAndValidity;
+        predioNumberTwoControl.updateValueAndValidity;
+        sectorTwoControl.updateValueAndValidity;
+        floorTwoControl.updateValueAndValidity;
+        hallNumberTwoControl.updateValueAndValidity;
+        
+        localNumberTriControl.updateValueAndValidity;
+        predioNumberTriControl.updateValueAndValidity;
+        sectorTriControl.updateValueAndValidity;
+        floorTriControl.updateValueAndValidity;
+        hallNumberTriControl.updateValueAndValidity;
+      })
+  }
+
+  setTributaryValidator() {
+    const taxRucControl = this.dataForm.get('taxNumberRuc');
+    const taxRiseControl = this.dataForm.get('taxNumberRise');
+    const keepAccountingControl = this.dataForm.get('keepAccounting');
+
+    this.dataForm.get('taxType').valueChanges
+      .subscribe(taxType => {
+        if (taxType === 'ruc') {
+          taxRucControl.setValidators([Validators.required, Validators.min(100000000000), Validators.max(9999999999999), Validators.pattern('^(([0-1][0-9])|([2][0-4])|30)[0-9]{8}(([0][0][1]))')]);
+          taxRiseControl.setValidators(null);
+          keepAccountingControl.setValidators([Validators.required]);
+        }
+        if (taxType === 'rise') {
+          taxRucControl.setValidators(null);
+          taxRiseControl.setValidators([Validators.required, Validators.min(100000000), Validators.max(9999999999), Validators.pattern('^(([0-1][0-9])|([2][0-4])|30)[0-9]*')]);
+          keepAccountingControl.setValidators(null);
+        }
+        if (taxType === 'none') {
+          taxRucControl.setValidators(null);
+          taxRiseControl.setValidators(null);
+          keepAccountingControl.setValidators(null);
+        }
+        taxRiseControl.updateValueAndValidity();
+        taxRucControl.updateValueAndValidity();
+        keepAccountingControl.updateValueAndValidity();
+      })
+  }
+
+  setQualifiedValidator() {
+    const calificationControl = this.dataForm.get('craftmanCalification');
+
+    this.dataForm.get('qualifiedCraftman').valueChanges
+      .subscribe(qualifiedCraftman => {
+        if (qualifiedCraftman === 'true') {
+          calificationControl.setValidators([Validators.required]);
+        }
+        if (qualifiedCraftman === 'false') {
+          calificationControl.setValidators(null);
+        }
+        calificationControl.updateValueAndValidity();
+      })
+  }
+
+  setAllergyValidator() {
+    const allergicToControl = this.dataForm.get('allergicTo');
+
+    this.dataForm.get('allergy').valueChanges
+      .subscribe(allergy => {
+        if (allergy === 'true') {
+          allergicToControl.setValidators([Validators.required]);
+        }
+        if (allergy === 'false') {
+          allergicToControl.setValidators(null);
+        }
+        allergicToControl.updateValueAndValidity();
+      })
+  }
+
+  setConsumedValidator() {
+    const medicamentBeingConsumedControl = this.dataForm.get('medicamentBeingConsumed');
+
+    this.dataForm.get('consumingMedicine').valueChanges
+      .subscribe(consumingMedicine => {
+        if (consumingMedicine === 'true') {
+          medicamentBeingConsumedControl.setValidators([Validators.required]);
+        }
+        if (consumingMedicine === 'false') {
+          medicamentBeingConsumedControl.setValidators(null);
+        }
+        medicamentBeingConsumedControl.updateValueAndValidity();
+      })
+  }
+
+  setRetirementValidator() {
+    const retirementDetailsControl = this.dataForm.get('retirementDetails');
+
+    this.dataForm.get('retirement').valueChanges
+      .subscribe(retirement => {
+        if (retirement === 'true') {
+          retirementDetailsControl.setValidators([Validators.required]);
+        }
+        if (retirement === 'false') {
+          retirementDetailsControl.setValidators(null);
+        }
+        retirementDetailsControl.updateValueAndValidity();
+      })
+  }
+
+  setConadisValidator() {
+    const disabilityControl = this.dataForm.get('disability');
+    const disabilityPerControl = this.dataForm.get('disabilityPer');
+
+    this.dataForm.get('conadisLicense').valueChanges
+      .subscribe(conadisLicense => {
+        if (conadisLicense === 'true') {
+          disabilityControl.setValidators([Validators.required]);
+          disabilityPerControl.setValidators([Validators.required, Validators.pattern('^(([1-9])|([1-9][0-9]))')]);
+        }
+        if (conadisLicense === 'false') {
+          disabilityControl.setValidators(null);
+          disabilityPerControl.setValidators(null);
+        }
+        disabilityControl.updateValueAndValidity();
+        disabilityPerControl.updateValueAndValidity();
+      })
+  }
+
+  setPrivateValidator() {
+    const affiliatedToPrivateControl = this.dataForm.get('affiliatedToPrivate');
+
+    this.dataForm.get('affiliatedTo').valueChanges
+      .subscribe(affiliatedTo => {
+        if (affiliatedTo === 'true') {
+          affiliatedToPrivateControl.setValidators([Validators.required]);
+        }
+        if (affiliatedTo === 'false') {
+          affiliatedToPrivateControl.setValidators(null);
+        }
+        affiliatedToPrivateControl.updateValueAndValidity();
+      })
   }
 
   fileUpload(files: FileList) {
@@ -896,9 +1093,62 @@ export class MedicalComponent implements OnInit {
     this.isSubmitted = true;
     var taxNum: String;
     var products: {};
-    var numLocal: {};
-    var numPredio: {};
-    var licenseType: {};
+    var locals: { localNumber: String; predioNumber: String; sector: String; floor: String; hallNumber: String; }[];
+
+    if (this.dataForm.value.numberLocals == "1") {
+      locals = [
+        {
+          localNumber: this.dataForm.value.localNumberOne,
+          predioNumber: this.dataForm.value.predioNumberOne,
+          sector: this.dataForm.value.sectorOne,
+          floor: this.dataForm.value.floorOne,
+          hallNumber: this.dataForm.value.hallNumberOne.toUpperCase()
+        }
+      ]
+    }
+    else if (this.dataForm.value.numberLocals == "2") {
+      locals = [
+        {
+          localNumber: this.dataForm.value.localNumberOne,
+          predioNumber: this.dataForm.value.predioNumberOne,
+          sector: this.dataForm.value.sectorOne,
+          floor: this.dataForm.value.floorOne,
+          hallNumber: this.dataForm.value.hallNumberOne.toUpperCase()
+        },
+        {
+          localNumber: this.dataForm.value.localNumberTwo,
+          predioNumber: this.dataForm.value.predioNumberTwo,
+          sector: this.dataForm.value.sectorTwo,
+          floor: this.dataForm.value.floorTwo,
+          hallNumber: this.dataForm.value.hallNumberTwo.toUpperCase()
+        }
+      ]
+    }
+    else if (this.dataForm.value.numberLocals == "3") {
+      locals = [
+        {
+          localNumber: this.dataForm.value.localNumberOne,
+          predioNumber: this.dataForm.value.predioNumberOne,
+          sector: this.dataForm.value.sectorOne,
+          floor: this.dataForm.value.floorOne,
+          hallNumber: this.dataForm.value.hallNumberOne.toUpperCase()
+        },
+        {
+          localNumber: this.dataForm.value.localNumberTwo,
+          predioNumber: this.dataForm.value.predioNumberTwo,
+          sector: this.dataForm.value.sectorTwo,
+          floor: this.dataForm.value.floorTwo,
+          hallNumber: this.dataForm.value.hallNumberTwo.toUpperCase()
+        },
+        {
+          localNumber: this.dataForm.value.localNumberTri,
+          predioNumber: this.dataForm.value.predioNumberTri,
+          sector: this.dataForm.value.sectorTri,
+          floor: this.dataForm.value.floorTri,
+          hallNumber: this.dataForm.value.hallNumberTri.toUpperCase()
+        }
+      ]
+    }
 
     if (this.dataForm.value.taxType == "ruc") {
       taxNum = this.dataForm.value.taxNumberRuc;
@@ -945,46 +1195,6 @@ export class MedicalComponent implements OnInit {
         "5": this.dataForm.value.productsBeingSoldQui
       }
     }
-
-    if (this.dataForm.value.numberLocals == '1') {
-      numLocal = {
-        "1": this.dataForm.value.localNumber
-      }
-      numPredio = {
-        "1": this.dataForm.value.predioNumber
-      }
-    }
-
-    else if (this.dataForm.value.numberLocals == '2') {
-      numLocal = {
-        "1": this.dataForm.value.localNumber,
-        "2": this.dataForm.value.localNumberTwo
-      }
-      numPredio = {
-        "1": this.dataForm.value.predioNumber,
-        "2": this.dataForm.value.predioNumberTwo
-      }
-    }
-    
-    else if (this.dataForm.value.numberLocals == '3') {
-      numLocal = {
-        "1": this.dataForm.value.localNumber,
-        "2": this.dataForm.value.localNumberTwo,
-        "3": this.dataForm.value.localNumberTri
-      }
-      numPredio = {
-        "1": this.dataForm.value.predioNumber,
-        "2": this.dataForm.value.predioNumberTwo,
-        "3": this.dataForm.value.predioNumberTri
-      }
-    }
-
-    if (this.dataForm.value.conadisLicense == "true") {
-      licenseType = {
-        "type": this.dataForm.value.disability,
-        "percentage": this.dataForm.value.disabilityPer
-      }
-    }
     
     let tributary: Tributary = {
       taxType: this.dataForm.value.taxType,
@@ -997,16 +1207,12 @@ export class MedicalComponent implements OnInit {
      businessName: this.dataForm.value.businessName,
      socialReason: this.dataForm.value.socialReason,
      productsBeingSold: JSON.stringify(products),
-     localNumber: JSON.stringify(numLocal),
-     predioNumber: JSON.stringify(numPredio),
-     sector: this.dataForm.value.sector,
-     floor: this.dataForm.value.floor,
-     hallNumber: this.dataForm.value.hallNumber.toUpperCase(),
-     originOfProducts: this.dataForm.value.originOfProducts,
      numberLocals: this.dataForm.value.numberLocals,
+     originOfProducts: this.dataForm.value.originOfProducts,
      qualifiedCraftman: this.dataForm.value.qualifiedCraftman,
      craftmanCalification: this.dataForm.value.craftmanCalification,
-     sellerType: this.dataForm.value.sellerType
+     sellerType: this.dataForm.value.sellerType,
+     locals: locals 
     };
 
     let medical: Medical = {
@@ -1020,9 +1226,10 @@ export class MedicalComponent implements OnInit {
      affiliatedToPrivate: this.dataForm.value.affiliatedToPrivate,
      affiliatedTo: this.dataForm.value.affiliatedTo,
      conadisLicense: this.dataForm.value.conadisLicense,
-     conadisLicenseType: JSON.stringify(licenseType),
+     conadisLicenseType: this.dataForm.value.disability,
      retirement: this.dataForm.value.retirement,
-     retirementDetails: this.dataForm.value.retirementDetails
+     retirementDetails: this.dataForm.value.retirementDetails,
+     conadisPercentage: this.dataForm.value.disabilityPer
     };
 
     let personal: Personal = {

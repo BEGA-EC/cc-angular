@@ -399,3 +399,6 @@
         </form>
     </div>
 </div>
+<div id="preloader" *ngIf="_loadingService.loading$ | async">
+  <div id="loader"></div>
+</div>

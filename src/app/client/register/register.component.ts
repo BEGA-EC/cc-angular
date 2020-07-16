@@ -44,7 +44,6 @@ export class RegisterComponent implements OnInit {
       return false;
     } else {
       let email = this.registerForm.value.email;
-      console.log(`Email: ${email}`)
       this._userService.register(email);
     }
   }

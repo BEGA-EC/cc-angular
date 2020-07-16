@@ -11,5 +11,6 @@ export interface Medical {
     conadisLicense?: Boolean,
     conadisLicenseType?: String,
     retirement?: Boolean,
-    retirementDetails?: String
+    retirementDetails?: String,
+    conadisPercentage?: Number
 }

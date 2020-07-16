@@ -49,7 +49,7 @@ import {Directive} from '@angular/core';
         else if (checkDigit(control.value)) {
           return null;
         }
-        return {idValidator: 'Documento inválido PENE.'};
+        return {idValidator: 'Documento inválido.'};
 
       }
 }

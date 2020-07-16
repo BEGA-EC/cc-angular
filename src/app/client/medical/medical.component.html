@@ -213,9 +213,9 @@
         </div>
         <div class="form-group p-3" *ngIf="taxType == 'ruc'">
             <label>RUC
-                <input type="text" appOnlynumber class="form-control" name="taxNumberRuc" [(ngModel)]="taxNumberRuc" formControlName="taxNumberRuc" minlength="12" maxlength="13" idValidator requerid>
+                <input type="text" appOnlynumber class="form-control" name="taxNumberRuc" formControlName="taxNumberRuc" minlength="12" maxlength="13" idValidator>
             </label>
-            <small *ngIf="isSubmitted && !taxNumberRuc">
+            <small *ngIf="isSubmitted && errorControl.taxNumberRuc.errors?.required">
                 Complete este campo, por favor.
             </small>
             <small *ngIf="isSubmitted && errorControl.taxNumberRuc.errors?.min">
@@ -233,9 +233,9 @@
         </div>
         <div class="form-group p-3" *ngIf="taxType == 'rise'">
             <label>RISE
-                <input type="text" appOnlynumber class="form-control" name="taxNumberRise" [(ngModel)]="taxNumberRise" formControlName="taxNumberRise" minlength="9" maxlength="10" idValidator requerid>
+                <input type="text" appOnlynumber class="form-control" name="taxNumberRise" formControlName="taxNumberRise" minlength="9" maxlength="10" idValidator>
             </label>
-            <small *ngIf="isSubmitted && !taxNumberRise">
+            <small *ngIf="isSubmitted && errorControl.taxNumberRise.errors?.required">
                 Complete este campo, por favor.
             </small>
             <small *ngIf="isSubmitted && errorControl.taxNumberRise.errors?.min">
@@ -269,23 +269,23 @@
         <div class="form-group p-3 w-100">
             <h4>En su negocio, usted es:</h4>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="personType" formControlName="personType" id="CBa" value="owner">
+                <input class="form-check-input" type="radio" name="personType" formControlName="personType" id="CBa" value="Propietario">
                 <label class="form-check-label" for="CBa">Propietario</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="personType" formControlName="personType" id="CBe" value="lessee">
+                <input class="form-check-input" type="radio" name="personType" formControlName="personType" id="CBe" value="Arrendatario">
                 <label class="form-check-label" for="CBe">Arrendatario</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="personType" formControlName="personType" id="CBi" value="possessor">
+                <input class="form-check-input" type="radio" name="personType" formControlName="personType" id="CBi" value="Posecionario">
                 <label class="form-check-label" for="CBi">Posecionario</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="personType" formControlName="personType" id="CB4" value="borrower">
+                <input class="form-check-input" type="radio" name="personType" formControlName="personType" id="CB4" value="Comodatario">
                 <label class="form-check-label" for="CB4">Comodatario</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="personType" formControlName="personType" id="CB5" value="attorney">
+                <input class="form-check-input" type="radio" name="personType" formControlName="personType" id="CB5" value="Apoderado">
                 <label class="form-check-label" for="CB5">Apoderado</label>
               </div>
               <small *ngIf="isSubmitted && errorControl.personType.errors?.required">
@@ -464,6 +464,9 @@
                     <option value="Tungurahua">Tungurahua</option>
                     <option value="12 de Febrero">12 de Febrero</option>
                 </select>
+                <small *ngIf="isSubmitted && errorControl.sectorTwo.errors?.required">
+                    Seleccione uno.
+                </small>
             </label>
             <label *ngIf="numberLocals == '3'">Asociación del tercer local
                 <select class="form-control" name="sectorTri" formControlName="sectorTri">
@@ -478,6 +481,9 @@
                     <option value="Tungurahua">Tungurahua</option>
                     <option value="12 de Febrero">12 de Febrero</option>
                 </select>
+                <small *ngIf="isSubmitted && errorControl.sectorTri.errors?.required">
+                    Seleccione uno.
+                </small>
             </label>
         </div>
         <div *ngIf="numberLocals" class="form-group p-3">
@@ -489,9 +495,15 @@
             </label>
             <label *ngIf="numberLocals == '2' || numberLocals == '3'">Número de Local
                 <input type="text" appOnlynumber class="form-control" name="localNumberTwo" formControlName="localNumberTwo" placeholder="Número del segundo local">
+                <small *ngIf="isSubmitted && errorControl.localNumberTwo.errors?.required">
+                    El número del local es necesario.
+                </small>
             </label>
             <label *ngIf="numberLocals == '3'">Número de Local
                 <input type="text" appOnlynumber class="form-control" name="localNumberTri" formControlName="localNumberTri" placeholder="Número del tercer local">
+                <small *ngIf="isSubmitted && errorControl.localNumberTri.errors?.required">
+                    El número del local es necesario.
+                </small>
             </label>
         </div>
         <div *ngIf="numberLocals" class="form-group p-3">
@@ -503,9 +515,15 @@
             </label>
             <label *ngIf="numberLocals == '2' || numberLocals == '3'">Número de Predio
                 <input type="text" appOnlynumber class="form-control" placeholder="Segundo Local" name="predioNumberTwo" formControlName="predioNumberTwo">
+                <small *ngIf="isSubmitted && errorControl.predioNumberTwo.errors?.required">
+                    El predio es necesario.
+                </small>
             </label>
             <label *ngIf="numberLocals == '3'">Número de Predio
                 <input type="text" appOnlynumber class="form-control" placeholder="Tercer Local" name="predioNumberTri" formControlName="predioNumberTri">
+                <small *ngIf="isSubmitted && errorControl.predioNumberTri.errors?.required">
+                    El predio es necesario.
+                </small>
             </label>
         </div>
         <div *ngIf="numberLocals" class="form-group p-3">
@@ -516,49 +534,73 @@
                 </small>
                 <small *ngIf="isSubmitted && errorControl.hallNumberOne.errors?.pattern">
                     Debe ingresar el número seguido de la letra.
-                    </small>
+                </small>
             </label>
             <label *ngIf="numberLocals == '2' || numberLocals == '3'">Número de Pasillo
                 <input type="text" class="form-control" name="hallNumberTwo" formControlName="hallNumberTwo" placeholder="Número de Pasillo del segundo local">
+                <small *ngIf="isSubmitted && errorControl.hallNumberTwo.errors?.required">
+                    El número del pasillo es necesario.
+                </small>
+                <small *ngIf="isSubmitted && errorControl.hallNumberTwo.errors?.pattern">
+                    Debe ingresar el número seguido de la letra.
+                </small>
             </label>
             <label *ngIf="numberLocals == '3'">Número de Pasillo
                 <input type="text" class="form-control" name="hallNumberTri" formControlName="hallNumberTri" placeholder="Número de Pasillo del tercer local">
+                <small *ngIf="isSubmitted && errorControl.hallNumberTri.errors?.required">
+                    El número del pasillo es necesario.
+                </small>
+                <small *ngIf="isSubmitted && errorControl.hallNumberTri.errors?.pattern">
+                    Debe ingresar el número seguido de la letra.
+                </small>
             </label>
         </div>
         <div *ngIf="numberLocals" class="form-group p-3">
             <h4>Planta del primer local</h4>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="floorOne" formControlName="floorOne" id="CBalta" value="top">
-                <label class="form-check-label" for="CBalta">Planta Baja</label>
+                <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="floorOne" formControlName="floorOne" value="top">
+                Planta Baja</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="floorOne" formControlName="floorOne" id="CBbaja" value="bottom">
-                <label class="form-check-label" for="CBbaja">Planta Alta</label>
+                <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="floorOne" formControlName="floorOne" value="bottom">
+                Planta Alta</label>
               </div>
-              <small *ngIf="isSubmitted && errorControl.floorOne.errors?.required">
-                Seleccione uno.
-            </small>
+                <small *ngIf="isSubmitted && errorControl.floorOne.errors?.required">
+                    Seleccione uno.
+                </small>
             <div *ngIf="numberLocals == '2' || numberLocals == '3'">
                 <h4>Planta del segundo local</h4>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="floorTwo" formControlName="floorTwo" id="CBalta" value="top">
-                    <label class="form-check-label" for="CBalta">Planta Baja</label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="floorTwo" formControlName="floorTwo" value="top">
+                    Planta Baja</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="floorTwo" formControlName="floorTwo" id="CBbaja" value="bottom">
-                    <label class="form-check-label" for="CBbaja">Planta Alta</label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="floorTwo" formControlName="floorTwo" value="bottom">
+                    Planta Alta</label>
                   </div>
+                  <small *ngIf="isSubmitted && errorControl.floorTwo.errors?.required">
+                    Seleccione uno.
+                </small>
             </div>
             <div *ngIf="numberLocals == '3'">
                 <h4>Planta del tercer local</h4>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="floorTri" formControlName="floorTri" id="CBalta" value="top">
-                    <label class="form-check-label" for="CBalta">Planta Baja</label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="floorTri" formControlName="floorTri" value="top">
+                    Planta Baja</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="floorTri" formControlName="floorTri" id="CBbaja" value="bottom">
-                    <label class="form-check-label" for="CBbaja">Planta Alta</label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="floorTri" formControlName="floorTri" value="bottom">
+                    Planta Alta</label>
                   </div>
+                  <small *ngIf="isSubmitted && errorControl.floorTri.errors?.required">
+                    Seleccione uno.
+                </small>
             </div>
         </div>
         <div class="form-group p-3">
@@ -589,9 +631,9 @@
         </div>
         <div class="form-group p-3" *ngIf="qualifiedCraftman == 'true'">
             <label>Número de Calificación Artesanal
-                <input type="text" appOnlynumber class="form-control" name="craftmanCalification" [(ngModel)]="craftmanCalification" formControlName="craftmanCalification">
-                <small *ngIf="isSubmitted && !craftmanCalification">
-                    Rellene este campo, por favor.
+                <input type="text" appOnlynumber class="form-control" name="craftmanCalification" formControlName="craftmanCalification">
+                <small *ngIf="isSubmitted && errorControl.craftmanCalification.errors?.required">
+                    Complete este campo.
                 </small>
             </label>
         </div>
@@ -657,8 +699,8 @@
         </div>
         <div class="form-group p-3" *ngIf="allergy == 'true'">
             <label>Ingrese el medicamento
-                <input type="text" class="form-control" name="allergicTo" [(ngModel)]="allergicTo" formControlName="allergicTo">
-                <small *ngIf="isSubmitted && !allergicTo">
+                <input type="text" class="form-control" name="allergicTo" formControlName="allergicTo">
+                <small *ngIf="isSubmitted && errorControl.allergicTo.errors?.required">
                     Complete este campo, por favor.
                 </small>
             </label>
@@ -680,8 +722,8 @@
         </div>
         <div class="form-group p-3" *ngIf="consumingMedicine == 'true'">
             <label>Ingrese el medicamento
-                <input type="text" class="form-control" name="medicamentBeingConsumed" [(ngModel)]="medicamentBeingConsumed" formControlName="medicamentBeingConsumed">
-                <small *ngIf="isSubmitted && !medicamentBeingConsumed">
+                <input type="text" class="form-control" name="medicamentBeingConsumed" formControlName="medicamentBeingConsumed">
+                <small *ngIf="isSubmitted && errorControl.medicamentBeingConsumed.errors?.required">
                     Complete este campo, por favor.
                 </small>
             </label>
@@ -704,12 +746,15 @@
                 </select>
                 <small *ngIf="isSubmitted && errorControl.affiliatedTo.errors?.required">
                     Complete este campo, por favor.
-                  </small>
+                </small>
             </label>
         </div>
         <div class="form-group p-3" *ngIf="affiliatedTo == 'private'">
             <label>Ingrese su seguro privado
                 <input type="text" class="form-control" name="affiliatedToPrivate" formControlName="affiliatedToPrivate">
+                <small *ngIf="isSubmitted && errorControl.affiliatedToPrivate.errors?.required">
+                    Complete este campo, por favor.
+                </small>
             </label>
         </div>
         <div class="form-group p-3">
@@ -728,16 +773,16 @@
         </div>
         <div class="form-group p-3" *ngIf="conadisLicense == 'true'">
             <label>Discapacidad
-                <input type="text" class="form-control" name="disability" [(ngModel)]="disability" formControlName="disability">
-                <small *ngIf="isSubmitted && !disability">
+                <input type="text" class="form-control" name="disability" formControlName="disability">
+                <small *ngIf="isSubmitted && errorControl.disability.errors?.required">
                     Este campo es necesario.
                 </small>
             </label>
         </div>
         <div class="form-group p-3" *ngIf="conadisLicense == 'true'">
             <label>Porcentaje de discapacidad
-                <input type="text" appOnlynumber class="form-control" name="disabilityPer" [(ngModel)]="disabilityPer" formControlName="disabilityPer" maxlength="2">
-                <small *ngIf="isSubmitted && !disabilityPer">
+                <input type="number" min="1" max="99" maxlength="2" class="form-control" name="disabilityPer" formControlName="disabilityPer" maxlength="2">
+                <small *ngIf="isSubmitted && errorControl.disabilityPer.errors?.required">
                     Este campo es necesario.
                 </small>
                 <small *ngIf="isSubmitted && errorControl.disabilityPer.errors?.pattern">
@@ -758,12 +803,12 @@
         </div>
         <div class="form-group p-3" *ngIf="retirement == 'true'">
             <label>Tipo de Jubilación
-                <select class="form-control" name="retirementDetails" [(ngModel)]="retirementDetails" formControlName="retirementDetails">
+                <select class="form-control" name="retirementDetails" formControlName="retirementDetails">
                     <option value="IESS">IESS</option>
                     <option value="ISFA">ISFA</option>
                 </select>
             </label>
-            <small *ngIf="isSubmitted && !retirementDetails">
+            <small *ngIf="isSubmitted && errorControl.retirementDetails.errors?.required">
                 Complete este campo, por favor.
             </small>
         </div>
@@ -771,4 +816,7 @@
         <br><br>
       </form>
     </div>
+</div>
+<div id="preloader" *ngIf="_loadingService.loading$ | async">
+    <div id="loader"></div>
 </div>

@@ -39,11 +39,26 @@ export class FormService {
           confirmButtonText: 'Aceptar'
         });
       }, err => {
-        console.log(err);
-        if ( err.status == 400) {
+        if (err.error.description === "Tax information is already in use.") {
           Swal.fire({
             title: 'Oh no',
-            html: `Parece que algo ha salido mal. ¿Ingresaste bien los datos?<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
+            html: `El número de RUC/RISE que has ingresado, ya se encuentra en uso.<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        else if (err.error.description === "Id Number already in use") {
+          Swal.fire({
+            title: 'Oh no',
+            html: `El número de cédula que has ingresado, ya se encuentra en uso.<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+        else if (err.error.description === "A local with that predio number or local number already exists") {
+          Swal.fire({
+            title: 'Oh no',
+            html: `Has ingresado un número de local o un número de predio que ya se encuentra en uso.<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
             icon: 'error',
             confirmButtonText: 'Aceptar'
           });

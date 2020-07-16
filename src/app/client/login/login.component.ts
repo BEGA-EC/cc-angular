@@ -47,7 +47,6 @@ export class LoginComponent implements OnInit {
       this._userService.login(user).subscribe(correcto =>{
         this.router.navigate(['/client/medical/']);
       }, err => {
-        console.log(err);
           if (err.status == 400) {
             Swal.fire({
               title: '¡Intento fallido!',
