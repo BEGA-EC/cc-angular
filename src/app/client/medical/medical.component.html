@@ -422,6 +422,18 @@
             </label>
         </div>
         <div class="form-group p-3">
+            <label>Procedencia del Producto
+                <select class="form-control" name="originOfProducts" formControlName="originOfProducts">
+                    <option value="national">Nacional</option>
+                    <option value="international">Internacional</option>
+                    <option value="both">Ambas</option>
+                </select>
+                <small *ngIf="isSubmitted && errorControl.originOfProducts.errors?.required">
+                    Seleccione una.
+                </small>
+            </label>
+        </div>
+        <div class="form-group p-3">
             <label>Cantidad de Locales
                 <select class="form-control" name="numberLocals" [(ngModel)]="numberLocals" formControlName="numberLocals">
                     <option value="1">1 local</option>
@@ -602,18 +614,6 @@
                     Seleccione uno.
                 </small>
             </div>
-        </div>
-        <div class="form-group p-3">
-            <label>Procedencia del Producto
-                <select class="form-control" name="originOfProducts" formControlName="originOfProducts">
-                    <option value="national">Nacional</option>
-                    <option value="international">Internacional</option>
-                    <option value="both">Ambas</option>
-                </select>
-                <small *ngIf="isSubmitted && errorControl.originOfProducts.errors?.required">
-                    Seleccione una.
-                </small>
-            </label>
         </div>
         <div class="form-group p-3">
             <h4>¿Es Artesano Calificado? </h4>
