@@ -53,16 +53,16 @@
                 <small *ngIf="isSubmitted && errorControl.idNumber.errors?.required">
                     La cédula es necesaria.
                 </small>
-                <small *ngIf="isSubmitted && errorControl.idNumber.errors?.min">
+                <small *ngIf="isSubmitted && errorControl.idNumber.errors?.minLength">
                     Debe ingresar 10 números.
                 </small>
                 <small *ngIf="isSubmitted && errorControl.idNumber.errors?.max">
                     Debe ingresar 10 números.
                 </small>
-                <small *ngIf="isSubmitted && !errorControl.idNumber.errors?.min && errorControl.idNumber.errors?.idValidator">
+                <small *ngIf="isSubmitted && !errorControl.idNumber.errors?.minLength && errorControl.idNumber.errors?.idValidator">
                     {{errorControl.idNumber.errors?.idValidator}}
                 </small>
-                <small *ngIf="isSubmitted && !errorControl.idNumber.errors?.min && errorControl.idNumber.errors?.pattern">
+                <small *ngIf="isSubmitted && !errorControl.idNumber.errors?.minLength && errorControl.idNumber.errors?.pattern">
                     Documento inválido.
                 </small>
             </label>
@@ -73,7 +73,7 @@
                 <small *ngIf="isSubmitted && errorControl.phoneNumber.errors?.required">
                     El teléfono convencional es necesario.
                 </small>
-                <small *ngIf="isSubmitted && errorControl.phoneNumber.errors?.min">
+                <small *ngIf="isSubmitted && errorControl.phoneNumber.errors?.minLength">
                     Debe ingresar 7 números mínimo.
                 </small>
                 <small *ngIf="isSubmitted && errorControl.phoneNumber.errors?.max">
@@ -87,7 +87,7 @@
                 <small *ngIf="isSubmitted && errorControl.cellphoneNumber.errors?.required">
                     El teléfono celular es necesario.
                 </small>
-                <small *ngIf="isSubmitted && errorControl.cellphoneNumber.errors?.min">
+                <small *ngIf="isSubmitted && errorControl.cellphoneNumber.errors?.minLength">
                     Debe ingresar 10 números.
                 </small>
                 <small *ngIf="isSubmitted && errorControl.cellphoneNumber.errors?.max">
@@ -101,7 +101,7 @@
                 <small *ngIf="isSubmitted && errorControl.emergencyPhone.errors?.required">
                     El número de emergencia es necesario.
                 </small>
-                <small *ngIf="isSubmitted && errorControl.emergencyPhone.errors?.min">
+                <small *ngIf="isSubmitted && errorControl.emergencyPhone.errors?.minLength">
                     Debe ingresar 7 números mínimo.
                 </small>
                 <small *ngIf="isSubmitted && errorControl.emergencyPhone.errors?.max">
@@ -218,16 +218,16 @@
             <small *ngIf="isSubmitted && errorControl.taxNumberRuc.errors?.required">
                 Complete este campo, por favor.
             </small>
-            <small *ngIf="isSubmitted && errorControl.taxNumberRuc.errors?.min">
+            <small *ngIf="isSubmitted && errorControl.taxNumberRuc.errors?.minLength">
                 Debe ingresar 13 números.
             </small>
             <small *ngIf="isSubmitted && errorControl.taxNumberRuc.errors?.max">
                 Debe ingresar 13 números.
             </small>
-            <small *ngIf="isSubmitted && !errorControl.taxNumberRuc.errors?.min && errorControl.taxNumberRuc.errors?.idValidator">
+            <small *ngIf="isSubmitted && !errorControl.taxNumberRuc.errors?.minLength && errorControl.taxNumberRuc.errors?.idValidator">
                 {{errorControl.taxNumberRuc.errors?.idValidator}}
             </small>
-            <small *ngIf="isSubmitted && !errorControl.taxNumberRuc.errors?.min && errorControl.taxNumberRuc.errors?.pattern">
+            <small *ngIf="isSubmitted && !errorControl.taxNumberRuc.errors?.minLength && errorControl.taxNumberRuc.errors?.pattern">
                 Documento inválido.
             </small>
         </div>
@@ -238,16 +238,16 @@
             <small *ngIf="isSubmitted && errorControl.taxNumberRise.errors?.required">
                 Complete este campo, por favor.
             </small>
-            <small *ngIf="isSubmitted && errorControl.taxNumberRise.errors?.min">
+            <small *ngIf="isSubmitted && errorControl.taxNumberRise.errors?.minLength">
                 Debe ingresar 13 números.
             </small>
             <small *ngIf="isSubmitted && errorControl.taxNumberRise.errors?.max">
                 Debe ingresar 13 números.
             </small>
-            <small *ngIf="isSubmitted && !errorControl.taxNumberRise.errors?.min && errorControl.taxNumberRise.errors?.idValidator">
+            <small *ngIf="isSubmitted && !errorControl.taxNumberRise.errors?.minLength && errorControl.taxNumberRise.errors?.idValidator">
                 {{errorControl.taxNumberRise.errors?.idValidator}}
             </small>
-            <small *ngIf="isSubmitted && !errorControl.taxNumberRise.errors?.min && errorControl.taxNumberRise.errors?.pattern">
+            <small *ngIf="isSubmitted && !errorControl.taxNumberRise.errors?.minLength && errorControl.taxNumberRise.errors?.pattern">
                 Documento inválido.
             </small>
         </div>

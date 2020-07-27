@@ -823,10 +823,10 @@ export class MedicalComponent implements OnInit {
       lastName: ['', [Validators.required]],
       gender: ['', [Validators.required]],
       dateOfBirth: ['', [Validators.required]],
-      idNumber: ['', [Validators.required, Validators.min(100000000), Validators.max(9999999999), Validators.pattern('^(([0-1][0-9])|([2][0-4])|30)[0-9]*')]],
-      phoneNumber: ['', [Validators.required, Validators.min(1000000), Validators.max(9999999999)]],
-      cellphoneNumber: ['', [Validators.required, Validators.min(100000000), Validators.max(9999999999)]],
-      emergencyPhone: ['', [Validators.required, Validators.min(1000000), Validators.max(9999999999)]],
+      idNumber: ['', [Validators.required, Validators.minLength(10), Validators.max(9999999999), Validators.pattern('^(([0-1][0-9])|([2][0-4])|30)[0-9]*')]],
+      phoneNumber: ['', [Validators.required, Validators.minLength(7), Validators.max(9999999999)]],
+      cellphoneNumber: ['', [Validators.required, Validators.minLength(8), Validators.max(9999999999)]],
+      emergencyPhone: ['', [Validators.required, Validators.minLength(7), Validators.max(9999999999)]],
       province: ['', [Validators.required]],
       canton: ['', [Validators.required]],
       city: ['', [Validators.required]],
@@ -947,13 +947,13 @@ export class MedicalComponent implements OnInit {
     this.dataForm.get('taxType').valueChanges
       .subscribe(taxType => {
         if (taxType === 'ruc') {
-          taxRucControl.setValidators([Validators.required, Validators.min(100000000000), Validators.max(9999999999999), Validators.pattern('^(([0-1][0-9])|([2][0-4])|30)[0-9]{8}(([0][0][1]))')]);
+          taxRucControl.setValidators([Validators.required, Validators.minLength(13), Validators.max(9999999999999), Validators.pattern('^(([0-1][0-9])|([2][0-4])|30)[0-9]{8}(([0][0][1]))')]);
           taxRiseControl.setValidators(null);
           keepAccountingControl.setValidators([Validators.required]);
         }
         if (taxType === 'rise') {
           taxRucControl.setValidators(null);
-          taxRiseControl.setValidators([Validators.required, Validators.min(100000000), Validators.max(9999999999), Validators.pattern('^(([0-1][0-9])|([2][0-4])|30)[0-9]*')]);
+          taxRiseControl.setValidators([Validators.required, Validators.minLength(10), Validators.max(9999999999), Validators.pattern('^(([0-1][0-9])|([2][0-4])|30)[0-9]*')]);
           keepAccountingControl.setValidators(null);
         }
         if (taxType === 'none') {
