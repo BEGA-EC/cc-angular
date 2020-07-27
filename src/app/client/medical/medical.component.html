@@ -540,7 +540,7 @@
         </div>
         <div *ngIf="numberLocals" class="form-group p-3">
             <label>Número de Pasillo
-                <input type="text" class="form-control" name="hallNumberOne" formControlName="hallNumberOne" placeholder="Número de Pasillo del primer local">
+                <input type="text" class="form-control" name="hallNumberOne" formControlName="hallNumberOne" placeholder="Número de Pasillo del primer local" placeholder="48A">
                 <small *ngIf="isSubmitted && errorControl.hallNumberOne.errors?.required">
                     El número del pasillo es necesario.
                 </small>
@@ -549,7 +549,7 @@
                 </small>
             </label>
             <label *ngIf="numberLocals == '2' || numberLocals == '3'">Número de Pasillo
-                <input type="text" class="form-control" name="hallNumberTwo" formControlName="hallNumberTwo" placeholder="Número de Pasillo del segundo local">
+                <input type="text" class="form-control" name="hallNumberTwo" formControlName="hallNumberTwo" placeholder="Número de Pasillo del segundo local" placeholder="11B">
                 <small *ngIf="isSubmitted && errorControl.hallNumberTwo.errors?.required">
                     El número del pasillo es necesario.
                 </small>
@@ -558,7 +558,7 @@
                 </small>
             </label>
             <label *ngIf="numberLocals == '3'">Número de Pasillo
-                <input type="text" class="form-control" name="hallNumberTri" formControlName="hallNumberTri" placeholder="Número de Pasillo del tercer local">
+                <input type="text" class="form-control" name="hallNumberTri" formControlName="hallNumberTri" placeholder="Número de Pasillo del tercer local" placeholder="7A">
                 <small *ngIf="isSubmitted && errorControl.hallNumberTri.errors?.required">
                     El número del pasillo es necesario.
                 </small>
