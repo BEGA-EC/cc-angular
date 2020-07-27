@@ -35,45 +35,45 @@ export class UserService {
     this.http.get(`${environment.endpoint}covid-poll/done`).subscribe((data: any) => {
       this.done = data.done;
     }, err => {
-      // if ( err.status == 403) {
-      //   Swal.fire({
-      //     title: '¡Alto!',
-      //     html: `Confirma tu correo electrónico antes de acceder.<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
-      //     icon: 'error',
-      //     confirmButtonText: 'Aceptar'
-      //   });
-      //   this.token = '';
-      //   this.expireAt = null;
-      //   localStorage.removeItem('token');
-      //   localStorage.removeItem('expireAt');
-      //   this.router.navigate(['/client/']);
-      //  }
-      //  else if ( err.status == 401) {
-      //   Swal.fire({
-      //     title: '¡Alto!',
-      //     html: `No tienes permisos de estar acá. Inicia sesión y confirma tu correo electrónico antes de acceder a este sitio.<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
-      //     icon: 'warning',
-      //     confirmButtonText: 'Aceptar'
-      //   });
-      //   this.token = '';
-      //   this.expireAt = null;
-      //   localStorage.removeItem('token');
-      //   localStorage.removeItem('expireAt');
-      //   this.router.navigate(['/client/']);
-      //  }
-      // else {
-      //   Swal.fire({
-      //     title: 'Vaya...',
-      //     html: `Algo ha ocurrido mal. ¡Notifica el error si se repite!<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
-      //     icon: 'error',
-      //     confirmButtonText: 'Aceptar'
-      //   });
-      //   this.token = '';
-      //   this.expireAt = null;
-      //   localStorage.removeItem('token');
-      //   localStorage.removeItem('expireAt');
-      //   this.router.navigate(['/client/']);
-      // }  
+      if ( err.status == 403) {
+        Swal.fire({
+          title: '¡Alto!',
+          html: `Confirma tu correo electrónico antes de acceder.<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+        this.token = '';
+        this.expireAt = null;
+        localStorage.removeItem('token');
+        localStorage.removeItem('expireAt');
+        this.router.navigate(['/client/']);
+       }
+       else if ( err.status == 401) {
+        Swal.fire({
+          title: '¡Alto!',
+          html: `No tienes permisos de estar acá. Inicia sesión y confirma tu correo electrónico antes de acceder a este sitio.<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
+          icon: 'warning',
+          confirmButtonText: 'Aceptar'
+        });
+        this.token = '';
+        this.expireAt = null;
+        localStorage.removeItem('token');
+        localStorage.removeItem('expireAt');
+        this.router.navigate(['/client/']);
+       }
+      else {
+        Swal.fire({
+          title: 'Vaya...',
+          html: `Algo ha ocurrido mal. ¡Notifica el error si se repite!<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+        this.token = '';
+        this.expireAt = null;
+        localStorage.removeItem('token');
+        localStorage.removeItem('expireAt');
+        this.router.navigate(['/client/']);
+      }  
     });
     if (this.done) {
       return true
