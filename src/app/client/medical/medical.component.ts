@@ -849,7 +849,7 @@ export class MedicalComponent implements OnInit {
       predioNumberOne: ['', [Validators.required]], predioNumberTwo: [''], predioNumberTri: [''],
       sectorOne: ['', [Validators.required]], sectorTwo: [''], sectorTri: [''],
       floorOne: ['', [Validators.required]], floorTwo: [''], floorTri: [''],
-      hallNumberOne: ['', [Validators.required, Validators.pattern('[0-9]{1,2}[a-bA-B]{1}$')]], hallNumberTwo: ['', [Validators.pattern('[0-9]{1,2}[a-bA-B]{1}$')]], hallNumberTri: ['', [Validators.pattern('[0-9]{1,2}[a-bA-B]{1}$')]],
+      hallNumberOne: ['', [Validators.required, Validators.pattern('[0-9]{1,2}[a-bA-B]{1}$')]], hallNumberTwo: [''], hallNumberTri: [''],
       originOfProducts: ['', [Validators.required]],
       qualifiedCraftman: ['', [Validators.required]],
       craftmanCalification: [''],
@@ -904,7 +904,7 @@ export class MedicalComponent implements OnInit {
           predioNumberTwoControl.setValidators([Validators.required]);
           sectorTwoControl.setValidators([Validators.required]);
           floorTwoControl.setValidators([Validators.required]);
-          hallNumberTwoControl.setValidators([Validators.required]);
+          hallNumberTwoControl.setValidators([Validators.required, Validators.pattern('[0-9]{1,2}[a-bA-B]{1}$')]);
 
           localNumberTriControl.setValidators(null);
           predioNumberTriControl.setValidators(null);
@@ -917,13 +917,13 @@ export class MedicalComponent implements OnInit {
           predioNumberTwoControl.setValidators([Validators.required]);
           sectorTwoControl.setValidators([Validators.required]);
           floorTwoControl.setValidators([Validators.required]);
-          hallNumberTwoControl.setValidators([Validators.required]);
+          hallNumberTwoControl.setValidators([Validators.required, Validators.pattern('[0-9]{1,2}[a-bA-B]{1}$')]);
           
           localNumberTriControl.setValidators([Validators.required]);
           predioNumberTriControl.setValidators([Validators.required]);
           sectorTriControl.setValidators([Validators.required]);
           floorTriControl.setValidators([Validators.required]);
-          hallNumberTriControl.setValidators([Validators.required]);
+          hallNumberTriControl.setValidators([Validators.required, Validators.pattern('[0-9]{1,2}[a-bA-B]{1}$')]);
         }
         localNumberTwoControl.updateValueAndValidity;
         predioNumberTwoControl.updateValueAndValidity;
