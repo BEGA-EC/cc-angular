@@ -10,12 +10,12 @@ import Swal from 'sweetalert2';
   providedIn: 'root'
 })
 export class CovidService {
-
-
+  
   constructor(public http: HttpClient, public router: Router) {}
 
   postCode(poll: Covid) {
-    let url = `${environment.endpoint}covid-poll`;
+    let id = localStorage.getItem('id');
+    let url = `${environment.endpoint}user/covid/${id}`;
     this.http.post(url, {poll}).subscribe((resp: boolean) => {
       this.router.navigate(['/client/dashboard']);
       Swal.fire({

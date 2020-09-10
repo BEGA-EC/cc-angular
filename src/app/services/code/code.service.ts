@@ -16,7 +16,7 @@ export class CodeService {
   
   postCode(code: string) {
     return new Promise(resolve => {
-      let url = `${environment.endpoint}user/confirmation-code`;
+      let url = `${environment.endpoint}user/code`;
       this.http.post(url, {code: code}).subscribe( (resp: any) => {
         Swal.fire({
           title: 'Genial',
@@ -32,6 +32,14 @@ export class CodeService {
             title: 'Oh no',
             html: `Parece que algo ha salido mal. El enlace es incorrecto.<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
             icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+          this.router.navigate(['/client/']);
+        } else if (err.status == 404) {
+          Swal.fire({
+            title: '¿Ha pasado algo?',
+            text: `Al parecer el servidor ha recibido un código inexistente. Quizás su cuenta ya esté confirmada`,
+            icon: 'warning',
             confirmButtonText: 'Aceptar'
           });
           this.router.navigate(['/client/']);

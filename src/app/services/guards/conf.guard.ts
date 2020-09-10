@@ -8,9 +8,6 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class ConfGuard implements CanActivate {
 
-    user: any;
-    done: any;
-
   constructor(
     public _userService: UserService,
     public router: Router,
@@ -18,10 +15,10 @@ export class ConfGuard implements CanActivate {
   ) { }
   canActivate() {
 
-    if ( !this._userService.inLog() ) {
+    if (this._userService.inForm()) {
         return true;
     } else {
-      this.router.navigate(['/client/dashboard']);
+      this.router.navigate(['/client/medical']);
       return false;
     }
   }

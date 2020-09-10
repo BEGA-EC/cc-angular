@@ -4,18 +4,18 @@
         <div class="form-group">
           <h2>Tus datos de Usuario</h2>
           <label for="emailInput">Correo</label>
-          <input type="email" class="form-control" id="emailInput" value="{{user.email}}" readonly>
+          <input type="email" class="form-control" id="emailInput" value="{{user?.email}}" readonly>
         </div>
         <div class="form-group">
           <label for="nameInput">Nombres</label>
-          <input type="text" class="form-control" id="nameInput" value="{{user.name}}" readonly>
+          <input type="text" class="form-control" id="nameInput" value="{{user?.address[0].firstname}}" readonly>
         </div>
         <div class="form-group">
             <label for="lastInput">Apellidos</label>
-            <input type="text" class="form-control" id="lastInput" value="{{user.lastName}}" readonly>
+            <input type="text" class="form-control" id="lastInput" value="{{user?.address[0].lastname}}" readonly>
           </div>
           <label style="width: 100%;">Imagen de Perfil</label>
-          <img src="{{user.avatar}}">
+          <img src="https://cdn.ccmna.net/{{user?.avatar}}">
           <p>¡Acá están tus datos! Cuando el panel de administración esté completo, acá podrás manejar tu tienda virtual.</p>
           <button routerLink="/client" (click)="_userService.logout()" class="btn btn-danger">Cerrar Sesión</button>
       </form>

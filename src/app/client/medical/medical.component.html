@@ -631,7 +631,7 @@
         </div>
         <div class="form-group p-3" *ngIf="qualifiedCraftman == 'true'">
             <label>Número de Calificación Artesanal
-                <input type="text" appOnlynumber class="form-control" name="craftmanCalification" formControlName="craftmanCalification">
+                <input type="number" appOnlynumber class="form-control" name="craftmanCalification" formControlName="craftmanCalification">
                 <small *ngIf="isSubmitted && errorControl.craftmanCalification.errors?.required">
                     Complete este campo.
                 </small>
@@ -640,15 +640,15 @@
         <div class="form-group p-3">
             <h4>Seleccione una </h4>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="sellerType" formControlName="sellerType" id="CBfab" value="maker" checked>
+                <input class="form-check-input" type="radio" name="sellerType" formControlName="sellerType" id="CBfab" value="Fabricante" checked>
                 <label class="form-check-label" for="CBfab">Fabricante</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="sellerType" formControlName="sellerType" id="CBcomer" value="marketer">
+                <input class="form-check-input" type="radio" name="sellerType" formControlName="sellerType" id="CBcomer" value="Comercializador">
                 <label class="form-check-label" for="CBcomer">Comercializador</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="sellerType" formControlName="sellerType" id="CBambas" value="both">
+                <input class="form-check-input" type="radio" name="sellerType" formControlName="sellerType" id="CBambas" value="Ambas">
                 <label class="form-check-label" for="CBambas">Ambas</label>
               </div>
               <small *ngIf="isSubmitted && errorControl.sellerType.errors?.required">
@@ -742,14 +742,14 @@
                 <select class="form-control" name="affiliatedTo" formControlName="affiliatedTo" [(ngModel)]="affiliatedTo">
                     <option value="IESS">IESS</option>
                     <option value="ISFA">ISFA</option>
-                    <option value="private">Privado</option>
+                    <option value="Privado">Privado</option>
                 </select>
                 <small *ngIf="isSubmitted && errorControl.affiliatedTo.errors?.required">
                     Complete este campo, por favor.
                 </small>
             </label>
         </div>
-        <div class="form-group p-3" *ngIf="affiliatedTo == 'private'">
+        <div class="form-group p-3" *ngIf="affiliatedTo == 'Privado'">
             <label>Ingrese su seguro privado
                 <input type="text" class="form-control" name="affiliatedToPrivate" formControlName="affiliatedToPrivate">
                 <small *ngIf="isSubmitted && errorControl.affiliatedToPrivate.errors?.required">

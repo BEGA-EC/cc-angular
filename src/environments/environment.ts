@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  endpoint: "https://admin.ccmna.com.ec/api/",
+  endpoint: "http://localhost:3002/",
   production: false
 };
 

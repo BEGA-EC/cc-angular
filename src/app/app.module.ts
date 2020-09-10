@@ -8,8 +8,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './http-interceptor/login-interceptor';
 import { AdminGuard } from './services/guards/admin.guard';
 import { ConfGuard } from './services/guards/conf.guard';
-import { LoadingInterceptor } from './loading-interceptor/loading-interceptor';
 import { CovidGuard } from './services/guards/covid.guard';
+import { LoadingInterceptor } from './loading-interceptor/loading-interceptor';
 
 @NgModule({
   declarations: [

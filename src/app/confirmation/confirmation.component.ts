@@ -21,7 +21,6 @@ export class ConfirmationComponent implements OnInit {
     public _codeService: CodeService,
     public router: Router,
     public activatedRoute: ActivatedRoute) { 
-      console.log('Called Constructor');
       this.activatedRoute.queryParams.subscribe(params => {
       this.code = params['code'];
       this._codeService.postCode(this.code);

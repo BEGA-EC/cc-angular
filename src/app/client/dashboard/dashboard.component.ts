@@ -13,13 +13,14 @@ export class DashboardComponent implements OnInit {
 
   user: any;
 
-  constructor(public http: HttpClient, public _userService: UserService, public _loadingService: LoadingService) { 
-    this.http.get(`${environment.endpoint}user/me`).subscribe((data: any) => {
-      this.user = data.user;
-    });
+  constructor(private http: HttpClient, public _userService: UserService, public _loadingService: LoadingService) { 
   }
 
   ngOnInit(): void {
+    let id = localStorage.getItem('id');
+    this.http.get(`${environment.endpoint}user/${id}`).subscribe((data: any) => {
+      this.user = data.data;
+    });
   }
 
   

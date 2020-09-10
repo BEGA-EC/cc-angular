@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { FormService } from 'src/app/services/service.index';
-import { Tributary } from 'src/app/models/tributary.model';
-import { Medical } from 'src/app/models/medical.model';
-import { Personal } from 'src/app/models/personal.model';
-import { Comercial } from 'src/app/models/comercial.model';
+import { Admin } from 'src/app/models/admin.model';
+import { Address }from 'src/app/models/address.model';
 import { LoadingService } from 'src/app/services/loading/loading.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -18,6 +16,7 @@ import { Router } from '@angular/router';
 })
 export class MedicalComponent implements OnInit {
 
+  userForm: any;
   dataForm: FormGroup;
   isSubmitted = false;
   taxType: String = '';
@@ -37,12 +36,12 @@ export class MedicalComponent implements OnInit {
 
   cantones: {};
 
-  public imagePath;
+  public imagePath: FileList;
   imgURL: any;
 
-  constructor(public formBuilder: FormBuilder, public _formService: FormService, public _loadingService: LoadingService, public http: HttpClient, public router: Router) { }
+  constructor(public formBuilder: FormBuilder, public _formService: FormService, public _loadingService: LoadingService, public http: HttpClient, public router: Router) {}
 
-  check(e){
+  check(e: { target: { value: string; }; }){
     if (e.target.value == "Azuay — 02") {
       this.cantones = [
         {
@@ -808,11 +807,6 @@ export class MedicalComponent implements OnInit {
     this.setRetirementValidator();
     this.setConadisValidator();
     this.setPrivateValidator();
-    this.http.get(`${environment.endpoint}covid-poll/done`).subscribe((data: any) => {
-      if (data.done) {
-        this.router.navigate(['/client/dashboard'])
-      }
-    });
   }
 
   buildForm() {
@@ -1072,9 +1066,9 @@ export class MedicalComponent implements OnInit {
  
     var reader = new FileReader();
     this.imagePath = files;
-    reader.readAsDataURL(files[0]); 
-    reader.onload = (_event) => { 
-      this.imgURL = reader.result; 
+    reader.readAsDataURL(files[0]);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
     }
   }
 
@@ -1092,8 +1086,8 @@ export class MedicalComponent implements OnInit {
   submitForm() {
     this.isSubmitted = true;
     var taxNum: String;
-    var products: {};
     var locals: { localNumber: String; predioNumber: String; sector: String; floor: String; hallNumber: String; }[];
+    var products: { productName: String }[];
 
     if (this.dataForm.value.numberLocals == "1") {
       locals = [
@@ -1161,108 +1155,92 @@ export class MedicalComponent implements OnInit {
     } 
 
     if (!this.dataForm.value.productsBeingSoldSec) {
-      products = {
-        "1": this.dataForm.value.productsBeingSold
-      }
+      products = [
+        {productName: this.dataForm.value.productsBeingSold}
+      ]
     }
     else if (!this.dataForm.value.productsBeingSoldTri) {
-      products = {
-        "1": this.dataForm.value.productsBeingSold,
-        "2": this.dataForm.value.productsBeingSoldSec
-      }
+      products = [
+        {productName: this.dataForm.value.productsBeingSold},
+        {productName: this.dataForm.value.productsBeingSoldSec}
+      ]
     }
     else if (!this.dataForm.value.productsBeingSoldCua) {
-      products = {
-        "1": this.dataForm.value.productsBeingSold,
-        "2": this.dataForm.value.productsBeingSoldSec,
-        "3": this.dataForm.value.productsBeingSoldTri
-      }
+      products = [
+        {productName: this.dataForm.value.productsBeingSold},
+        {productName: this.dataForm.value.productsBeingSoldSec},
+        {productName: this.dataForm.value.productsBeingSoldTri}
+      ]
     }
     else if (!this.dataForm.value.productsBeingSoldQui) {
-      products = {
-        "1": this.dataForm.value.productsBeingSold,
-        "2": this.dataForm.value.productsBeingSoldSec,
-        "3": this.dataForm.value.productsBeingSoldTri,
-        "4": this.dataForm.value.productsBeingSoldCua
-      }
+      products = [
+        {productName: this.dataForm.value.productsBeingSold},
+        {productName: this.dataForm.value.productsBeingSoldSec},
+        {productName: this.dataForm.value.productsBeingSoldTri},
+        {productName: this.dataForm.value.productsBeingSoldCua} 
+      ]
     }
     else if (this.dataForm.value.productsBeingSoldQui) {
-      products = {
-        "1": this.dataForm.value.productsBeingSold,
-        "2": this.dataForm.value.productsBeingSoldSec,
-        "3": this.dataForm.value.productsBeingSoldTri,
-        "4": this.dataForm.value.productsBeingSoldCua,
-        "5": this.dataForm.value.productsBeingSoldQui
-      }
+      products = [
+        {productName: this.dataForm.value.productsBeingSold},
+        {productName: this.dataForm.value.productsBeingSoldSec},
+        {productName: this.dataForm.value.productsBeingSoldTri},
+        {productName: this.dataForm.value.productsBeingSoldCua},
+        {productName: this.dataForm.value.productsBeingSoldQui}
+      ]
     }
-    
-    let tributary: Tributary = {
+
+    let address: Address = {
+      firstname: this.dataForm.value.firstName,
+      lastname: this.dataForm.value.lastName,
+      gender: this.dataForm.value.gender,
+      dateOfBirth: this.dataForm.value.dateOfBirth,
+      idNumber: this.dataForm.value.idNumber,
+      phoneNumber: this.dataForm.value.phoneNumber,
+      cellphoneNumber: this.dataForm.value.cellphoneNumber,
+      emergencyPhone: this.dataForm.value.emergencyPhone,
+      province: this.dataForm.value.province,
+      canton: this.dataForm.value.canton,
+      city: this.dataForm.value.city,
+      neighborhood: this.dataForm.value.neighborhood,
+      mainStreet: this.dataForm.value.mainStreet,
+      nomenclature: this.dataForm.value.nomenclature,
+      secondaryStreet: this.dataForm.value.secondaryStreet
+    };
+
+    let admin: Admin = {
       taxType: this.dataForm.value.taxType,
       taxNumber: taxNum,
-      keepAccounting: this.dataForm.value.keepAccounting
-    };
+      keepAccounting: this.dataForm.value.keepAccounting,
+      personType: this.dataForm.value.personType,
+      businessName: this.dataForm.value.businessName,
+      socialReason: this.dataForm.value.socialReason,
+      productsBeingSold: products,
+      numberLocals: this.dataForm.value.numberLocals,
+      originOfProducts: this.dataForm.value.originOfProducts,
+      qualifiedCraftman: this.dataForm.value.qualifiedCraftman,
+      craftmanCalification: this.dataForm.value.craftmanCalification,
+      sellerType: this.dataForm.value.sellerType,
+      locals: locals,
+      bloodType: this.dataForm.value.bloodType,
+      height: this.dataForm.value.height,
+      allergy: this.dataForm.value.allergy,
+      allergicTo: this.dataForm.value.allergicTo,
+      consumingMedicine: this.dataForm.value.consumingMedicine,
+      medicamentBeingConsumed: this.dataForm.value.medicamentBeingConsumed,
+      illness: this.dataForm.value.illness,
+      affiliatedToPrivate: this.dataForm.value.affiliatedToPrivate,
+      affiliatedTo: this.dataForm.value.affiliatedTo,
+      conadisLicense: this.dataForm.value.conadisLicense,
+      disability: this.dataForm.value.disability,
+      disabilityPer: this.dataForm.value.disabilityPer,
+      retirement: this.dataForm.value.retirement,
+      retirementDetails: this.dataForm.value.retirementDetails
+    }
 
-    let comercial: Comercial = {
-     personType: this.dataForm.value.personType,
-     businessName: this.dataForm.value.businessName,
-     socialReason: this.dataForm.value.socialReason,
-     productsBeingSold: JSON.stringify(products),
-     numberLocals: this.dataForm.value.numberLocals,
-     originOfProducts: this.dataForm.value.originOfProducts,
-     qualifiedCraftman: this.dataForm.value.qualifiedCraftman,
-     craftmanCalification: this.dataForm.value.craftmanCalification,
-     sellerType: this.dataForm.value.sellerType,
-     locals: locals 
-    };
-
-    let medical: Medical = {
-     bloodType: this.dataForm.value.bloodType,
-     height: this.dataForm.value.height,
-     allergy: this.dataForm.value.allergy,
-     allergicTo: this.dataForm.value.allergicTo,
-     consumingMedicine: this.dataForm.value.consumingMedicine,
-     medicamentBeingConsumed: this.dataForm.value.medicamentBeingConsumed,
-     illness: this.dataForm.value.illness,
-     affiliatedToPrivate: this.dataForm.value.affiliatedToPrivate,
-     affiliatedTo: this.dataForm.value.affiliatedTo,
-     conadisLicense: this.dataForm.value.conadisLicense,
-     conadisLicenseType: this.dataForm.value.disability,
-     retirement: this.dataForm.value.retirement,
-     retirementDetails: this.dataForm.value.retirementDetails,
-     conadisPercentage: this.dataForm.value.disabilityPer
-    };
-
-    let personal: Personal = {
-     firstName: this.dataForm.value.firstName,
-     lastName: this.dataForm.value.lastName,
-     gender: this.dataForm.value.gender,
-     dateOfBirth: this.dataForm.value.dateOfBirth,
-     idNumber: this.dataForm.value.idNumber,
-     phoneNumber: this.dataForm.value.phoneNumber,
-     cellphoneNumber: this.dataForm.value.cellphoneNumber,
-     emergencyPhone: this.dataForm.value.emergencyPhone,
-     province: this.dataForm.value.province,
-     canton: this.dataForm.value.canton,
-     city: this.dataForm.value.city,
-     neighborhood: this.dataForm.value.neighborhood,
-     mainStreet: this.dataForm.value.mainStreet,
-     nomenclature: this.dataForm.value.nomenclature,
-     secondaryStreet: this.dataForm.value.secondaryStreet
-    };
-
-    const booleans = ['allergy', 'consumingMedicine', 'conadisLicense', 'retirement'];
+    const booleans = ['allergy', 'consumingMedicine', 'conadisLicense', 'retirement', 'qualifiedCraftman', 'keepAccounting'];
     for( let booleanParameter of booleans) {
-      medical[booleanParameter] = medical[booleanParameter] === 'true';
-    };
-    
-    const booleansComercial = ['qualifiedCraftman'];
-    for( let booleanParameter of booleansComercial) {
-      comercial[booleanParameter] = comercial[booleanParameter] === 'true';
-    };
-
-    const booleansTributary = ['keepAccounting'];
-    for( let booleanParameter of booleansTributary) {
-      tributary[booleanParameter] = tributary[booleanParameter] === 'true';
+      admin[booleanParameter] = admin[booleanParameter] === 'true';
     };
 
     let avatar = this.fileToUpload;
@@ -1276,7 +1254,7 @@ export class MedicalComponent implements OnInit {
       });
       return false;
     } else {
-      this._formService.upload(tributary, comercial, medical, personal, avatar);
+      this._formService.upload(admin, address, avatar); //debug fix xdxd
     }
   }
 }

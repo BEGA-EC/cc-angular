@@ -45,12 +45,19 @@ export class LoginComponent implements OnInit {
     } else {
       let user = {email: this.loginForm.value.email, password: this.loginForm.value.password};
       this._userService.login(user).subscribe(correcto =>{
-        this.router.navigate(['/client/medical/']);
+        this.router.navigate(['/client/dashboard']);
       }, err => {
-          if (err.status == 400) {
+          if (err.status === 400) {
             Swal.fire({
               title: '¡Intento fallido!',
               text: `La combinación de email y contraseña que has usado es incorrecta. Intenta nuevamente.`,
+              icon: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          } else if (err.status === 403) {
+            Swal.fire({
+              title: '¡Intento fallido!',
+              text: `No has confirmado tu correo electrónico. Ingresa a tu correo electrónico y comprueba tus carpetas de Entregados o SPAM`,
               icon: 'error',
               confirmButtonText: 'Aceptar'
             });
