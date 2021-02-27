@@ -25,7 +25,7 @@ const routes: Routes = [{ path: 'client/register', loadChildren: () => import('.
 { path: '**', loadChildren: () => import('./client/login/login.module').then(m => m.LoginModule)}];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
