@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
   providedIn: 'root'
 })
 export class CovidService {
-  
+
   constructor(public http: HttpClient, public router: Router) {}
 
   postCode(poll: Covid) {
@@ -26,7 +26,7 @@ export class CovidService {
       });
     }, err => {
       console.log(err);
-      if (err.error.description == 'User already has a poll') {
+      if (err.error.description === 'User already has a poll') {
         Swal.fire({
           title: 'Un momento',
           html: `Parece que ya has realizado esta encuesta antes. ¡No puedes repetir!`,

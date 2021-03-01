@@ -7,17 +7,17 @@ import Swal from 'sweetalert2';
 export class AdminGuard implements CanActivate {
 
   constructor(
-    public _userService: UserService,
+    public userService: UserService,
     public router: Router
   ) { }
 
   canActivate() {
 
-    if ( this._userService.inLog() ) {
+    if ( this.userService.inLog() ) {
       return true;
     }else {
       Swal.fire({
-        title: '¡Espera!',  
+        title: '¡Espera!',
         html: `Inicia sesión antes`,
         icon: 'info',
         confirmButtonText: 'Aceptar'

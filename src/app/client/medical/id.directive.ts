@@ -14,11 +14,11 @@ import {Directive} from '@angular/core';
 })
   export class IdValidator implements Validator {
     constructor() {}
-  
+
       validate(control: AbstractControl) : ValidationErrors | null {
 
         function idNumber(idNum: Boolean) {
-          var number = control.value.substr(0,10); 
+          var number = control.value.substr(0,10);
           var nCheck = 0, nDigit = 0, bEven = false;
           number = number.replace(/\D/g, "");
           for (var n = number.length - 1; n >= 0; n--) {
@@ -30,17 +30,17 @@ import {Directive} from '@angular/core';
               nCheck += nDigit;
               bEven = !bEven;
           }
-          return idNum = (nCheck % 10) == 0;
+          return idNum = (nCheck % 10) === 0;
         }
         function checkDigit(idNum: Boolean) {
           var numEleven = control.value.substr(0,10);
           var l = numEleven.length, i = 0, j = (l%8), v = 0;
-        
+
           for(i = 0, l = l-1; i < l; i++) {
-            v += parseInt(numEleven[i], 10) * j; 
-            j = (j == 2) ? 9 : --j;
+            v += parseInt(numEleven[i], 10) * j;
+            j = (j === 2) ? 9 : --j;
           }
-          return idNum = ((v%11 < 2) ? (0) : (11 - (v%11))) == 0;
+          return idNum = ((v%11 < 2) ? (0) : (11 - (v%11))) === 0;
         };
 
         if (idNumber(control.value)) {

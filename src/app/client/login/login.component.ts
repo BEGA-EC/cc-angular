@@ -17,9 +17,9 @@ export class LoginComponent implements OnInit {
 
   constructor(
     public formBuilder: FormBuilder,
-    public _userService: UserService,
+    public userService: UserService,
     public router: Router,
-    public _loadingService: LoadingService) { }
+    public loadingService: LoadingService) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
       return false;
     } else {
       let user = {email: this.loginForm.value.email, password: this.loginForm.value.password};
-      this._userService.login(user).subscribe(correcto =>{
+      this.userService.login(user).subscribe(correcto =>{
         this.router.navigate(['/client/dashboard']);
       }, err => {
           if (err.status === 400) {

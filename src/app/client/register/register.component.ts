@@ -18,9 +18,9 @@ export class RegisterComponent implements OnInit {
   email: string;
 
   constructor(public formBuilder: FormBuilder,
-    public router: Router,
-    public _userService: UserService,
-    public _loadingService: LoadingService) { }
+              public router: Router,
+              public userService: UserService,
+              public loadingService: LoadingService) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -44,9 +44,9 @@ export class RegisterComponent implements OnInit {
       });
       return false;
     } else {
-      let email = this.registerForm.value.email;
-      let password = this.registerForm.value.password;
-      this._userService.register(email, password);
+      const email = this.registerForm.value.email;
+      const password = this.registerForm.value.password;
+      this.userService.register(email, password);
     }
   }
 }

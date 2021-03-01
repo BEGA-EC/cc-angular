@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
 import Swal from 'sweetalert2';
 import { FormService } from 'src/app/services/service.index';
 import { Admin } from 'src/app/models/admin.model';
@@ -19,779 +19,783 @@ export class MedicalComponent implements OnInit {
   userForm: any;
   dataForm: FormGroup;
   isSubmitted = false;
-  taxType: String = '';
-  qualifiedCraftman: String = '';
-  allergy: String = '';
-  consumingMedicine: String = '';
-  affiliatedTo: String = '';
-  conadisLicense: String = '';
-  retirement: String = '';
+  taxType = '';
+  qualifiedCraftman = '';
+  allergy = '';
+  consumingMedicine = '';
+  affiliatedTo = '';
+  conadisLicense = '';
+  retirement = '';
   fileToUpload: File = null;
-  productsBeingSold: String = '';
-  productsBeingSoldSec: String = '';
-  productsBeingSoldTri: String = '';
-  productsBeingSoldCua: String = '';
-  numberLocals: String = '';
-  retirementDetails: String = '';
+  productsBeingSold = '';
+  productsBeingSoldSec = '';
+  productsBeingSoldTri = '';
+  productsBeingSoldCua = '';
+  numberLocals = '';
+  retirementDetails = '';
 
   cantones: {};
 
   public imagePath: FileList;
   imgURL: any;
 
-  constructor(public formBuilder: FormBuilder, public _formService: FormService, public _loadingService: LoadingService, public http: HttpClient, public router: Router) {}
+  constructor(public formBuilder: FormBuilder,
+              public formService: FormService,
+              public loadingService: LoadingService,
+              public http: HttpClient,
+              public router: Router) {}
 
   check(e: { target: { value: string; }; }){
-    if (e.target.value == "Azuay — 02") {
+    if (e.target.value === 'Azuay — 02') {
       this.cantones = [
         {
-          name: "Chordelog"
+          name: 'Chordelog'
         },
         {
-          name: "Cuenca"
+          name: 'Cuenca'
         },
         {
-          name: "El Pan"
+          name: 'El Pan'
         },
         {
-          name: "El Girón"
+          name: 'El Girón'
         },
         {
-          name: "Guachapala"
+          name: 'Guachapala'
         },
         {
-          name: "Gualeco"
+          name: 'Gualeco'
         },
         {
-          name: "Nabón"
+          name: 'Nabón'
         },
         {
-          name: "Oña"
+          name: 'Oña'
         },
         {
-          name: "Paute"
+          name: 'Paute'
         },
         {
-          name: "Ponce Enriquez"
+          name: 'Ponce Enriquez'
         },
         {
-          name: "Pucará"
+          name: 'Pucará'
         },
         {
-          name: "San Fernando"
+          name: 'San Fernando'
         },
         {
-          name: "Santa Isabel"
+          name: 'Santa Isabel'
         },
         {
-          name: "Sevilla de Oro"
+          name: 'Sevilla de Oro'
         },
         {
-          name: "Sígsig"
+          name: 'Sígsig'
         }
       ];
     }
-    if (e.target.value == "Bolívar — 03") {
+    if (e.target.value === 'Bolívar — 03') {
       this.cantones = [
         {
-          name: "Caluma"
+          name: 'Caluma'
         },
         {
-          name: "Chillanes"
+          name: 'Chillanes'
         },
         {
-          name: "Chimbo"
+          name: 'Chimbo'
         },
         {
-          name: "Echeandía"
+          name: 'Echeandía'
         },
         {
-          name: "Guaranda"
+          name: 'Guaranda'
         },
         {
-          name: "Las Naves"
+          name: 'Las Naves'
         },
         {
-          name: "San Miguel"
+          name: 'San Miguel'
         }
       ];
     }
-    if (e.target.value == "Cañar — 07") {
+    if (e.target.value === 'Cañar — 07') {
       this.cantones = [
         {
-          name: "Azogues"
+          name: 'Azogues'
         },
         {
-          name: "Biblián"
+          name: 'Biblián'
         },
         {
-          name: "Cañar"
+          name: 'Cañar'
         },
         {
-          name: "Déleg"
+          name: 'Déleg'
         },
         {
-          name: "El Tambo"
+          name: 'El Tambo'
         },
         {
-          name: "La Troncal"
+          name: 'La Troncal'
         },
         {
-          name: "Suscal"
+          name: 'Suscal'
         }
       ];
     }
-    if (e.target.value == "Carchi — 06") {
+    if (e.target.value === 'Carchi — 06') {
       this.cantones = [
         {
-          name: "Bolívar"
+          name: 'Bolívar'
         },
         {
-          name: "Espejo"
+          name: 'Espejo'
         },
         {
-          name: "Mira"
+          name: 'Mira'
         },
         {
-          name: "Montúfar"
+          name: 'Montúfar'
         },
         {
-          name: "San Pedro de Huaca"
+          name: 'San Pedro de Huaca'
         },
         {
-          name: "Tulcán"
+          name: 'Tulcán'
         }
       ];
     }
-    if (e.target.value == "Chimborazo — 03") {
+    if (e.target.value === 'Chimborazo — 03') {
       this.cantones = [
         {
-          name: "Alausí"
+          name: 'Alausí'
         },
         {
-          name: "Chambo"
+          name: 'Chambo'
         },
         {
-          name: "Chunchi"
+          name: 'Chunchi'
         },
         {
-          name: "Colta"
+          name: 'Colta'
         },
         {
-          name: "Cumandá"
+          name: 'Cumandá'
         },
         {
-          name: "Guamote"
+          name: 'Guamote'
         },
         {
-          name: "Guano"
+          name: 'Guano'
         },
         {
-          name: "Pallatanga"
+          name: 'Pallatanga'
         },
         {
-          name: "Penipe"
+          name: 'Penipe'
         },
         {
-          name: "Riobamba"
+          name: 'Riobamba'
         }
       ];
     }
-    if (e.target.value == "Cotopaxi — 03") {
+    if (e.target.value === 'Cotopaxi — 03') {
       this.cantones = [
         {
-          name: "La Maná"
+          name: 'La Maná'
         },
         {
-          name: "Latacunga"
+          name: 'Latacunga'
         },
         {
-          name: "Pangua"
+          name: 'Pangua'
         },
         {
-          name: "Pujilí"
+          name: 'Pujilí'
         },
         {
-          name: "Salcedo"
+          name: 'Salcedo'
         },
         {
-          name: "Saquisilí"
+          name: 'Saquisilí'
         },
         {
-          name: "Sigchos"
+          name: 'Sigchos'
         }
       ];
     }
-    if (e.target.value == "El Oro — 07") {
+    if (e.target.value === 'El Oro — 07') {
       this.cantones = [
         {
-          name: "Arenillas"
+          name: 'Arenillas'
         },
         {
-          name: "Atahualpa"
+          name: 'Atahualpa'
         },
         {
-          name: "Balsas"
+          name: 'Balsas'
         },
         {
-          name: "Chilla"
+          name: 'Chilla'
         },
         {
-          name: "El Guabo"
+          name: 'El Guabo'
         },
         {
-          name: "Huaquillas"
+          name: 'Huaquillas'
         },
         {
-          name: "Las Lajas"
+          name: 'Las Lajas'
         },
         {
-          name: "Machala"
+          name: 'Machala'
         },
         {
-          name: "Marcabelí"
+          name: 'Marcabelí'
         },
         {
-          name: "Pasaje"
+          name: 'Pasaje'
         },
         {
-          name: "Piñas"
+          name: 'Piñas'
         },
         {
-          name: "Portovelo"
+          name: 'Portovelo'
         },
         {
-          name: "Santa Rosa"
+          name: 'Santa Rosa'
         },
         {
-          name: "Zaruma"
+          name: 'Zaruma'
         }
       ];
     }
-    if (e.target.value == "Esmeraldas — 06") {
+    if (e.target.value === 'Esmeraldas — 06') {
       this.cantones = [
         {
-          name: "Atacames"
+          name: 'Atacames'
         },
         {
-          name: "Eloy Alfaro"
+          name: 'Eloy Alfaro'
         },
         {
-          name: "Esmeraldas"
+          name: 'Esmeraldas'
         },
         {
-          name: "Muisne"
+          name: 'Muisne'
         },
         {
-          name: "Quinindé"
+          name: 'Quinindé'
         },
         {
-          name: "Rioverde"
+          name: 'Rioverde'
         },
         {
-          name: "San Lorenzo"
+          name: 'San Lorenzo'
         }
       ];
     }
-    if (e.target.value == "Galápagos — 05") {
+    if (e.target.value === 'Galápagos — 05') {
       this.cantones = [
         {
-          name: "Isabela"
+          name: 'Isabela'
         },
         {
-          name: "San Cristóbal"
+          name: 'San Cristóbal'
         },
         {
-          name: "Santa Cruz"
+          name: 'Santa Cruz'
         }
       ];
     }
-    if (e.target.value == "Guayas — 04") {
+    if (e.target.value === 'Guayas — 04') {
       this.cantones = [
         {
-          name: "Alfredo Baquerizo Moreno"
+          name: 'Alfredo Baquerizo Moreno'
         },
         {
-          name: "Balao"
+          name: 'Balao'
         },
         {
-          name: "Balzar"
+          name: 'Balzar'
         },
         {
-          name: "Colimes"
+          name: 'Colimes'
         },
         {
-          name: "Coronel Marcelino Maridueña"
+          name: 'Coronel Marcelino Maridueña'
         },
         {
-          name: "Daule"
+          name: 'Daule'
         },
         {
-          name: "Durán"
+          name: 'Durán'
         },
         {
-          name: "El Empalme"
+          name: 'El Empalme'
         },
         {
-          name: "El Triunfo"
+          name: 'El Triunfo'
         },
         {
-          name: "General Antonio Elizalde"
+          name: 'General Antonio Elizalde'
         },
         {
-          name: "Guayaquil"
+          name: 'Guayaquil'
         },
         {
-          name: "Isidro Ayora"
+          name: 'Isidro Ayora'
         },
         {
-          name: "Lomas de Sargentillo"
+          name: 'Lomas de Sargentillo'
         },
         {
-          name: "Milagro"
+          name: 'Milagro'
         },
         {
-          name: "Naranjal"
+          name: 'Naranjal'
         },
         {
-          name: "Naranjito"
+          name: 'Naranjito'
         },
         {
-          name: "Nobol"
+          name: 'Nobol'
         },
         {
-          name: "Palestina"
+          name: 'Palestina'
         },
         {
-          name: "Pedro Carbo"
+          name: 'Pedro Carbo'
         },
         {
-          name: "Playas"
+          name: 'Playas'
         },
         {
-          name: "Salitre"
+          name: 'Salitre'
         },
         {
-          name: "Samborondón"
+          name: 'Samborondón'
         },
         {
-          name: "Santa Lucía"
+          name: 'Santa Lucía'
         },
         {
-          name: "Simón Bolívar"
+          name: 'Simón Bolívar'
         },
         {
-          name: "Yaguachi"
+          name: 'Yaguachi'
         }
       ];
     }
-    if (e.target.value == "Imbabura — 06") {
+    if (e.target.value === 'Imbabura — 06') {
       this.cantones = [
         {
-          name: "Antonio Ante"
+          name: 'Antonio Ante'
         },
         {
-          name: "Cotacachi"
+          name: 'Cotacachi'
         },
         {
-          name: "Ibarra"
+          name: 'Ibarra'
         },
         {
-          name: "Otavalo"
+          name: 'Otavalo'
         },
         {
-          name: "Pimampiro"
+          name: 'Pimampiro'
         },
         {
-          name: "San Miguel de Urcuquí"
+          name: 'San Miguel de Urcuquí'
         }
       ];
     }
-    if (e.target.value == "Loja — 07") {
+    if (e.target.value === 'Loja — 07') {
       this.cantones = [
         {
-          name: "Calvas"
+          name: 'Calvas'
         },
         {
-          name: "Catamayo"
+          name: 'Catamayo'
         },
         {
-          name: "Celica"
+          name: 'Celica'
         },
         {
-          name: "Chaguarpamba"
+          name: 'Chaguarpamba'
         },
         {
-          name: "Espíndola"
+          name: 'Espíndola'
         },
         {
-          name: "Gonzanamá"
+          name: 'Gonzanamá'
         },
         {
-          name: "Loja"
+          name: 'Loja'
         },
         {
-          name: "Macará"
+          name: 'Macará'
         },
         {
-          name: "Olmedo"
+          name: 'Olmedo'
         },
         {
-          name: "Paltas"
+          name: 'Paltas'
         },
         {
-          name: "Pindal"
+          name: 'Pindal'
         },
         {
-          name: "Puyango"
+          name: 'Puyango'
         },
         {
-          name: "Quilanga"
+          name: 'Quilanga'
         },
         {
-          name: "Saraguro"
+          name: 'Saraguro'
         },
         {
-          name: "Sozoranga"
+          name: 'Sozoranga'
         },
         {
-          name: "Zapotillo"
+          name: 'Zapotillo'
         }
       ];
     }
-    if (e.target.value == "Los Ríos — 05") {
+    if (e.target.value === 'Los Ríos — 05') {
       this.cantones = [
         {
-          name: "Baba"
+          name: 'Baba'
         },
         {
-          name: "Babahoyo"
+          name: 'Babahoyo'
         },
         {
-          name: "Buena Fe"
+          name: 'Buena Fe'
         },
         {
-          name: "Mocache"
+          name: 'Mocache'
         },
         {
-          name: "Montalvo"
+          name: 'Montalvo'
         },
         {
-          name: "Palenque"
+          name: 'Palenque'
         },
         {
-          name: "Puebloviejo"
+          name: 'Puebloviejo'
         },
         {
-          name: "Quevedo"
+          name: 'Quevedo'
         },
         {
-          name: "Quinsaloma"
+          name: 'Quinsaloma'
         },
         {
-          name: "Urdaneta"
+          name: 'Urdaneta'
         },
         {
-          name: "Valencia"
+          name: 'Valencia'
         },
         {
-          name: "Ventanas"
+          name: 'Ventanas'
         },
         {
-          name: "Vinces"
+          name: 'Vinces'
         }
       ];
     }
-    if (e.target.value == "Manabí — 05") {
+    if (e.target.value === 'Manabí — 05') {
       this.cantones = [
         {
-          name: "Bolívar"
+          name: 'Bolívar'
         },
         {
-          name: "Chone"
+          name: 'Chone'
         },
         {
-          name: "El Carmen"
+          name: 'El Carmen'
         },
         {
-          name: "Flavio Alfaro"
+          name: 'Flavio Alfaro'
         },
         {
-          name: "Jama"
+          name: 'Jama'
         },
         {
-          name: "Jaramijó"
+          name: 'Jaramijó'
         },
         {
-          name: "Jipijapa"
+          name: 'Jipijapa'
         },
         {
-          name: "Junín"
+          name: 'Junín'
         },
         {
-          name: "Manta"
+          name: 'Manta'
         },
         {
-          name: "Montecristi"
+          name: 'Montecristi'
         },
         {
-          name: "Olmedo"
+          name: 'Olmedo'
         },
         {
-          name: "Paján"
+          name: 'Paján'
         },
         {
-          name: "Pedernales"
+          name: 'Pedernales'
         },
         {
-          name: "Pichincha"
+          name: 'Pichincha'
         },
         {
-          name: "Portoviejo"
+          name: 'Portoviejo'
         },
         {
-          name: "Puerto López"
+          name: 'Puerto López'
         },
         {
-          name: "Rocafuerte"
+          name: 'Rocafuerte'
         },
         {
-          name: "San Vicente"
+          name: 'San Vicente'
         },
         {
-          name: "Santa Ana"
+          name: 'Santa Ana'
         },
         {
-          name: "Sucre"
+          name: 'Sucre'
         },
         {
-          name: "Tosagua"
+          name: 'Tosagua'
         },
         {
-          name: "Veinticuatro de Mayo"
+          name: 'Veinticuatro de Mayo'
         }
       ];
     }
-    if (e.target.value == "Morona Santiago — 07"  ) {
+    if (e.target.value === 'Morona Santiago — 07'  ) {
       this.cantones = [
         {
-          name: "Gualaquiza"
+          name: 'Gualaquiza'
         },
         {
-          name: "Huamboya"
+          name: 'Huamboya'
         },
         {
-          name: "Logroño"
+          name: 'Logroño'
         },
         {
-          name: "Morona"
+          name: 'Morona'
         },
         {
-          name: "Pablo Sexto"
+          name: 'Pablo Sexto'
         },
         {
-          name: "Palora"
+          name: 'Palora'
         },
         {
-          name: "San Juan Bosco"
+          name: 'San Juan Bosco'
         },
         {
-          name: "Santiago"
+          name: 'Santiago'
         },
         {
-          name: "Sucúa"
+          name: 'Sucúa'
         },
         {
-          name: "Taisha"
+          name: 'Taisha'
         }
       ];
     }
-    if (e.target.value == "Napo — 06") {
+    if (e.target.value === 'Napo — 06') {
       this.cantones = [
         {
-          name: "Archidona"
+          name: 'Archidona'
         },
         {
-          name: "Carlos Julio Arosemena Tola"
+          name: 'Carlos Julio Arosemena Tola'
         },
         {
-          name: "El Chaco"
+          name: 'El Chaco'
         },
         {
-          name: "Quijos"
+          name: 'Quijos'
         },
         {
-          name: "Tena"
+          name: 'Tena'
         }
       ];
     }
-    if (e.target.value == "Orellana — 06") {
+    if (e.target.value === 'Orellana — 06') {
       this.cantones = [
         {
-          name: "Aguarico"
+          name: 'Aguarico'
         },
         {
-          name: "Orellana"
+          name: 'Orellana'
         },
         {
-          name: "La Joya de los Sachas"
+          name: 'La Joya de los Sachas'
         },
         {
-          name: "Loreto"
+          name: 'Loreto'
         }
       ];
     }
-    if (e.target.value == "Pastaza — 03") {
+    if (e.target.value === 'Pastaza — 03') {
       this.cantones = [
         {
-          name: "Arajuno"
+          name: 'Arajuno'
         },
         {
-          name: "Mera"
+          name: 'Mera'
         },
         {
-          name: "Pastaza"
+          name: 'Pastaza'
         },
         {
-          name: "Santa Clara"
+          name: 'Santa Clara'
         }
       ];
     }
-    if (e.target.value == "Pichincha — 02") {
+    if (e.target.value === 'Pichincha — 02') {
       this.cantones = [
         {
-          name: "Cayambe"
+          name: 'Cayambe'
         },
         {
-          name: "Mejía"
+          name: 'Mejía'
         },
         {
-          name: "Pedro Moncayo"
+          name: 'Pedro Moncayo'
         },
         {
-          name: "Pedro Vicente Maldonado"
+          name: 'Pedro Vicente Maldonado'
         },
         {
-          name: "Puerto Quito"
+          name: 'Puerto Quito'
         },
         {
-          name: "Distrito Metropolitano de Quito"
+          name: 'Distrito Metropolitano de Quito'
         },
         {
-          name: "Rumiñahui"
+          name: 'Rumiñahui'
         },
         {
-          name: "San Miguel de Los Bancos"
+          name: 'San Miguel de Los Bancos'
         }
       ];
     }
-    if (e.target.value == "Santa Elena — 04") {
+    if (e.target.value === 'Santa Elena — 04') {
       this.cantones = [
         {
-          name: "La Libertad"
+          name: 'La Libertad'
         },
         {
-          name: "Salinas"
+          name: 'Salinas'
         },
         {
-          name: "Santa Elena"
+          name: 'Santa Elena'
         }
       ];
     }
-    if (e.target.value == "Santo Domingo — 02") {
+    if (e.target.value === 'Santo Domingo — 02') {
       this.cantones = [
         {
-          name: "La Concordia"
+          name: 'La Concordia'
         },
         {
-          name: "Santo Domingo"
+          name: 'Santo Domingo'
         }
       ];
     }
-    if (e.target.value == "Sucumbíos — 06") {
+    if (e.target.value === 'Sucumbíos — 06') {
       this.cantones = [
         {
-          name: "Cascales"
+          name: 'Cascales'
         },
         {
-          name: "Cuyabeno"
+          name: 'Cuyabeno'
         },
         {
-          name: "Gonzalo Pizarro"
+          name: 'Gonzalo Pizarro'
         },
         {
-          name: "Lago Agrio"
+          name: 'Lago Agrio'
         },
         {
-          name: "Putumayo"
+          name: 'Putumayo'
         },
         {
-          name: "Shushufindi"
+          name: 'Shushufindi'
         },
         {
-          name: "Sucumbíos"
+          name: 'Sucumbíos'
         }
       ];
     }
-    if (e.target.value == "Tungurahua — 03") {
+    if (e.target.value === 'Tungurahua — 03') {
       this.cantones = [
         {
-          name: "Ambato"
+          name: 'Ambato'
         },
         {
-          name: "Baños de Agua Santa"
+          name: 'Baños de Agua Santa'
         },
         {
-          name: "Cevallos"
+          name: 'Cevallos'
         },
         {
-          name: "Mocha"
+          name: 'Mocha'
         },
         {
-          name: "Patate"
+          name: 'Patate'
         },
         {
-          name: "Pelileo"
+          name: 'Pelileo'
         },
         {
-          name: "Píllaro"
+          name: 'Píllaro'
         },
         {
-          name: "Quero"
+          name: 'Quero'
         },
         {
-          name: "Tisaleo"
+          name: 'Tisaleo'
         }
       ];
     }
-    if (e.target.value == "Zamora Chinchipe — 07") {
+    if (e.target.value === 'Zamora Chinchipe — 07') {
       this.cantones = [
         {
-          name: "Centinela del Cóndor"
+          name: 'Centinela del Cóndor'
         },
         {
-          name: "Chinchipe"
+          name: 'Chinchipe'
         },
         {
-          name: "El Pangui"
+          name: 'El Pangui'
         },
         {
-          name: "Nangaritza"
+          name: 'Nangaritza'
         },
         {
-          name: "Palanda"
+          name: 'Palanda'
         },
         {
-          name: "Paquisha"
+          name: 'Paquisha'
         },
         {
-          name: "Yacuambi"
+          name: 'Yacuambi'
         },
         {
-          name: "Yantzaza"
+          name: 'Yantzaza'
         },
         {
-          name: "Zamora"
+          name: 'Zamora'
         }
       ];
     }
@@ -799,7 +803,6 @@ export class MedicalComponent implements OnInit {
 
   ngOnInit() {
     this.buildForm();
-    this.setlocalsValidator();
     this.setTributaryValidator();
     this.setQualifiedValidator();
     this.setAllergyValidator();
@@ -837,17 +840,19 @@ export class MedicalComponent implements OnInit {
       personType: ['', [Validators.required]],
       businessName: ['', [Validators.required]],
       socialReason: ['', [Validators.required]],
-      productsBeingSold: ['', [Validators.required]], productsBeingSoldSec: [''], productsBeingSoldTri: [''], productsBeingSoldCua: [''], productsBeingSoldQui: [''],
-      numberLocals: ['', [Validators.required]],
-      localNumberOne: ['', [Validators.required]], localNumberTwo: ['', null], localNumberTri: ['', null],
-      predioNumberOne: ['', [Validators.required]], predioNumberTwo: [''], predioNumberTri: [''],
-      sectorOne: ['', [Validators.required]], sectorTwo: [''], sectorTri: [''],
-      floorOne: ['', [Validators.required]], floorTwo: [''], floorTri: [''],
-      hallNumberOne: ['', [Validators.required, Validators.pattern('[0-9]{1,2}[a-bA-B]{1}$')]], hallNumberTwo: [''], hallNumberTri: [''],
+      productsBeingSold: ['', [Validators.required]], productsBeingSoldSec: [''], productsBeingSoldTri: [''],
+      productsBeingSoldCua: [''], productsBeingSoldQui: [''],
+      // localNumber: this.formBuilder.array([this.formBuilder.group({localNumberAdd: ''})]),
+      // predioNumber: this.formBuilder.array([this.formBuilder.group({predioNumberAdd: ''})]),
+      // sector: this.formBuilder.array([this.formBuilder.group({sectorAdd: ''})]),
+      // floor: this.formBuilder.array([this.formBuilder.group({floorAdd: ''})]),
+      // hallNumber: this.formBuilder.array([this.formBuilder.group({hallNumberAdd: ''})]),
+      // [Validators.required, Validators.pattern('[0-9]{1,2}[a-bA-B]{1}$')]],
+      locals: this.formBuilder.array([]),
       originOfProducts: ['', [Validators.required]],
       qualifiedCraftman: ['', [Validators.required]],
       craftmanCalification: [''],
-      sellerType: ['', [Validators.required]] ,
+      sellerType: ['', [Validators.required]],
 
       bloodType: ['', [Validators.required]],
       height: ['', [Validators.required]],
@@ -859,78 +864,33 @@ export class MedicalComponent implements OnInit {
       affiliatedTo: ['', [Validators.required]],
       affiliatedToPrivate: [''],
       conadisLicense: ['', [Validators.required]],
-      disability: [''], 
+      disability: [''],
       disabilityPer: [''],
       retirement: ['', [Validators.required]],
       retirementDetails: ['']
     });
   }
 
-  setlocalsValidator() {
-    const localNumberTwoControl = this.dataForm.get('localNumberTwo');
-    const localNumberTriControl = this.dataForm.get('localNumberTri');
-    const predioNumberTwoControl = this.dataForm.get('predioNumberTwo');
-    const predioNumberTriControl = this.dataForm.get('predioNumberTri');
-    const sectorTwoControl = this.dataForm.get('sectorTwo');
-    const sectorTriControl = this.dataForm.get('sectorTri');
-    const floorTwoControl = this.dataForm.get('floorTwo');
-    const floorTriControl = this.dataForm.get('floorTri');
-    const hallNumberTwoControl = this.dataForm.get('hallNumberTwo');
-    const hallNumberTriControl = this.dataForm.get('hallNumberTri');
+  locals(): FormArray {
+    return this.dataForm.get('locals') as FormArray;
+  }
 
-    this.dataForm.get('numberLocals').valueChanges
-      .subscribe(numberLocals => {
-        if (numberLocals === '1') {
-          localNumberTwoControl.setValidators(null);
-          predioNumberTwoControl.setValidators(null);
-          sectorTwoControl.setValidators(null);
-          floorTwoControl.setValidators(null);
-          hallNumberTwoControl.setValidators(null);
-          
-          localNumberTriControl.setValidators(null);
-          predioNumberTriControl.setValidators(null);
-          sectorTriControl.setValidators(null);
-          floorTriControl.setValidators(null);
-          hallNumberTriControl.setValidators(null);
-        }
-        if (numberLocals === '2') {
-          localNumberTwoControl.setValidators([Validators.required]);
-          predioNumberTwoControl.setValidators([Validators.required]);
-          sectorTwoControl.setValidators([Validators.required]);
-          floorTwoControl.setValidators([Validators.required]);
-          hallNumberTwoControl.setValidators([Validators.required, Validators.pattern('[0-9]{1,2}[a-bA-B]{1}$')]);
+  newLocal(): FormGroup {
+    return this.formBuilder.group({
+      localNumber: ['', [Validators.required]],
+      predioNumber: ['', [Validators.required]],
+      sector: ['', [Validators.required]],
+      floor: ['', [Validators.required]],
+      hallNumber: ['', [Validators.required]]
+    });
+  }
 
-          localNumberTriControl.setValidators(null);
-          predioNumberTriControl.setValidators(null);
-          sectorTriControl.setValidators(null);
-          floorTriControl.setValidators(null);
-          hallNumberTriControl.setValidators(null);
-        }
-        if (numberLocals === '3' ) {
-          localNumberTwoControl.setValidators([Validators.required]);
-          predioNumberTwoControl.setValidators([Validators.required]);
-          sectorTwoControl.setValidators([Validators.required]);
-          floorTwoControl.setValidators([Validators.required]);
-          hallNumberTwoControl.setValidators([Validators.required, Validators.pattern('[0-9]{1,2}[a-bA-B]{1}$')]);
-          
-          localNumberTriControl.setValidators([Validators.required]);
-          predioNumberTriControl.setValidators([Validators.required]);
-          sectorTriControl.setValidators([Validators.required]);
-          floorTriControl.setValidators([Validators.required]);
-          hallNumberTriControl.setValidators([Validators.required, Validators.pattern('[0-9]{1,2}[a-bA-B]{1}$')]);
-        }
-        localNumberTwoControl.updateValueAndValidity;
-        predioNumberTwoControl.updateValueAndValidity;
-        sectorTwoControl.updateValueAndValidity;
-        floorTwoControl.updateValueAndValidity;
-        hallNumberTwoControl.updateValueAndValidity;
-        
-        localNumberTriControl.updateValueAndValidity;
-        predioNumberTriControl.updateValueAndValidity;
-        sectorTriControl.updateValueAndValidity;
-        floorTriControl.updateValueAndValidity;
-        hallNumberTriControl.updateValueAndValidity;
-      })
+  public addLocal() {
+    this.locals().push(this.newLocal());
+  }
+
+  public deleteLocal(index: number) {
+    this.locals().removeAt(index);
   }
 
   setTributaryValidator() {
@@ -958,7 +918,7 @@ export class MedicalComponent implements OnInit {
         taxRiseControl.updateValueAndValidity();
         taxRucControl.updateValueAndValidity();
         keepAccountingControl.updateValueAndValidity();
-      })
+      });
   }
 
   setQualifiedValidator() {
@@ -973,7 +933,7 @@ export class MedicalComponent implements OnInit {
           calificationControl.setValidators(null);
         }
         calificationControl.updateValueAndValidity();
-      })
+      });
   }
 
   setAllergyValidator() {
@@ -988,7 +948,7 @@ export class MedicalComponent implements OnInit {
           allergicToControl.setValidators(null);
         }
         allergicToControl.updateValueAndValidity();
-      })
+      });
   }
 
   setConsumedValidator() {
@@ -1003,7 +963,7 @@ export class MedicalComponent implements OnInit {
           medicamentBeingConsumedControl.setValidators(null);
         }
         medicamentBeingConsumedControl.updateValueAndValidity();
-      })
+      });
   }
 
   setRetirementValidator() {
@@ -1018,7 +978,7 @@ export class MedicalComponent implements OnInit {
           retirementDetailsControl.setValidators(null);
         }
         retirementDetailsControl.updateValueAndValidity();
-      })
+      });
   }
 
   setConadisValidator() {
@@ -1037,7 +997,7 @@ export class MedicalComponent implements OnInit {
         }
         disabilityControl.updateValueAndValidity();
         disabilityPerControl.updateValueAndValidity();
-      })
+      });
   }
 
   setPrivateValidator() {
@@ -1052,7 +1012,7 @@ export class MedicalComponent implements OnInit {
           affiliatedToPrivateControl.setValidators(null);
         }
         affiliatedToPrivateControl.updateValueAndValidity();
-      })
+      });
   }
 
   fileUpload(files: FileList) {
@@ -1061,15 +1021,16 @@ export class MedicalComponent implements OnInit {
 
 
   preview(files: FileList) {
-    if (files.length === 0)
+    if (files.length === 0) {
       return;
- 
-    var reader = new FileReader();
+    }
+
+    const reader = new FileReader();
     this.imagePath = files;
     reader.readAsDataURL(files[0]);
     reader.onload = (_event) => {
       this.imgURL = reader.result;
-    }
+    };
   }
 
   getDate(e: any) {
@@ -1085,100 +1046,44 @@ export class MedicalComponent implements OnInit {
 
   submitForm() {
     this.isSubmitted = true;
-    var taxNum: String;
-    var locals: { localNumber: String; predioNumber: String; sector: String; floor: String; hallNumber: String; }[];
-    var products: { productName: String }[];
+    let taxNum: string;
+    let products: { productName: string }[];
 
-    if (this.dataForm.value.numberLocals == "1") {
-      locals = [
-        {
-          localNumber: this.dataForm.value.localNumberOne,
-          predioNumber: this.dataForm.value.predioNumberOne,
-          sector: this.dataForm.value.sectorOne,
-          floor: this.dataForm.value.floorOne,
-          hallNumber: this.dataForm.value.hallNumberOne.toUpperCase()
-        }
-      ]
-    }
-    else if (this.dataForm.value.numberLocals == "2") {
-      locals = [
-        {
-          localNumber: this.dataForm.value.localNumberOne,
-          predioNumber: this.dataForm.value.predioNumberOne,
-          sector: this.dataForm.value.sectorOne,
-          floor: this.dataForm.value.floorOne,
-          hallNumber: this.dataForm.value.hallNumberOne.toUpperCase()
-        },
-        {
-          localNumber: this.dataForm.value.localNumberTwo,
-          predioNumber: this.dataForm.value.predioNumberTwo,
-          sector: this.dataForm.value.sectorTwo,
-          floor: this.dataForm.value.floorTwo,
-          hallNumber: this.dataForm.value.hallNumberTwo.toUpperCase()
-        }
-      ]
-    }
-    else if (this.dataForm.value.numberLocals == "3") {
-      locals = [
-        {
-          localNumber: this.dataForm.value.localNumberOne,
-          predioNumber: this.dataForm.value.predioNumberOne,
-          sector: this.dataForm.value.sectorOne,
-          floor: this.dataForm.value.floorOne,
-          hallNumber: this.dataForm.value.hallNumberOne.toUpperCase()
-        },
-        {
-          localNumber: this.dataForm.value.localNumberTwo,
-          predioNumber: this.dataForm.value.predioNumberTwo,
-          sector: this.dataForm.value.sectorTwo,
-          floor: this.dataForm.value.floorTwo,
-          hallNumber: this.dataForm.value.hallNumberTwo.toUpperCase()
-        },
-        {
-          localNumber: this.dataForm.value.localNumberTri,
-          predioNumber: this.dataForm.value.predioNumberTri,
-          sector: this.dataForm.value.sectorTri,
-          floor: this.dataForm.value.floorTri,
-          hallNumber: this.dataForm.value.hallNumberTri.toUpperCase()
-        }
-      ]
-    }
-
-    if (this.dataForm.value.taxType == "ruc") {
+    if (this.dataForm.value.taxType === 'ruc') {
       taxNum = this.dataForm.value.taxNumberRuc;
     }
-    else if (this.dataForm.value.taxType == "rise") {
+    else if (this.dataForm.value.taxType === 'rise') {
       taxNum = this.dataForm.value.taxNumberRise;
     }
     else {
       taxNum = '';
-    } 
+    }
 
     if (!this.dataForm.value.productsBeingSoldSec) {
       products = [
         {productName: this.dataForm.value.productsBeingSold}
-      ]
+      ];
     }
     else if (!this.dataForm.value.productsBeingSoldTri) {
       products = [
         {productName: this.dataForm.value.productsBeingSold},
         {productName: this.dataForm.value.productsBeingSoldSec}
-      ]
+      ];
     }
     else if (!this.dataForm.value.productsBeingSoldCua) {
       products = [
         {productName: this.dataForm.value.productsBeingSold},
         {productName: this.dataForm.value.productsBeingSoldSec},
         {productName: this.dataForm.value.productsBeingSoldTri}
-      ]
+      ];
     }
     else if (!this.dataForm.value.productsBeingSoldQui) {
       products = [
         {productName: this.dataForm.value.productsBeingSold},
         {productName: this.dataForm.value.productsBeingSoldSec},
         {productName: this.dataForm.value.productsBeingSoldTri},
-        {productName: this.dataForm.value.productsBeingSoldCua} 
-      ]
+        {productName: this.dataForm.value.productsBeingSoldCua}
+      ];
     }
     else if (this.dataForm.value.productsBeingSoldQui) {
       products = [
@@ -1187,10 +1092,10 @@ export class MedicalComponent implements OnInit {
         {productName: this.dataForm.value.productsBeingSoldTri},
         {productName: this.dataForm.value.productsBeingSoldCua},
         {productName: this.dataForm.value.productsBeingSoldQui}
-      ]
+      ];
     }
 
-    let address: Address = {
+    const address: Address = {
       firstname: this.dataForm.value.firstName,
       lastname: this.dataForm.value.lastName,
       gender: this.dataForm.value.gender,
@@ -1208,7 +1113,7 @@ export class MedicalComponent implements OnInit {
       secondaryStreet: this.dataForm.value.secondaryStreet
     };
 
-    let admin: Admin = {
+    const admin: Admin = {
       taxType: this.dataForm.value.taxType,
       taxNumber: taxNum,
       keepAccounting: this.dataForm.value.keepAccounting,
@@ -1221,7 +1126,7 @@ export class MedicalComponent implements OnInit {
       qualifiedCraftman: this.dataForm.value.qualifiedCraftman,
       craftmanCalification: this.dataForm.value.craftmanCalification,
       sellerType: this.dataForm.value.sellerType,
-      locals: locals,
+      locals: this.dataForm.value.locals,
       bloodType: this.dataForm.value.bloodType,
       height: this.dataForm.value.height,
       allergy: this.dataForm.value.allergy,
@@ -1236,15 +1141,15 @@ export class MedicalComponent implements OnInit {
       disabilityPer: this.dataForm.value.disabilityPer,
       retirement: this.dataForm.value.retirement,
       retirementDetails: this.dataForm.value.retirementDetails
-    }
-
-    const booleans = ['allergy', 'consumingMedicine', 'conadisLicense', 'retirement', 'qualifiedCraftman', 'keepAccounting'];
-    for( let booleanParameter of booleans) {
-      admin[booleanParameter] = admin[booleanParameter] === 'true';
     };
 
-    let avatar = this.fileToUpload;
-    
+    const booleans = ['allergy', 'consumingMedicine', 'conadisLicense', 'retirement', 'qualifiedCraftman', 'keepAccounting'];
+    for ( const booleanParameter of booleans) {
+      admin[booleanParameter] = admin[booleanParameter] === 'true';
+    }
+
+    const avatar = this.fileToUpload;
+
     if (!this.dataForm.valid) {
       Swal.fire({
         title: 'Oh no',
@@ -1252,9 +1157,11 @@ export class MedicalComponent implements OnInit {
         icon: 'error',
         confirmButtonText: 'Aceptar'
       });
+      console.log(admin);
       return false;
     } else {
-      this._formService.upload(admin, address, avatar); //debug fix xdxd
+      console.log(admin);
+      this.formService.upload(admin, address, avatar, this.dataForm.value.locals); // debug fix xdxd
     }
   }
 }

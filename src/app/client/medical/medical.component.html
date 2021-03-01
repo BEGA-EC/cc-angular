@@ -211,7 +211,7 @@
                 La información tributaria es necesaria.
               </small>
         </div>
-        <div class="form-group p-3" *ngIf="taxType == 'ruc'">
+        <div class="form-group p-3" *ngIf="taxType === 'ruc'">
             <label>RUC
                 <input type="text" appOnlynumber class="form-control" name="taxNumberRuc" formControlName="taxNumberRuc" minlength="12" maxlength="13" idValidator>
             </label>
@@ -231,7 +231,7 @@
                 Documento inválido.
             </small>
         </div>
-        <div class="form-group p-3" *ngIf="taxType == 'rise'">
+        <div class="form-group p-3" *ngIf="taxType === 'rise'">
             <label>RISE
                 <input type="text" appOnlynumber class="form-control" name="taxNumberRise" formControlName="taxNumberRise" minlength="9" maxlength="10" idValidator>
             </label>
@@ -251,7 +251,7 @@
                 Documento inválido.
             </small>
         </div>
-        <div class="form-group p-3 w-100" *ngIf="taxType == 'ruc'">
+        <div class="form-group p-3 w-100" *ngIf="taxType === 'ruc'">
             <h4>Está obligado a llevar contabilidad</h4>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="keepAccounting" formControlName="keepAccounting" id="CBtrue" value="true">
@@ -433,187 +433,86 @@
                 </small>
             </label>
         </div>
-        <div class="form-group p-3">
-            <label>Cantidad de Locales
-                <select class="form-control" name="numberLocals" [(ngModel)]="numberLocals" formControlName="numberLocals">
-                    <option value="1">1 local</option>
-                    <option value="2">2 locales</option>
-                    <option value="3">3 locales</option>
-                </select>
-                <small *ngIf="isSubmitted && errorControl.numberLocals.errors?.required">
-                    Seleccione una.
-                </small>
-            </label>
-        </div>
-        <div class="form-group p-3" *ngIf="numberLocals">
-            <label>Asociación del primer local
-                <select class="form-control" name="sectorOne" formControlName="sectorOne">
-                    <option value="none">Ninguna</option>
-                    <option value="2 de Octubre">2 de Octubre</option>
-                    <option value="El Cebollar">El Cebollar</option>
-                    <option value="La Campana">La Campana</option>
-                    <option value="24 de Mayo">24 de Mayo</option>
-                    <option value="29 de Enero">29 de Enero</option>
-                    <option value="Chimborazo">Chimborazo</option>
-                    <option value="Alianza Para el Progreso">Alianza Para el Progreso</option>
-                    <option value="Tungurahua">Tungurahua</option>
-                    <option value="12 de Febrero">12 de Febrero</option>
-                </select>
-                <small *ngIf="isSubmitted && errorControl.sectorOne.errors?.required">
-                    Seleccione uno.
-                </small>
-            </label>
-            <label *ngIf="numberLocals == '2' || numberLocals == '3'">Asociación del segundo local
-                <select class="form-control" name="sectorTwo" formControlName="sectorTwo">
-                    <option value="none">Ninguna</option>
-                    <option value="2 de Octubre">2 de Octubre</option>
-                    <option value="El Cebollar">El Cebollar</option>
-                    <option value="La Campana">La Campana</option>
-                    <option value="24 de Mayo">24 de Mayo</option>
-                    <option value="29 de Enero">29 de Enero</option>
-                    <option value="Chimborazo">Chimborazo</option>
-                    <option value="Alianza Para el Progreso">Alianza Para el Progreso</option>
-                    <option value="Tungurahua">Tungurahua</option>
-                    <option value="12 de Febrero">12 de Febrero</option>
-                </select>
-                <small *ngIf="isSubmitted && errorControl.sectorTwo.errors?.required">
-                    Seleccione uno.
-                </small>
-            </label>
-            <label *ngIf="numberLocals == '3'">Asociación del tercer local
-                <select class="form-control" name="sectorTri" formControlName="sectorTri">
-                    <option value="none">Ninguna</option>
-                    <option value="2 de Octubre">2 de Octubre</option>
-                    <option value="El Cebollar">El Cebollar</option>
-                    <option value="La Campana">La Campana</option>
-                    <option value="24 de Mayo">24 de Mayo</option>
-                    <option value="29 de Enero">29 de Enero</option>
-                    <option value="Chimborazo">Chimborazo</option>
-                    <option value="Alianza Para el Progreso">Alianza Para el Progreso</option>
-                    <option value="Tungurahua">Tungurahua</option>
-                    <option value="12 de Febrero">12 de Febrero</option>
-                </select>
-                <small *ngIf="isSubmitted && errorControl.sectorTri.errors?.required">
-                    Seleccione uno.
-                </small>
-            </label>
-        </div>
-        <div *ngIf="numberLocals" class="form-group p-3">
-            <label>Número del Local
-                <input type="text" appOnlynumber class="form-control" name="localNumberOne" formControlName="localNumberOne" placeholder="Número del primer local">
-                <small *ngIf="isSubmitted && errorControl.localNumberOne.errors?.required">
-                    El número del local es necesario.
-                </small>
-            </label>
-            <label *ngIf="numberLocals == '2' || numberLocals == '3'">Número de Local
-                <input type="text" appOnlynumber class="form-control" name="localNumberTwo" formControlName="localNumberTwo" placeholder="Número del segundo local">
-                <small *ngIf="isSubmitted && errorControl.localNumberTwo.errors?.required">
-                    El número del local es necesario.
-                </small>
-            </label>
-            <label *ngIf="numberLocals == '3'">Número de Local
-                <input type="text" appOnlynumber class="form-control" name="localNumberTri" formControlName="localNumberTri" placeholder="Número del tercer local">
-                <small *ngIf="isSubmitted && errorControl.localNumberTri.errors?.required">
-                    El número del local es necesario.
-                </small>
-            </label>
-        </div>
-        <div *ngIf="numberLocals" class="form-group p-3">
-            <label>Número de Predio
-                <input type="text" appOnlynumber class="form-control" name="predioNumberOne" placeholder="Primer Local" formControlName="predioNumberOne">
-                <small *ngIf="isSubmitted && errorControl.predioNumberOne.errors?.required">
-                    El predio es necesario.
-                </small>
-            </label>
-            <label *ngIf="numberLocals == '2' || numberLocals == '3'">Número de Predio
-                <input type="text" appOnlynumber class="form-control" placeholder="Segundo Local" name="predioNumberTwo" formControlName="predioNumberTwo">
-                <small *ngIf="isSubmitted && errorControl.predioNumberTwo.errors?.required">
-                    El predio es necesario.
-                </small>
-            </label>
-            <label *ngIf="numberLocals == '3'">Número de Predio
-                <input type="text" appOnlynumber class="form-control" placeholder="Tercer Local" name="predioNumberTri" formControlName="predioNumberTri">
-                <small *ngIf="isSubmitted && errorControl.predioNumberTri.errors?.required">
-                    El predio es necesario.
-                </small>
-            </label>
-        </div>
-        <div *ngIf="numberLocals" class="form-group p-3">
-            <label>Número de Pasillo
-                <input type="text" class="form-control" name="hallNumberOne" formControlName="hallNumberOne" placeholder="Número de Pasillo del primer local" placeholder="48A">
+<!--        <div class="form-group p-3">-->
+<!--            <label>Cantidad de Locales-->
+<!--                <select class="form-control" name="numberLocals" [(ngModel)]="numberLocals" formControlName="numberLocals">-->
+<!--                    <option value="1">1 local</option>-->
+<!--                    <option value="2">2 locales</option>-->
+<!--                    <option value="3">3 locales</option>-->
+<!--                </select>-->
+<!--                <small *ngIf="isSubmitted && errorControl.numberLocals.errors?.required">-->
+<!--                    Seleccione una.-->
+<!--                </small>-->
+<!--            </label>-->
+<!--        </div>-->
+        <div formArrayName="locals" class="locals">
+          <div class="local" *ngFor="let item of locals().controls; let localIndex=index" [formGroupName]="localIndex">
+            <h2 class="form-group p-3">Local Número #{{localIndex+1}}</h2>
+            <div class="form-group p-3">
+                <label>Asociación del local
+                    <select class="form-control" formControlName="sector">
+                        <option value="none">Ninguna</option>
+                        <option value="2 de Octubre">2 de Octubre</option>
+                        <option value="El Cebollar">El Cebollar</option>
+                        <option value="La Campana">La Campana</option>
+                        <option value="24 de Mayo">24 de Mayo</option>
+                        <option value="29 de Enero">29 de Enero</option>
+                        <option value="Chimborazo">Chimborazo</option>
+                        <option value="Alianza Para el Progreso">Alianza Para el Progreso</option>
+                        <option value="Tungurahua">Tungurahua</option>
+                        <option value="12 de Febrero">12 de Febrero</option>
+                    </select>
+                    <small *ngIf="isSubmitted && errorControl.sectorOne.errors?.required">
+                        Seleccione uno.
+                    </small>
+                </label>
+            </div>
+            <div class="form-group p-3">
+                <label>Número del Local
+                    <input type="text" appOnlynumber class="form-control" formControlName="localNumber" placeholder="Número local">
+                    <small *ngIf="isSubmitted && errorControl.localNumberOne.errors?.required">
+                        El número del local es necesario.
+                    </small>
+                </label>
+            </div>
+            <div class="form-group p-3">
+                <label>Número de Predio
+                    <input type="text" appOnlynumber class="form-control" placeholder="Predio del local" formControlName="predioNumber">
+                    <small *ngIf="isSubmitted && errorControl.predioNumberOne.errors?.required">
+                        El predio es necesario.
+                    </small>
+                </label>
+            </div>
+            <div class="form-group p-3">
+              <label>Número de Pasillo
+                <input type="text" class="form-control" name="hallNumberAdd" formControlName="hallNumber" placeholder="48A">
                 <small *ngIf="isSubmitted && errorControl.hallNumberOne.errors?.required">
-                    El número del pasillo es necesario.
+                  El número del pasillo es necesario.
                 </small>
                 <small *ngIf="isSubmitted && errorControl.hallNumberOne.errors?.pattern">
-                    Debe ingresar el número seguido de la letra.
+                  Debe ingresar el número seguido de la letra.
                 </small>
-            </label>
-            <label *ngIf="numberLocals == '2' || numberLocals == '3'">Número de Pasillo
-                <input type="text" class="form-control" name="hallNumberTwo" formControlName="hallNumberTwo" placeholder="Número de Pasillo del segundo local" placeholder="11B">
-                <small *ngIf="isSubmitted && errorControl.hallNumberTwo.errors?.required">
-                    El número del pasillo es necesario.
-                </small>
-                <small *ngIf="isSubmitted && errorControl.hallNumberTwo.errors?.pattern">
-                    Debe ingresar el número seguido de la letra.
-                </small>
-            </label>
-            <label *ngIf="numberLocals == '3'">Número de Pasillo
-                <input type="text" class="form-control" name="hallNumberTri" formControlName="hallNumberTri" placeholder="Número de Pasillo del tercer local" placeholder="7A">
-                <small *ngIf="isSubmitted && errorControl.hallNumberTri.errors?.required">
-                    El número del pasillo es necesario.
-                </small>
-                <small *ngIf="isSubmitted && errorControl.hallNumberTri.errors?.pattern">
-                    Debe ingresar el número seguido de la letra.
-                </small>
-            </label>
-        </div>
-        <div *ngIf="numberLocals" class="form-group p-3">
-            <h4>Planta del primer local</h4>
-            <div class="form-check form-check-inline">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="floorOne" formControlName="floorOne" value="top">
-                Planta Baja</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="floorOne" formControlName="floorOne" value="bottom">
-                Planta Alta</label>
-              </div>
-                <small *ngIf="isSubmitted && errorControl.floorOne.errors?.required">
-                    Seleccione uno.
-                </small>
-            <div *ngIf="numberLocals == '2' || numberLocals == '3'">
-                <h4>Planta del segundo local</h4>
+              </label>
+            </div>
+            <div class="form-group p-3">
+                <h4>Planta del local</h4>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="floorTwo" formControlName="floorTwo" value="top">
+                        <input class="form-check-input" type="radio" formControlName="floor" value="top">
                     Planta Baja</label>
                   </div>
                   <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="floorTwo" formControlName="floorTwo" value="bottom">
+                        <input class="form-check-input" type="radio" formControlName="floor" value="bottom">
                     Planta Alta</label>
                   </div>
-                  <small *ngIf="isSubmitted && errorControl.floorTwo.errors?.required">
-                    Seleccione uno.
-                </small>
+                    <small *ngIf="isSubmitted && errorControl.floorOne.errors?.required">
+                        Seleccione uno.
+                    </small>
             </div>
-            <div *ngIf="numberLocals == '3'">
-                <h4>Planta del tercer local</h4>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="floorTri" formControlName="floorTri" value="top">
-                    Planta Baja</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="floorTri" formControlName="floorTri" value="bottom">
-                    Planta Alta</label>
-                  </div>
-                  <small *ngIf="isSubmitted && errorControl.floorTri.errors?.required">
-                    Seleccione uno.
-                </small>
-            </div>
+            <button type="button" class="btn btn-primary m-3" (click)="deleteLocal(localIndex)">Eliminar Local</button>
+          </div>
+          <button type="button" class="btn btn-primary ml-3" (click)="addLocal()">Agregar Local</button>
         </div>
         <div class="form-group p-3">
             <h4>¿Es Artesano Calificado? </h4>
@@ -629,7 +528,7 @@
                 Seleccione una.
             </small>
         </div>
-        <div class="form-group p-3" *ngIf="qualifiedCraftman == 'true'">
+        <div class="form-group p-3" *ngIf="qualifiedCraftman === 'true'">
             <label>Número de Calificación Artesanal
                 <input type="number" appOnlynumber class="form-control" name="craftmanCalification" formControlName="craftmanCalification">
                 <small *ngIf="isSubmitted && errorControl.craftmanCalification.errors?.required">
@@ -697,7 +596,7 @@
                 Complete este campo, por favor.
               </small>
         </div>
-        <div class="form-group p-3" *ngIf="allergy == 'true'">
+        <div class="form-group p-3" *ngIf="allergy === 'true'">
             <label>Ingrese el medicamento
                 <input type="text" class="form-control" name="allergicTo" formControlName="allergicTo">
                 <small *ngIf="isSubmitted && errorControl.allergicTo.errors?.required">
@@ -720,7 +619,7 @@
                 Complete este campo, por favor.
               </small>
         </div>
-        <div class="form-group p-3" *ngIf="consumingMedicine == 'true'">
+        <div class="form-group p-3" *ngIf="consumingMedicine === 'true'">
             <label>Ingrese el medicamento
                 <input type="text" class="form-control" name="medicamentBeingConsumed" formControlName="medicamentBeingConsumed">
                 <small *ngIf="isSubmitted && errorControl.medicamentBeingConsumed.errors?.required">
@@ -749,7 +648,7 @@
                 </small>
             </label>
         </div>
-        <div class="form-group p-3" *ngIf="affiliatedTo == 'Privado'">
+        <div class="form-group p-3" *ngIf="affiliatedTo === 'Privado'">
             <label>Ingrese su seguro privado
                 <input type="text" class="form-control" name="affiliatedToPrivate" formControlName="affiliatedToPrivate">
                 <small *ngIf="isSubmitted && errorControl.affiliatedToPrivate.errors?.required">
@@ -771,7 +670,7 @@
                 Complete este campo, por favor.
               </small>
         </div>
-        <div class="form-group p-3" *ngIf="conadisLicense == 'true'">
+        <div class="form-group p-3" *ngIf="conadisLicense === 'true'">
             <label>Discapacidad
                 <input type="text" class="form-control" name="disability" formControlName="disability">
                 <small *ngIf="isSubmitted && errorControl.disability.errors?.required">
@@ -779,7 +678,7 @@
                 </small>
             </label>
         </div>
-        <div class="form-group p-3" *ngIf="conadisLicense == 'true'">
+        <div class="form-group p-3" *ngIf="conadisLicense === 'true'">
             <label>Porcentaje de discapacidad
                 <input type="number" min="1" max="99" maxlength="2" class="form-control" name="disabilityPer" formControlName="disabilityPer" maxlength="2">
                 <small *ngIf="isSubmitted && errorControl.disabilityPer.errors?.required">
@@ -801,7 +700,7 @@
                 Complete este campo, por favor.
             </small>
         </div>
-        <div class="form-group p-3" *ngIf="retirement == 'true'">
+        <div class="form-group p-3" *ngIf="retirement === 'true'">
             <label>Tipo de Jubilación
                 <select class="form-control" name="retirementDetails" formControlName="retirementDetails">
                     <option value="IESS">IESS</option>
@@ -817,6 +716,6 @@
       </form>
     </div>
 </div>
-<div id="preloader" *ngIf="_loadingService.loading$ | async">
+<div id="preloader" *ngIf="loadingService.loading$ | async">
     <div id="loader"></div>
 </div>

@@ -9,13 +9,13 @@ import { HttpClient } from '@angular/common/http';
 export class CovidGuard implements CanActivate {
 
   constructor(
-    public _userService: UserService,
+    public userService: UserService,
     public router: Router,
     public http: HttpClient
   ) { }
   canActivate() {
 
-    if (this._userService.inCovid()) {
+    if (this.userService.inCovid()) {
         return true;
     } else {
       this.router.navigate(['/client/covid']);

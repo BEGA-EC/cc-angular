@@ -17,10 +17,10 @@ export class ConfirmationComponent implements OnInit {
 
   constructor(
     public formBuilder: FormBuilder,
-    public _userService: UserService,
+    public userService: UserService,
     public _codeService: CodeService,
     public router: Router,
-    public activatedRoute: ActivatedRoute) { 
+    public activatedRoute: ActivatedRoute) {
       this.activatedRoute.queryParams.subscribe(params => {
       this.code = params['code'];
       this._codeService.postCode(this.code);

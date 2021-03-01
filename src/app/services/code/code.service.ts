@@ -9,11 +9,11 @@ import Swal from 'sweetalert2';
 })
 export class CodeService {
 
-  constructor( 
+  constructor(
     public http: HttpClient,
     public router: Router
   ) { }
-  
+
   postCode(code: string) {
     return new Promise(resolve => {
       let url = `${environment.endpoint}user/code`;
@@ -27,7 +27,7 @@ export class CodeService {
         this.router.navigate(['/client/']);
         return resolve(true);
       }, err =>{
-        if ( err.status == 400) {
+        if ( err.status === 400) {
           Swal.fire({
             title: 'Oh no',
             html: `Parece que algo ha salido mal. El enlace es incorrecto.<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
@@ -35,7 +35,7 @@ export class CodeService {
             confirmButtonText: 'Aceptar'
           });
           this.router.navigate(['/client/']);
-        } else if (err.status == 404) {
+        } else if (err.status === 404) {
           Swal.fire({
             title: '¿Ha pasado algo?',
             text: `Al parecer el servidor ha recibido un código inexistente. Quizás su cuenta ya esté confirmada`,
@@ -57,4 +57,3 @@ export class CodeService {
     });
   }
 }
-  

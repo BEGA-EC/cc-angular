@@ -14,6 +14,18 @@ form .form-group {
     transition: all .5s ease-in-out;
     margin: 0;
 }
+
+form .locals .local {
+  width: 100%;
+  border-radius: 5px;
+  background: #efefef;
+  margin-bottom: 20px;
+}
+
+form .locals {
+  float: left;
+  width: 100%;
+}
 form label {
     line-height: 35px;
     width: 100%;

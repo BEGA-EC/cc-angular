@@ -9,13 +9,13 @@ import { HttpClient } from '@angular/common/http';
 export class ConfGuard implements CanActivate {
 
   constructor(
-    public _userService: UserService,
+    public userService: UserService,
     public router: Router,
     public http: HttpClient
   ) { }
   canActivate() {
 
-    if (this._userService.inForm()) {
+    if (this.userService.inForm()) {
         return true;
     } else {
       this.router.navigate(['/client/medical']);

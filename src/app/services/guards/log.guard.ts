@@ -7,13 +7,13 @@ import Swal from 'sweetalert2';
 export class LogGuard implements CanActivate {
 
   constructor(
-    public _userService: UserService,
+    public userService: UserService,
     public router: Router
   ) { }
 
   canActivate() {
 
-    if (this._userService.inLog() ) {
+    if (this.userService.inLog() ) {
       this.router.navigate(['/dashboard']);
       return false;
     }

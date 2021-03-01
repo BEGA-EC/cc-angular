@@ -18,7 +18,7 @@ export class CovidComponent implements OnInit {
   covidForm: FormGroup;
   isSubmitted = false;
 
-  constructor(public formBuilder: FormBuilder, public _covidService: CovidService, public _loadingService: LoadingService, public http: HttpClient, public router: Router) { }
+  constructor(public formBuilder: FormBuilder, public _covidService: CovidService, public loadingService: LoadingService, public http: HttpClient, public router: Router) { }
 
   ngOnInit() {
     this.covidForm = this.formBuilder.group({

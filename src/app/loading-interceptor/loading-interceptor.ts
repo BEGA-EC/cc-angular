@@ -13,13 +13,13 @@ export class LoadingInterceptor {
   activeRequests: number = 0;
 
     constructor(
-        private _loadingService: LoadingService
+        private loadingService: LoadingService
     ) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         if (this.activeRequests === 0) {
-            this._loadingService.startLoading();
+            this.loadingService.startLoading();
         }
 
         this.activeRequests++;
@@ -28,7 +28,7 @@ export class LoadingInterceptor {
             finalize(() => {
                 this.activeRequests--;
                 if (this.activeRequests === 0) {
-                    this._loadingService.stopLoading();
+                    this.loadingService.stopLoading();
                 }
             })
         )

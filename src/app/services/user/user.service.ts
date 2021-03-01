@@ -31,20 +31,20 @@ export class UserService {
   }
 
   inForm() {
-    let me = localStorage.getItem('id');
+    const me = localStorage.getItem('id');
     return this.http.get(`${environment.endpoint}user/${me}`).subscribe((data: any) => {
       this.userForm =   data.data.avatar;
-      if (this.userForm == undefined) this.router.navigate(['/client/medical']); 
-      return (this.userForm != undefined)
+      if (this.userForm === undefined) { this.router.navigate(['/client/medical']); }
+      return (this.userForm != undefined);
     });
   }
 
   inCovid() {
-    let me = localStorage.getItem('id');
+    const me = localStorage.getItem('id');
     return this.http.get(`${environment.endpoint}user/${me}`).subscribe((data: any) => {
       this.userForm = data.data.covid[0];
-      if (this.userForm == undefined) this.router.navigate(['/client/covid']); 
-      return (this.userForm != undefined)
+      if (this.userForm === undefined) { this.router.navigate(['/client/covid']); }
+      return (this.userForm != undefined);
     });
   }
 
@@ -78,7 +78,7 @@ export class UserService {
   }
 
     login( user: User) {
-      let url = `${environment.endpoint}auth`;
+      const url = `${environment.endpoint}auth`;
       return this.http.post( url, user ).pipe(map( (resp: any) => {
         this.saveStorage(resp.token, resp.id);
         return true;
@@ -87,19 +87,28 @@ export class UserService {
 
   register(email: string, password: string) {
     return new Promise(resolve => {
-      let url = `${environment.endpoint}user/`
+      const url = `${environment.endpoint}user/`;
       return this.http.post(url, {email, password}).pipe(map( (resp) => {
-      })).subscribe( async _resp => {
-        await Swal.fire({
-          title: '¡Excelente!',
-          html: `Hemos enviado un email de confirmación. Revisa tu corrreo electrónico.`,
-          icon: 'success',
-          confirmButtonText: 'Aceptar'
-        });
+      })).subscribe( async (resp: any) => {
+        if (resp.status === 200) {
+          await Swal.fire({
+            title: '¡Excelente!',
+            html: `Hemos enviado un email de confirmación. Revisa tu corrreo electrónico.`,
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+          });
+        } else {
+          await Swal.fire({
+            title: 'Oh no',
+            html: `El servidor no ha recibido los datos. ¿Puedes intentarlo de nuevo? ¡Notifica el error si se repite!<br><br><i>Server status:</i> <b>${resp.status} - ${resp.statusText}</b>`,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        }
         this.router.navigate(['/client/']);
         return resolve(true);
       }, err => {
-        if ( err.status == 400) {
+        if ( err.status === 400) {
           Swal.fire({
             title: 'Oh no',
             html: `El correo que ingresaste, ya se encuentra en uso.<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
@@ -114,7 +123,7 @@ export class UserService {
             icon: 'error',
             confirmButtonText: 'Aceptar'
           });
-        }  
+        }
       });
     });
   }

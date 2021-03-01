@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
 
   user: any;
 
-  constructor(private http: HttpClient, public _userService: UserService, public _loadingService: LoadingService) { 
+  constructor(private http: HttpClient, public userService: UserService, public loadingService: LoadingService) {
   }
 
   ngOnInit(): void {
@@ -23,6 +23,6 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  
+
 
 }

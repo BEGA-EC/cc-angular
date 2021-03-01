@@ -2,7 +2,7 @@
     <div class="row">
         <form class="p-3" [formGroup]="covidForm" (ngSubmit)="submitForm()" novalidate>
             <h2>Encuesta - COVID</h2>
-  
+
             <h3>Fase Clínica</h3>
             <p>¿Presenta usted alguno de estos síntomas?</p>
             <div class="form-group covid p-3">
@@ -399,6 +399,6 @@
         </form>
     </div>
 </div>
-<div id="preloader" *ngIf="_loadingService.loading$ | async">
+<div id="preloader" *ngIf="loadingService.loading$ | async">
   <div id="loader"></div>
 </div>
