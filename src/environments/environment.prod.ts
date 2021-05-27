@@ -1,4 +1,4 @@
 export const environment = {
-  endpoint: 'http://ccmna.net:3002/',
+  endpoint: 'https://ccmna.net/',
   production: true
 };
