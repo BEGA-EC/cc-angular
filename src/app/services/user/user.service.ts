@@ -88,9 +88,9 @@ export class UserService {
   register(email: string, password: string) {
     return new Promise(resolve => {
       const url = `${environment.endpoint}user/`;
-      return this.http.post(url, {email, password}).pipe(map( (resp) => {
-      })).subscribe( async (resp: any) => {
-        if (resp.status === 200) {
+      return this.http.post(url, {email, password}).subscribe( async (resp: any) => {
+        console.log(resp);
+        if (resp.status === 200 || resp.status === 201) {
           await Swal.fire({
             title: '¡Excelente!',
             html: `Hemos enviado un email de confirmación. Revisa tu corrreo electrónico.`,

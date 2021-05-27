@@ -46,9 +46,10 @@ export class FormService {
     formData.append('address', JSON.stringify(address));
     formData.append('admin', JSON.stringify(admin));
     this.http.post(urlAva, formAva).subscribe( (resp: any) => {
-      this.http.post(url, formData).subscribe( (resp: any) =>
+      this.http.post(url, formData).subscribe( (post: any) =>
         {
           console.log(resp);
+          console.log(post);
           Swal.fire({
             title: 'Genial',
             html: `¡Bien! Ya casi terminamos, solo hace falta un último formulario y estamos en ello.`,
@@ -93,6 +94,40 @@ export class FormService {
           }
         }
       );
+    }, err => {
+      console.log(err);
+      if (err.error.description === 'Tax information is already in use.') {
+        Swal.fire({
+          title: 'Oh no',
+          html: `El número de RUC/RISE que has ingresado, ya se encuentra en uso.<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      }
+      else if (err.error.description === 'Id Number already in use') {
+        Swal.fire({
+          title: 'Oh no',
+          html: `El número de cédula que has ingresado, ya se encuentra en uso.<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      }
+      else if (err.error.description === 'A local with that predio number or local number already exists') {
+        Swal.fire({
+          title: 'Oh no',
+          html: `Has ingresado un número de local o un número de predio que ya se encuentra en uso.<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      }
+      else {
+        Swal.fire({
+          title: 'Vaya...',
+          html: `El servidor no ha recibido los datos. ¿Puedes intentarlo de nuevo? ¡Notifica el error si se repite!<br><br><i>Server status:</i> <b>${err.status} - ${err.statusText}</b>`,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      }
     });
   }
 
